@@ -1,0 +1,37 @@
+.nav{
+    background-color: rgb(107, 109, 109);
+    height: 15cqmin;
+    width: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-top: 1rem; */
+}
+.head{
+    width: 20rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.regi{
+    height: 6vmin;
+    width: 11vmin;
+    border-radius: 20px;
+    font-size: large;
+    cursor: pointer;
+    background-color: chartreuse;
+    margin-right: 1.5rem;
+    position: relative;
+    margin-top: 2.5rem;
+}
+.home{
+    height: 6vmin;
+    width: 11vmin;
+    border-radius: 20px;
+    font-size: large;
+    cursor: pointer;
+    background-color: rgb(253, 12, 36);
+    position: relative;
+    margin-top: 2.5rem;
+}
