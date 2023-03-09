@@ -1,0 +1,77 @@
+body{
+   background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm373batch15-bg-11.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=330dde5a4191a3d87204a2f9b040e3fe");
+    width: 100%;
+    /* background-repeat: no-repeat; */
+    height: 100%;
+    overflow-x: hidden;
+    background-position: 10px 10px ;
+
+    /* overflow-y: hidden; */
+}
+.app{
+    /* width: 95%; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(3,30%); */
+    justify-content:center;
+    align-items: center;
+}
+.image{
+    height: 30vmin;
+    width: 50vmin ;
+    border-top-right-radius: 13px;
+    border-top-left-radius: 13px;
+}
+.mainContainer{
+    background-color: rgb(110, 195, 205);
+    height: 54vmin;
+    width: 50vmin;
+    font-size: 3vmin;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 13px;
+    border-top-left-radius: 13px;
+    box-shadow: 0px 4px 21px -1px rgb(20, 20, 20);
+    margin: 1.5em;
+}
+
+
+
+.search-input{
+    margin: 1%;
+    display:flex ;
+    flex-direction: column;
+    align-items: center;
+    /* text-align: center; */
+}
+.input-search{
+    background-color: beige;
+    height: 3vmin;
+    width: 40vmin;
+    border-radius: 20%;
+    color: black;
+    font-size: 3.5vmin;
+    font-weight: 300;
+    padding: 10px;
+    text-align: center;
+   /* margin-bottom: 1em; */
+}
+.name{
+    font-size: 5vmin;
+    color:rebeccapurple ;
+    margin: 1%;
+}
+.area{
+    font-size: 4vmin;
+    color:rgb(205, 5, 5) ;
+    margin: 1%;
+}
+
+#btn{
+    height: 10vmin;
+    width: 50vmin;
+    border-radius: 10%;
+    font-size: 3.3vmin;
+    cursor: pointer;
+}

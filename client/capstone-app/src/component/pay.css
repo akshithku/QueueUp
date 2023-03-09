@@ -1,0 +1,22 @@
+.pay-div{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2vmin;
+}
+.heading{
+    color: aliceblue;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-decoration: dotted 5px red;
+}
+
+label{
+    color: azure;
+}
+
+.input1{
+    font-size: 3vmin;
+    margin: 4vmin;
+}
+

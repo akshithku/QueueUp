@@ -1,12 +1,13 @@
 .nav{
     background-color: rgb(107, 109, 109);
-    height: 15cqmin;
-    width: cover;
+    height: 15vmin;
+    /* width: cover; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    /* margin-top: 1rem; */
+    
 }
 .head{
     width: 20rem;
@@ -35,3 +36,52 @@
     position: relative;
     margin-top: 2.5rem;
 }
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 35vmin;
+    height: 28vmin;
+    padding: 2vmin;
+    background-color: #9f9e9e;
+    box-shadow: 0 0 10px rgba(40, 20, 20, 0.3);
+  }
+
+  .btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .close-btn {
+    height: 5vmin;
+    width: 5vmin;
+    font-size: 3vmin;
+    margin-left: 26vmin;
+    margin-top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .btn-1{
+    background-color: rgb(145, 235, 72);
+    height: 6vmin;
+    width: 20vmin;
+    font-size: 3vmin;
+    margin: 2vmin;
+    /* padding: 2%; */
+    border-radius: 10%;
+    cursor: pointer;
+  }
+
+  .btn-2{
+    height: 6vmin;
+    width: 20vmin;
+    font-size: 3vmin;
+    margin: 3%;
+    padding: 2%;
+    border-radius: 10%;
+    cursor: pointer;
+  }
