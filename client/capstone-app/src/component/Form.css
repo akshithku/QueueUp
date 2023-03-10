@@ -53,11 +53,22 @@
   }
   
   input {
-    height: 7vmin;
+    height: 6vmin;
     width: 50vmin;
     border-radius: 0.5rem;
     margin: 0.5em;
-    font-size: 10vmin;
+    font-size: 6vmin;
+  }
+ 
+
+  /* form{
+    align-items: end;
+    display: flex;
+    flex-direction: column;
+  } */
+
+  form button{
+    align-self: center;
   }
   
   

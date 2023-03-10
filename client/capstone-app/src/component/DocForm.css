@@ -1,0 +1,17 @@
+.DocForm-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aquamarine; */
+  }
+
+   form{
+    /* align-items: end; */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label-1{
+    margin-right: 12vmin;
+  }
