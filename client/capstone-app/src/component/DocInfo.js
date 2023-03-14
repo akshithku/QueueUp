@@ -60,12 +60,25 @@ export default function Doclist() {
   const [name, setName] = useState("");
   const [docData,setDocData]=useState(Docdata())
   const [num, setNum] = useState(0);
+  const[data,setdata] = useState([]);
   
   useEffect(()=>{
     localStorage.setItem("Num", num);
   },)
     
+  useEffect(()=>{
+    fetch("http://localhost:2917/User")
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data);
+          setdata(data);
+        })
+        .catch((error) => {
+          console.log(" failed to fetch");
+        })
+  },[])
   
+ 
   return (
     <main className="DocContainer">
       {/* <div>
@@ -73,13 +86,13 @@ export default function Doclist() {
           return <img src={abd.img} alt=""/>
         })}
       </div> */}
-      {docData.map((abc) => {
+      {data.map((abc) => {
         console.log(abc);
         return (
           <div className="Docapp">
             <div className="Doc-token">
               <h6 className="token">#Current Num:</h6>
-              <p className="Token-Num" value={num} onChange={(event)=>setNum(event.target.value)}>{abc.count}</p>
+              <p className="Token-Num" value={num} onChange={(event)=>setNum(event.target.value)}>{abc.Count}</p>
               <div className="doc-btns">
                 <button className="doc-btn1"
                  onClick={() => {
@@ -92,7 +105,7 @@ export default function Doclist() {
             </div>
             <div className="SubContainer">
               <div className="img-div">
-                <img className="Doc-img" src={abc.Dcoimg} alt="" />
+                <img className="Doc-img" src={abc.Docimg} alt="" />
               </div>
               <div className="div-list">
                 <h1
@@ -100,9 +113,9 @@ export default function Doclist() {
                   value={name}
                   onChange={(abd) => setName(abd.target.value)}
                 >
-                  {abc.name}
+                  {abc.DoctorName}
                 </h1>
-                <h2 className="lit-1">{abc.specialist}</h2>
+                <h2 className="lit-1">{abc.Specialty}</h2>
                 <h3 className="lit-2">{abc.timings}</h3>
               </div>
             </div>

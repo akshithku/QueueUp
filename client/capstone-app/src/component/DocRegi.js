@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 
 export default function DocRegi() {
   const [name, setName] = useState('');
+  const[Img,setImg]=useState('')
   const [HospitalName,setHospitalName]=useState('');
+  const [HospitalImg,setHospitalImg]=useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [specialty, setSpecialty] = useState('');
@@ -11,8 +14,15 @@ export default function DocRegi() {
     setName(event.target.value);
   };
 
+  const handleImageChange=(event)=>{
+    setImg(event.target.value);
+  }
+
   const handleHospitalNameChange = (event) => {
     setHospitalName(event.target.value);
+  };
+  const handleHospitalImgageChange = (event) => {
+    setHospitalImg(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -27,37 +37,56 @@ export default function DocRegi() {
     setSpecialty(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    fetch('http://localhost:2917/register',{
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try{
+   const res= fetch('http://localhost:2917/register',{
       method:"POST",
-
       body:JSON.stringify({
         "DoctorName":name,
+        "Docimg":Img,
         "HospitalName":HospitalName,
+        "HospitalsImg":HospitalImg,
         "email":email,
         "password":password,
         "Specialty":specialty
       }),
       headers:{
-        "Content-typr":'application/json; charset=UTF-8'
+        "Content-type":'application/json; charset=UTF-8'
       }
     })
-    .then(res=>res.json).then(json=>console.log(json));
+    .then(res=>res.json())
+    .then(json=>
+      {console.log(json)
+        window.location.href="/";
+      });
+     
+      const data =  res.json()
+      console.log({ data })
 
-    window.location.href="/";
+    }catch (error){
+      console.log(error)
+    }
    
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form method='POST' onSubmit={handleSubmit}>
       <label>
         Doctor's Name:
         <input type="text" value={name} onChange={handleNameChange} />
       </label>
       <label>
+        Doctor's image:
+        <input  value={Img} onChange={handleImageChange}></input>
+      </label>
+      <label>
         Hospital Name:
         <input type="text" value={HospitalName} onChange={handleHospitalNameChange} />
+      </label>
+      <label>
+        Hospital's image:
+        <input  value={HospitalImg} onChange={handleHospitalImgageChange}></input>
       </label>
       <label>
         Email:
@@ -71,7 +100,7 @@ export default function DocRegi() {
         Specialty:
         <input type="text" value={specialty} onChange={handleSpecialtyChange} />
       </label>
-      <button type="submit" onClick={handleSubmit}>Register</button>
+      <button type="submit">Register</button>
     </form>
   );
 }

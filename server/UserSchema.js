@@ -1,27 +1,39 @@
 const mongoose = require("mongoose");
 
 const UserSchema= mongoose.Schema({
+    Docimg:{
+        type:String,
+        // required:true
+    },
     DoctorName:{
         type: String,
-        required:true
+        // required:true
     },
     HospitalName:{
         type:String,
-        required:true
+        // required:true
+    },
+    HospitalsImg:{
+        type:String,
+        // required:true
     },
     email:{
         type:String,
-        required:true
+        // required:true
     },
     password:{
         type:String,
-        required:true
+        // required:true
     },
     Specialty:{
         type:String,
-        required:true
+        // required:true
+    },
+    Count:{
+        type:Number,
+        // required:true
     }
-})
+});
 
 const User=mongoose.model("User",UserSchema);
 
