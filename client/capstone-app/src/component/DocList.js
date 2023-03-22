@@ -3,69 +3,46 @@
 import React, { useState, useEffect } from "react";
 import "./Doc.css";
 import { Link } from "react-router-dom";
-// function Docdata() {
-//   let data = [
-//     {
-//       Dcoimg:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-//       name: "qwertyu",
-//       specialist: "Cardiologist",
-//       timings: "9:00 am to 12:30 pm",
-//       count: 0,
-//     },
-//     {
-//       Dcoimg:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-//       name: "asdfghj",
-//       specialist: "Cardiologist",
-//       timings: "9:00 am to 12:30 pm",
-//       count: 0,
-//     },
-//     {
-//       Dcoimg:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-//       name: "asdfghjk",
-//       specialist: "Cardiologist",
-//       timings: "9:00 am to 12:30 pm",
-//       count: 0,
-//     },
-//     {
-//       Dcoimg:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-//       name: "qazxsde",
-//       specialist: "Cardiologist",
-//       timings: "9:00 am to 12:30 pm",
-//       count: 0,
-//     },
-//     {
-//       Dcoimg:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-//       name: "plkmnjhy",
-//       specialist: "Cardiologist",
-//       timings: "9:00 am to 12:30 pm",
-//       count: 0,
-//     },
-//     {
-//       Dcoimg:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-//       name: "vcdfrgthnbvf",
-//       specialist: "Cardiologist",
-//       timings: "9:00 am to 12:30 pm",
-//       count: 0,
-//     },
-//   ];
-//   return data;
-// }
+import { useParams } from "react-router-dom";
+import io from "socket.io-client";
+
+
+
 export default function Doclist() {
+  const {id} = useParams()
   const [timing, setTiming] = useState("");
   const [name, setName] = useState("");
 const[data,setdata] = useState([]);
+const[forHos,setForHos] = useState([]);
+const[DocCount,setDoccount]=useState([]);
   const handleClick = () => {
     localStorage.setItem("time", timing);
     localStorage.setItem("name", name);
   };
+  const socket = io.connect("http://localhost:2917");
 
-
+  useEffect(()=>{
+    socket.on("countUpdate",(data)=>{
+      setDoccount(data.Count)
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  useEffect(()=>{
+    console.log('hospital', forHos);
+  },[forHos])
+  useEffect(()=>{
+    fetch(`http://localhost:2917/hospital/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data);
+          setForHos(data);
+          setDoccount(data.Count)
+        })
+        .catch((error) => {
+          console.log(" failed to fetch");
+        })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   useEffect(()=>{
     fetch("http://localhost:2917/User")
         .then((response) => response.json())
@@ -73,21 +50,34 @@ const[data,setdata] = useState([]);
           // console.log(data);
           setdata(data);
         })
+
         .catch((error) => {
           console.log(" failed to fetch");
         })
   },[])
   
+  // useEffect(()=>{
+  //   fetch("http://localhost:2917/DocCount")
+  //   .then((response)=>response.json())
+  //   .then((data)=>{
+  //     setDoccount(data.Count)
+  //   })
+  //   .catch((error)=>{
+  //     console.log(error)
+  //   })
+  // })
+  
   return (
     <main className="DocContainer">
         {
-        data.map((abc) => {
+        data.filter(e=>e.HospitalName===forHos.HospitalName).map((abc) => {
         console.log(abc);
         return (
           <div className="Docapp">
             <div className="Doc-token">
               <h6 className="token">#Current Num:</h6>
-              <p className="Token-Num">{localStorage.getItem("Num")}</p>
+              {/* <p className="Token-Num">{localStorage.getItem("Num")}</p> */}
+              <p className="Token-Num">{abc.Count}</p>
             </div>
             <div className="SubContainer">
               <div className="img-div">

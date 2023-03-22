@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState } from "react";
 import "./DocForm.css"
 import { Link } from "react-router-dom";
@@ -23,10 +24,10 @@ const DocForm = () => {
     setPassword("");
   };
 
-  const handleLogout = () => {
-    setIsAuthenticated(true);
-    // alert("Logged out!");
-  };
+  // const handleLogout = () => {
+  //   setIsAuthenticated(true);
+  //   alert("Logged out!");
+  // };
 
   return (
     <div className="DocForm-div">
@@ -34,8 +35,8 @@ const DocForm = () => {
       {isAuthenticated ? (
         <div>
           <h1>Welcome,Doctor!</h1>
-          <Link to={"/DocInfo"}>
-          <button onClick={handleLogout}>Let's Go</button>
+          <Link to={'/DocInfo'}>
+          <button >Let's Go</button>
           </Link>
         </div>
       ) : (

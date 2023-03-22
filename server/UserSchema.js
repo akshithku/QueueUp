@@ -30,7 +30,7 @@ const UserSchema= mongoose.Schema({
         // required:true
     },
     Count:{
-        type:Number,
+        type:Number, 
         // required:true
     }
 });

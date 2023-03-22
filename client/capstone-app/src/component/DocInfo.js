@@ -1,70 +1,27 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from "react";
+import { json, useParams } from "react-router-dom";
+// import { count } from "../../../../server/UserSchema";
 import "./Doc.css";
-// import { Link } from "react-router-dom";
-function Docdata() {
-  let data = [
-    {
-      Dcoimg:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-      name: "qwertyu",
-      specialist: "Cardiologist",
-      timings: "9:00 am to 12:30 pm",
-      count:0
-    },
-    {
-      Dcoimg:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-      name: "asdfghj",
-      specialist: "Cardiologist",
-      timings: "9:00 am to 12:30 pm",
-      count:0
-    },
-    {
-      Dcoimg:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-      name: "asdfghjk",
-      specialist: "Cardiologist",
-      timings: "9:00 am to 12:30 pm",
-      count:0
-    },
-    {
-      Dcoimg:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-      name: "qazxsde",
-      specialist: "Cardiologist",
-      timings: "9:00 am to 12:30 pm",
-      count:0
-    },
-    {
-      Dcoimg:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-      name: "plkmnjhy",
-      specialist: "Cardiologist",
-      timings: "9:00 am to 12:30 pm",
-      count:0
-    },
-    {
-      Dcoimg:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oT9DZBnkbcGnMMQyARlpIPHFbuxeGihowVuI-8V_RA&usqp=CAU&ec=48600112",
-      name: "vcdfrgthnbvf",
-      specialist: "Cardiologist",
-      timings: "9:00 am to 12:30 pm",
-      count:0
-    },
-  ];
-  return data;
-}
-export default function Doclist() {
+// import { Link } from "react-router-dom";s
+
+export default function DocInfo() {
+  const {id} = useParams()
+  // console.log(id)
   const [timing, setTiming] = useState("");
   const [name, setName] = useState("");
-  const [docData,setDocData]=useState(Docdata())
-  const [num, setNum] = useState(0);
   const[data,setdata] = useState([]);
+  // const[counts,setCounts]=useState('');
+  const[counts,setCounts]=useState(0);
+  const [docData,setDocData]=useState(data)
+  // const [num, setNum] = useState(0);
+  // value={num} onChange={(event)=>setNum(event.target.value)}
   
-  useEffect(()=>{
-    localStorage.setItem("Num", num);
-  },)
+  // useEffect(()=>{
+  //   localStorage.setItem("Num", num);
+  // },)
     
   useEffect(()=>{
     fetch("http://localhost:2917/User")
@@ -72,13 +29,42 @@ export default function Doclist() {
         .then((data) => {
           // console.log(data);
           setdata(data);
+          // setCounts(data.Count);
         })
         .catch((error) => {
           console.log(" failed to fetch");
         })
-  },[])
-  
- 
+  },[id])
+  // /update/:id
+const UpdatCount= (e,count)=>{
+  console.log(e.target.id)
+   fetch(`http://localhost:2917/update/${e.target.id}`,{
+      method:"PUT",
+      headers:{
+        "Content-type":'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify({
+        "Count":count,
+      }),
+      
+    })
+    .then(res=>res.json())
+    .then((json)=>{
+      // console.log(json);
+      // setdata((prevData)=>
+      //   prevData.map((doc) =>
+      //       doc._id === id ? { ...doc, Count: counts } : doc
+      //     )
+      //   );
+    })
+    .catch((error)=>{
+      console.log("Failed to update count")
+    });
+     
+      // console.log(res)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
+
   return (
     <main className="DocContainer">
       {/* <div>
@@ -86,22 +72,34 @@ export default function Doclist() {
           return <img src={abd.img} alt=""/>
         })}
       </div> */}
-      {data.map((abc) => {
-        console.log(abc);
+      {data.map((abc,i) => {
+        // console.log(abc);
         return (
-          <div className="Docapp">
-            <div className="Doc-token">
+          <div className="Docapp" key={abc._id}>
+            <div method="PUT" className="Doc-token">
               <h6 className="token">#Current Num:</h6>
-              <p className="Token-Num" value={num} onChange={(event)=>setNum(event.target.value)}>{abc.Count}</p>
+              <p className="Token-Num">{abc.Count}</p>
               <div className="doc-btns">
                 <button className="doc-btn1"
-                 onClick={() => {
-                  abc.count=abc.count+1;
-                  setDocData([...docData,docData.count=abc.count+1])
-                }}>+</button>
-                <button className="doc-btn2"  onClick={() => {abc.count=abc.count-1;
-                  setDocData([...docData,docData.count=abc.count-1])}}>-</button>
+                id={abc._id} 
+                 onClick={(e) => {setdata(prev=>{
+                  let newData=[...prev]
+                  console.log(newData)
+                  newData[i].Count++;
+                  UpdatCount(e,newData[i].Count);
+                  return newData;
+                 }); }}>+</button>
+                <button
+               id={abc._id} 
+               onClick={(e) => {setdata(prev=>{
+                let newData=[...prev]
+                newData[i].Count--;
+                UpdatCount(e,newData[i].Count);
+                return newData
+               }); }}
+                 className="doc-btn2" >-</button>
               </div>
+              {console.log(counts)}
             </div>
             <div className="SubContainer">
               <div className="img-div">
@@ -117,6 +115,7 @@ export default function Doclist() {
                 </h1>
                 <h2 className="lit-1">{abc.Specialty}</h2>
                 <h3 className="lit-2">{abc.timings}</h3>
+                {/* <button onClick={UpdatCount}>Save</button> */}
               </div>
             </div>
             <div className="SubContainer-1">

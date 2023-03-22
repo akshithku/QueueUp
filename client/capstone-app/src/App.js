@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Datas/>}></Route>
         <Route path='/Forms' element={<Forms/>}></Route>
-        <Route path='/Doc' element={<DocList/>}></Route>
+        <Route path='/Doc/:id' element={<DocList/>}></Route>
         <Route path='/Pay' element={<PaymentPage/>}></Route>
         <Route path='/DocForm' element={<DocForm/>}></Route>
         <Route path='/DocInfo' element={<DocInfo/>}></Route>
