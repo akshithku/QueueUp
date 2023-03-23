@@ -40,8 +40,9 @@ export default function DocRegi() {
   const handleSubmit = (e) => {
     e.preventDefault();
     try{
-   const res= fetch('http://localhost:2917/register',{
+    fetch('http://localhost:2917/register',{
       method:"POST",
+      
       body:JSON.stringify({
         "DoctorName":name,
         "Docimg":Img,
@@ -51,18 +52,19 @@ export default function DocRegi() {
         "password":password,
         "Specialty":specialty
       }),
+
       headers:{
         "Content-type":'application/json; charset=UTF-8'
       }
+      
     })
     .then(res=>res.json())
     .then(json=>
       {console.log(json)
-        window.location.href="/";
+        // window.location.href="/";
       });
      
-      const data =  res.json()
-      console.log({ data })
+      
 
     }catch (error){
       console.log(error)
@@ -71,7 +73,7 @@ export default function DocRegi() {
   };
 
   return (
-    <form method='POST' onSubmit={handleSubmit}>
+    <form  method='POST' onSubmit={handleSubmit}>
       <label>
         Doctor's Name:
         <input type="text" value={name} onChange={handleNameChange} />
