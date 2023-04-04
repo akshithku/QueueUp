@@ -61,11 +61,36 @@ app.get("/hospital/:id", async (req, res) => {
   res.status(200).json(list);
 });
 
+app.get("/DocSlot/:id", async(req,res)=>{
+  const {id}=req.params;
+   const list = await List.findById(id).select("Docimg  DoctorName Specialty");
+  res.status(200).json(list);
+})
 
-// app.get("/DocCount", async(req,res)=>{
-//    const list = await List.find();
-//   res.status(200).send(list);
-// })
+async function getBookedSlotsForDoctor(doc_id) {
+  try {
+    const bookedSlots = await appModal.find({ Doc_id: doc_id}); 
+    return bookedSlots;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+app.get("/bookedSlots/:doc_id",async(req,res)=>{
+  try{
+    const {doc_id}=req.params;
+    // console.log(doc_id)
+  const data=await getBookedSlotsForDoctor(doc_id);
+  res.status(200).json(data);
+  // console.log(data)
+  }catch(error){
+    console.log(error);
+    res.status(500).send("Sever Error");
+  }
+  
+})
+
 
 app.put("/update/:id", async (req, res) => {
   const { id } = req.params;
@@ -82,27 +107,29 @@ app.put("/update/:id", async (req, res) => {
 });
 
 
-// app.post('/Slot',(req,res)=>{
-//   const {Docimg,name,specialist,timings,count } = req.body;
 
-//   const modal = new appModal()
+app.post('/Slot',(req,res)=>{
+  const {DoctorName,Name,timings,Amount,image,Doc_id } = req.body;
 
-//   modal.Docimg=Docimg,
-//   modal.name = name,
-//   modal.specialist=specialist,
-//   modal.timings=timings,
-//   modal.count=count
+  const modal = new appModal()
 
-//   modal.save(async (err,data)=>{
-//     if(err){
-//       console.log(req);
-//     }
-//     else{
-//       res.send(modal).status(200);
-//     }
-//   })
+  modal.DoctorName=DoctorName,
+  modal.Name = Name,
+  modal.timings=timings,
+  modal.Amount=Amount,
+  modal.image=image,
+  modal.Doc_id=Doc_id,
 
-// })
+  
+  modal.save(async (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+
+})
 
 app.post("/register", async (req, res) => {
   const {
@@ -113,7 +140,6 @@ app.post("/register", async (req, res) => {
     email,
     password,
     Specialty,
-    Count,
   } = req.body;
   console.log(req.body);
 
@@ -125,30 +151,30 @@ app.post("/register", async (req, res) => {
     modal.email = email,
     modal.password = password,
     modal.Specialty = Specialty,
-    modal.Count = Count;
+    modal.Count = 0;
 
-  // if (!email || !password)
-  //   return res.status(400).json({ msg: "Password and email are required" });
-  // if (password.length < 8) {
-  //   return res
-  //     .status(400)
-  //     .json({ msg: "Password should be at least 8 characters long" });
-  // }
+  if (!email || !password)
+    return res.status(400).json({ msg: "Password and email are required" });
+  if (password.length < 8) {
+    return res
+      .status(400)
+      .json({ msg: "Password should be at least 8 characters long" });
+  }
 
-  // const user = await UserSchema.findOne({ email });
-  // if (user) return res.status(400).json({ msg: "User already exists" });
+  const user = await UserSchema.findOne({ email });
+  if (user) return res.status(400).json({ msg: "User already exists" });
 
   // const newUser = new UserSchema({ email, password });
-  // bcrypt.hash(password, 7, async (err, hash) => {
-  //   if (err)
-  //     return res.status(400).json({ msg: "error while saving the password" });
+  bcrypt.hash(password, 7, async (err, hash) => {
+    if (err)
+      return res.status(400).json({ msg: "error while saving the password" });
 
-  //   newUser.password = hash;
-  //   const savedUserRes = await newUser.save();
+    modal.password = hash;
+    const savedUserRes = await modal.save();
 
-  //   if (savedUserRes)
-  //     return res.status(200).json({ msg: "user is successfully saved" });
-  // });
+    if (savedUserRes)
+      return res.status(200).json({ msg: "user is successfully saved" });
+  });
 
   modal.save(async (err, data) => {
     if (err) {

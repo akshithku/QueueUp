@@ -1,0 +1,21 @@
+.main_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5vmin;
+}
+
+.sub_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.img-2{
+    height: 50vmin;
+    width: 50vmin;
+}
+
+table{
+    color: aliceblue;
+}

@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/heading-has-content */
 import React, { useState, useEffect } from "react";
 import "./Doc.css";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
 
 
@@ -14,19 +15,31 @@ export default function Doclist() {
   const [name, setName] = useState("");
 const[data,setdata] = useState([]);
 const[forHos,setForHos] = useState([]);
-const[DocCount,setDoccount]=useState([]);
-  const handleClick = () => {
+// const[DocCount,setDoccount]=useState([]);
+  const handleClick = (e) => {
     localStorage.setItem("time", timing);
-    localStorage.setItem("name", name);
-  };
-  const socket = io.connect("http://localhost:2917");
+    localStorage.setItem("name", e.target.name); 
+    // if (!name) setName(abc.DoctorName)
+    console.log(name)
+  //   const selectedDoc = data.filter(doc => doc.DoctorName === e.target.name)[0];
+  // const docId = selectedDoc._id;
 
-  useEffect(()=>{
-    socket.on("countUpdate",(data)=>{
-      setDoccount(data.Count)
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  // const bookingData = {
+  //   doctorId: docId,
+  //   timing: timing,
+  //   userId: localStorage.getItem("user_id") 
+  // }
+
+  localStorage.setItem("doctorId",id);
+  // console.log('doctorId')
+  };
+  // const socket = io.connect("http://localhost:2917");
+
+  // useEffect(()=>{
+  //   socket.on("countUpdate",(data)=>{
+  //     setDoccount(data.Count)
+  //   })
+  // },[])
   useEffect(()=>{
     console.log('hospital', forHos);
   },[forHos])
@@ -36,7 +49,7 @@ const[DocCount,setDoccount]=useState([]);
         .then((data) => {
           // console.log(data);
           setForHos(data);
-          setDoccount(data.Count)
+          // setDoccount(data.Count)
         })
         .catch((error) => {
           console.log(" failed to fetch");
@@ -51,7 +64,7 @@ const[DocCount,setDoccount]=useState([]);
           setdata(data);
         })
 
-        .catch((error) => {
+        .catch((error) => {  
           console.log(" failed to fetch");
         })
   },[])
@@ -72,6 +85,7 @@ const[DocCount,setDoccount]=useState([]);
         {
         data.filter(e=>e.HospitalName===forHos.HospitalName).map((abc) => {
         console.log(abc);
+       
         return (
           <div className="Docapp">
             <div className="Doc-token">
@@ -86,8 +100,6 @@ const[DocCount,setDoccount]=useState([]);
               <div className="div-list">
                 <h1
                   className="lit"
-                  value={name}
-                  onChange={(abd) => setName(abd.target.value)}
                 >
                   {abc.DoctorName}
                 </h1>
@@ -100,7 +112,7 @@ const[DocCount,setDoccount]=useState([]);
                 <div className="slot-1">
                   <select
                     className="select-1"
-                    value={timing}
+                    // value={timing}
                     onChange={(event) => setTiming(event.target.value)}
                   >
                     <option className="mrng" value="Morning">
@@ -116,7 +128,7 @@ const[DocCount,setDoccount]=useState([]);
                 <div className="slot-2">
                   <select
                     className="select-1"
-                    value={timing}
+                    // value={timing}
                     onChange={(Event) => setTiming(Event.target.value)}
                   >
                     <option value="Afternoon">Afternoon</option>
@@ -128,8 +140,9 @@ const[DocCount,setDoccount]=useState([]);
                   </select>
                 </div>
               </div>
+              {/* {`/pay/${abc._id}`} */}
               <Link to="/Pay">
-                <button id="btn1" onClick={handleClick}>
+                <button id="btn1" onClick={handleClick} name={abc.DoctorName}>
                   Book Now
                 </button>
               </Link>

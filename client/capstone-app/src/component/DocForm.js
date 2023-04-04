@@ -14,7 +14,8 @@ const DocForm = () => {
     if (username === "" && userId === "Akshith" && password === newLocal) {
       setIsAuthenticated(true);
       alert("Login successful!");
-    } else {
+    } 
+    else {
       setIsAuthenticated(false);
       alert("Invalid credentials!");
     }
