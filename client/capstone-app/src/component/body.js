@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./body.css";
-
+import { useAuth0 } from "@auth0/auth0-react";
+// import  Search  from "../Assets/search.png.png";
 
 export default function Datas() {
  
 // const [Info,setInfo]=useState([])
 const [HospitalName,setHospitalName]=useState([])
+
+
+const {isAuthenticated,user} =useAuth0();
+console.log(user)
+
+
 // const [GetData,setGetData]=useState([]);
 
 // useEffect(()=>{
@@ -54,14 +61,23 @@ function handlechange(e){
 
   return (
     <main className="fullContainer">
-      <div className="search-input">
-        <input
-          type="text"
-          className="input-search"
-          placeholder="Search...."
-          id="search-input"
-        />
-      </div>
+
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="What are you looking for?"/>
+      {/* <button type="submit" class="searchButton">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      {<Search/> }
+     </button> */}
+     <button type="submit" className="searchbutton" >
+      <i class="fa fa-search" aria-hidden="true"></i>
+     </button>
+   </div>
+</div>
+
+    {
+     isAuthenticated && (<h1 className="name_head">Hello {user?.name} !</h1>)
+    }
       <div className="app">
         {arrayUniqueHospitals.map((abd) => {
           return (

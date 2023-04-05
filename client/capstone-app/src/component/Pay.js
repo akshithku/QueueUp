@@ -33,10 +33,8 @@ const PaymentPage = () => {
   // const handleImageChange = (event) => {
   //   setImage(event.target.value);
   // }
-
-// async function UploadImage(){
- 
-// }
+  // async function UploadImage(){
+  // }
 
 
 

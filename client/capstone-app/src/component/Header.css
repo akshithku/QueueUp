@@ -85,3 +85,39 @@
     border-radius: 10%;
     cursor: pointer;
   }
+
+  .user_img{
+    height: 10vmin;
+    width: 10vmin;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin-top: 3vmin;
+    margin-right: 1vmin;
+    display: inline-block;
+  }
+
+  .log_div{
+    position: absolute;
+    background-color: rgb(221, 250, 215);
+    height: 17vmin;
+    width: 25vmin;
+    font-size: 2.5vmin;
+    margin-bottom: 1vmin;
+    top: 17vmin;
+    right: 3vmin;
+  }
+
+  .log_btn1{
+    height: 3vmin;
+    width: 5vmin;
+    background-color: aliceblue;
+    color: black;
+    font-weight: 600;
+    border-radius: 30%;
+  }
+
+  .log_btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
