@@ -2,26 +2,36 @@ const mongoose = require("mongoose");
 
 const Shcema = mongoose.Schema
 ({
-        Docimg:{
+        Name:{
             type:String,
-            required:true
+            // required:true
         },
-        name:{
+        DoctorName:{
             type:String,
-            required:true
-        },
-        specialist:{
-            type:String,
-            required:true
+            // required:true
         },
         timings:{
-            type:Number,
-            required:true
+            type:String,
+            // required:true
         },
-        count:{
+        Amount:{
             type:Number,
-            required:true
+            // required:true
+        },
+        image:{
+            type:String,
+            // required:true
+        },
+        Doc_id:{
+            type:String,
+            // required:true,/
+        },
+        mySlots:{
+            type:Boolean,
+            // required:true,
         }
 })
 
-module.exports=mongoose.model('tokenNum', Shcema)
+const DocSlot=mongoose.model('DocSlot', Shcema)
+
+module.exports=DocSlot;

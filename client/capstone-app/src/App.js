@@ -7,6 +7,9 @@ import PaymentPage from './component/Pay';
 import DocForm from './component/DocForm';
 import DocInfo from "./component/DocInfo";
 import DocRegi from './component/DocRegi';
+import Slots from './component/Slots';
+
+
 import { Route,Routes
  } from 'react-router-dom';
 function App() {
@@ -21,6 +24,7 @@ function App() {
         <Route path='/DocForm' element={<DocForm/>}></Route>
         <Route path='/DocInfo' element={<DocInfo/>}></Route>
         <Route path='/DocRegi' element={<DocRegi/>}></Route>
+        <Route path='/slots/:id' element={<Slots/>}></Route>
       </Routes>
     </div>
   );
