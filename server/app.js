@@ -164,12 +164,12 @@ app.post("/register", async (req, res) => {
   const user = await UserSchema.findOne({ email });
   if (user) return res.status(400).json({ msg: "User already exists" });
 
-  // const newUser = new UserSchema({ email, password });
+  const newUser = new UserSchema({ email, password });
   bcrypt.hash(password, 7, async (err, hash) => {
     if (err)
       return res.status(400).json({ msg: "error while saving the password" });
 
-    modal.password = hash;
+      newUser.password = hash;
     const savedUserRes = await modal.save();
 
     if (savedUserRes)
