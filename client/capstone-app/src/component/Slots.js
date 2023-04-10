@@ -16,7 +16,7 @@ function Slots() {
 
   useEffect(() => {
     const datas = async () => {
-      const res = await axois.get(`http://localhost:2917/DocSlot/${id}`);
+      const res = await axois.get(`${process.env.REACT_APP_URL}/DocSlot/${id}`);
       // console.log("res", res.data);
       setdata(res.data);
     };
@@ -42,7 +42,7 @@ function Slots() {
 
   useEffect(() => {
     const BookedSlots = async () => {
-      const result = await axois.get(`http://localhost:2917/bookedSlots/${id}`);
+      const result = await axois.get(`${process.env.REACT_APP_URL}/bookedSlots/${id}`);
       setBookedSlots(result.data);
     };
     BookedSlots();

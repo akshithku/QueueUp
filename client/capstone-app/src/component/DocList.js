@@ -44,7 +44,7 @@ const[forHos,setForHos] = useState([]);
     console.log('hospital', forHos);
   },[forHos])
   useEffect(()=>{
-    fetch(`http://localhost:2917/hospital/${id}`)
+    fetch(process.env.REACT_APP_URL+`/hospital/${id}`)
         .then((response) => response.json())
         .then((data) => {
           // console.log(data);
@@ -57,7 +57,7 @@ const[forHos,setForHos] = useState([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   useEffect(()=>{
-    fetch("http://localhost:2917/User")
+    fetch(`${process.env.REACT_APP_URL}/User`)
         .then((response) => response.json())
         .then((data) => {
           // console.log(data);
@@ -141,10 +141,8 @@ const[forHos,setForHos] = useState([]);
                 </div>
               </div>
               {/* {`/pay/${abc._id}`} */}
-              <Link to="/Pay">
-                <button id="btn1" onClick={handleClick} name={abc.DoctorName}>
+              <Link to="/Pay" id="btn1" onClick={handleClick} name={abc.DoctorName}>
                   Book Now
-                </button>
               </Link>
             </div>
           </div>

@@ -67,7 +67,7 @@ const PaymentPage = () => {
     // setLink(json.url)
     // console.log(link)
  
-     const submit= await fetch('http://localhost:2917/Slot',{
+     const submit= await fetch(`${process.env.REACT_APP_URL}/Slot`,{
         method:"POST",
         headers:{
           "Content-type":'application/json; charset=UTF-8'

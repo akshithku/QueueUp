@@ -40,7 +40,7 @@ export default function DocRegi() {
   const handleSubmit = (e) => {
     e.preventDefault();
     try{
-    fetch('http://localhost:2917/register',{
+    fetch(`${process.env.REACT_APP_URL}/register`,{
       method:"POST",
       
       body:JSON.stringify({
@@ -62,11 +62,11 @@ export default function DocRegi() {
     .then(json=>
       {console.log(json)
         window.location.href="/";
-      });
+      }).catch((err)=>{
+        console.log(err)
+      })
      
-      
-
-    }catch (error){
+      }catch (error){
       console.log(error)
     }
    

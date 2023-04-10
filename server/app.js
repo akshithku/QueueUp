@@ -3,12 +3,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+require("dotenv").config();
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// mongoose.connect('mongodb+srv://akshithkumarkarla:9390733656a@queueup.qaqkgtb.mongodb.net/test')
 
 mongoose.set("strictQuery", false);
 const List = require("../server/UserSchema");
@@ -16,14 +17,15 @@ const List = require("../server/UserSchema");
 const appModal = require("./appModal");
 const UserSchema = require("./UserSchema");
 
+console.log("mongobd : ",process.env.PORT)
 mongoose
-  .connect("mongodb://localhost/DocsInfo", {
+  .connect(`mongodb+srv://akshithkumarkarla:Kanni123@queueup.qaqkgtb.mongodb.net/?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4,
   })
   .then(() => {
-    app.listen(2917, () => {
+    app.listen(process.env.PORT, () => {
       console.log("connected successfully");
     });
   })
@@ -32,8 +34,13 @@ mongoose
   });
 
 app.get("/User", async (err, data) => {
-  const list = await List.find();
-  data.status(200).send(list);
+  try{
+    const list = await List.find();
+    data.status(200).send(list);
+  }catch(err){
+    console.log(err)
+  }
+  
 });
 
 app.get("/Userdata", async (err, data) => {
@@ -153,28 +160,36 @@ app.post("/register", async (req, res) => {
     modal.Specialty = Specialty,
     modal.Count = 0;
 
-  if (!email || !password)
-    return res.status(400).json({ msg: "Password and email are required" });
-  if (password.length < 8) {
-    return res
-      .status(400)
-      .json({ msg: "Password should be at least 8 characters long" });
-  }
+//   if (!email || !password)
+//     return res.status(400).json({ msg: "Password and email are required" });
+//   if (password.length < 8) {
+//     return res
+//       .status(400)
+//       .json({ msg: "Password should be at least 8 characters long" });
+//   }
 
-  const user = await UserSchema.findOne({ email });
-  if (user) return res.status(400).json({ msg: "User already exists" });
+//   const user = await UserSchema.findOne({ email });
+//   if (user){ 
+//     console.log("user fund")
+//     return res.status(400).json({ msg: "User already exists" })
+// }
 
-  const newUser = new UserSchema({ email, password });
-  bcrypt.hash(password, 7, async (err, hash) => {
-    if (err)
-      return res.status(400).json({ msg: "error while saving the password" });
+//   const newUser = new UserSchema({ email, password });
+//   bcrypt.hash(password, 7, async (err, hash) => {
+//     if (err)
+//    {
+//     console.log('bcrypt')
+//       return res.status(400).json({ msg: "error while saving the password" });
+//    }
+//       newUser.password = hash;
+//     const savedUserRes = await modal.save();
+//     console.log(savedUserRes)
 
-      newUser.password = hash;
-    const savedUserRes = await modal.save();
+//     if (savedUserRes)
 
-    if (savedUserRes)
-      return res.status(200).json({ msg: "user is successfully saved" });
-  });
+
+//       return res.status(200).json({ msg: "user is successfully saved" });
+//   });
 
   modal.save(async (err, data) => {
     if (err) {
@@ -182,6 +197,7 @@ app.post("/register", async (req, res) => {
     } else {
       res.status(200).send(data);
     }
+
   });
 });
 

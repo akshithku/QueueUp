@@ -1,41 +1,62 @@
-.nav{
-    background-color: rgb(107, 109, 109);
-    height: 15vmin;
-    /* width: cover; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    
+*{
+  text-decoration: none;
 }
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  align-items:  center;
+  border: solid black; 
+  background-color: black;
+  border-bottom: solid white;
+  border-radius: 5px;
+  height: 12vh;
+  z-index: 0;
+}
+
 .head{
     width: 20rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
+
 }
 .regi{
-    height: 6vmin;
-    width: 11vmin;
-    border-radius: 20px;
-    font-size: large;
-    cursor: pointer;
-    background-color: chartreuse;
-    margin-right: 1.5rem;
-    position: relative;
-    margin-top: 2.5rem;
+	border: 2px solid chartreuse;
+  position:relative;
+	padding: 10px 25px;
+	border-radius: 30px;
+	background-color: chartreuse;
+	color: black;
+  transition: .2s;
+  font-size: medium;
 }
+.regi:hover{
+	background-color: black;
+	border: 2px solid chartreuse;
+  color: white;
+	cursor: pointer;
+}
+
 .home{
-    height: 6vmin;
-    width: 11vmin;
-    border-radius: 20px;
-    font-size: large;
-    cursor: pointer;
-    background-color: rgb(253, 12, 36);
-    position: relative;
-    margin-top: 2.5rem;
+	border: 2px solid #f9004d;
+  position:relative;
+	padding: 10px 25px;
+	border-radius: 30px;
+	background-color: #f9004d;
+	color: black;
+  transition: .2s;
+  font-size: medium;
 }
+.home:hover{
+	background-color: black;
+	border: 2px solid #f9004d;
+  color: white;
+	cursor: pointer;
+}
+
 
 .popup {
     position: fixed;
@@ -48,6 +69,7 @@
     padding: 2vmin;
     background-color: #9f9e9e;
     box-shadow: 0 0 10px rgba(40, 20, 20, 0.3);
+    border-radius: 30px;
   }
 
   .btn-container{
@@ -64,6 +86,7 @@
     margin-top: 0;
     background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
+    border-radius: 50px;
   }
   .btn-1{
     background-color: rgb(145, 235, 72);
@@ -71,8 +94,7 @@
     width: 20vmin;
     font-size: 3vmin;
     margin: 2vmin;
-    /* padding: 2%; */
-    border-radius: 10%;
+    border-radius: 30px;
     cursor: pointer;
   }
 
@@ -82,7 +104,7 @@
     font-size: 3vmin;
     margin: 3%;
     padding: 2%;
-    border-radius: 10%;
+    border-radius: 30px;
     cursor: pointer;
   }
 
