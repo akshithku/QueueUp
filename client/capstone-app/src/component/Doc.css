@@ -1,14 +1,16 @@
 
 
 .DocContainer{
+    background-image: url("https://wallpaperaccess.com/full/1282799.jpg");
+   background-repeat: no-repeat;
+   background-size: 100%;
     /* width: 95%; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-   margin: 1%;
-   padding:0%;
+    height: 88vh;
 }
 
 
@@ -22,7 +24,8 @@
     background-color: azure;
     margin: 2%;
     padding:1%;
-    
+    border: 3px solid black;
+    border-radius: 10px;
 }
 
 
@@ -56,31 +59,54 @@
 .Doc-img{
     height: 22vmin;
     width: 22vmin;
+    border-radius: 75px;
 }
 
 
 #btn1{
-    height: 6vmin;
-    width: 30vmin;
-    border-radius: 10%;
-    font-size: 3.3vmin;
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
     cursor: pointer;
-    margin: 2%;
-}
+    outline: none;
+  }
+  
+  #btn1:hover {
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  
+  #btn1:active {
+    transform: translateY(-1px);
+  }
 
 .SubContainer{
     height: 30vmin;
-    /* width: 40vmin; */
     background-color: rgb(17, 74, 165);
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
+    border-radius: 20px;
     align-items: center;
     margin: 2%;
+
 }
 .Doc-token{
     background-color: rgb(179, 244, 66);
-    border-radius: 8vmin;
+    border-radius: 20px;
     height:25vmin ;
     text-align: center;
     font-size: 10vmin;
@@ -108,13 +134,16 @@
 }
 
 .SubContainer-1{
-    margin-top: .5vmin;
+    margin: auto;
+    display:flex ;
+    flex-direction: column;
 }
 .doc-lit{
     display: flex;
     flex-direction: row;
     justify-content: center;
     text-align: center;
+    width: fit-content;
     /* margin: 2vmin ; */
     /* width: 20vmin; */
     /* margin-left: 14vmin; */
@@ -158,3 +187,4 @@
     font-weight: 600;
     cursor: pointer;
 }
+

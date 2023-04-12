@@ -25,7 +25,7 @@ export default function DocInfo() {
   },[Docbooked])
 
   useEffect(() => {
-    fetch("http://localhost:2917/User")
+    fetch(process.env.REACT_APP_URL+"/User")
       .then((response) => response.json())
       .then((data) => {
         // console.log(data);
@@ -61,7 +61,7 @@ export default function DocInfo() {
 
   const UpdatCount = (e, count) => {
     console.log(e.target.id);
-    fetch(`http://localhost:2917/update/${e.target.id}`, {
+    fetch(`${process.env.REACT_APP_URL}/update/${e.target.id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

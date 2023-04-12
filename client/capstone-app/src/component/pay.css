@@ -1,22 +1,26 @@
-.pay-div{
+.pay-div {
     /* background-color: aqua; */
+    background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    /* padding: 3vmin; */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 2vmin;
+    /* margin: 2vmin; */
 }
-.heading{
+
+.heading {
     color: aliceblue;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-decoration: dotted 5px red;
 }
 
-label{
-    color: azure;
+label {
+    color: rgb(11, 11, 11);
 }
 
-.input1{
+.input1 {
     font-size: 3vmin;
     margin: 4vmin;
 }
-

@@ -12,7 +12,6 @@ export default function Header() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   const [close,setclose]=useState(false);
 
-
   const openModel = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
@@ -37,19 +36,18 @@ export default function Header() {
 
   return (
     <div className="nav">
-      <h1>QueueUp</h1>
+      <h1 style={{color:"white", marginLeft:"5vw",textShadow: ".5px .1px 0px white, 0px 5px 15px white"}} >QueueUp</h1>
       <div className="head">
-        <Link to="/">
-          <button className="home">Home</button>
+        <Link to="/" className="home">Home
         </Link>
 
         {isAuthenticated ? (
           <img className="user_img" onClick={()=>{setclose(true)}} src={user.picture} alt="" />
         ) : (
           <div className="nav-title" id="nav-check">
-            <button className="regi" onClick={() => setModalIsOpen(true)}>
+            <Link className="regi" onClick={() => setModalIsOpen(true)}>
               login
-            </button>
+            </Link>
           </div>
         )}
 
@@ -76,7 +74,7 @@ export default function Header() {
             </button>
             {/* <Link to="/Forms"> */}
             <button onClick={() => loginWithRedirect()} className="btn-1">
-              Patient
+              User
             </button>
             {/* </Link> */}
             <Link to={"/DocForm"}>
