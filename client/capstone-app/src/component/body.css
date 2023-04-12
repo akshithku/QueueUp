@@ -132,3 +132,22 @@ body{
 .button:hover::before {
   width: 250%;
 }
+
+
+
+.notifi-btn{
+  background: none;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 10px;
+  margin-right:10vmin;
+}
+
+.notifi-btn:hover {
+  background: rgba(33, 23, 23, 0.062);
+  transition: 0.5s;
+}
+
+.notifi-btn svg {
+  color: #fff;
+}

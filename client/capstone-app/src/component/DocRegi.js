@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import "./DocForm.css"
 export default function DocRegi() {
   const [name, setName] = useState('');
   const[Img,setImg]=useState('')
@@ -9,20 +9,25 @@ export default function DocRegi() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [specialty, setSpecialty] = useState('');
+  const [picurl,setpicUrl]=useState([]);
+  const [ImageUrl,setImageUrl]=useState([]);
+
 
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
   const handleImageChange=(event)=>{
-    setImg(event.target.value);
+    setImg([...event.target.files]);
+    console.log(Img,"Doc Image")
   }
 
   const handleHospitalNameChange = (event) => {
     setHospitalName(event.target.value);
   };
   const handleHospitalImgageChange = (event) => {
-    setHospitalImg(event.target.value);
+    setHospitalImg([...event.target.files]);
+    console.log(HospitalImg,"Hos image")
   };
 
   const handleEmailChange = (event) => {
@@ -37,17 +42,58 @@ export default function DocRegi() {
     setSpecialty(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+useEffect(()=>{
+  if(Img.length<1) return;
+  const NewImageUrls=[];
+  Img.forEach(Img=>NewImageUrls.push(URL.createObjectURL(Img)));
+  setImageUrl(NewImageUrls)
+  },[Img])
+
+  
+  useEffect(()=>{
+    if(HospitalImg.length<1) return;
+    const NewImageUrls=[];
+    HospitalImg.forEach(Img=>NewImageUrls.push(URL.createObjectURL(Img)));
+    setpicUrl(NewImageUrls)
+    },[HospitalImg])
+  
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    try{
-    fetch(`${process.env.REACT_APP_URL}/register`,{
+    const data=  new FormData();
+    data.append("file",Img[0]);
+    data.append("upload_preset", "QueueUp");
+    data.append("cloud_name",'dr7cybxpq')
+  
+    const respone= await fetch("https://api.cloudinary.com/v1_1/dr7cybxpq/image/upload",{
+     method:"POST",
+     body:data
+    })
+    const json= await respone.json()
+    console.log(json)
+
+
+    const collection=  new FormData();
+    collection.append("file",HospitalImg[0]);
+    collection.append("upload_preset", "QueueUp");
+    collection.append("cloud_name",'dr7cybxpq')
+  
+    const imagedata= await fetch("https://api.cloudinary.com/v1_1/dr7cybxpq/image/upload",{
+     method:"POST",
+     body:collection
+    })
+    const Hosimg= await imagedata.json()
+    console.log(Hosimg)
+
+
+   const submit= await fetch(`${process.env.REACT_APP_URL}/register`,{
       method:"POST",
       
       body:JSON.stringify({
         "DoctorName":name,
-        "Docimg":Img,
+        "Docimg":json.url,
         "HospitalName":HospitalName,
-        "HospitalsImg":HospitalImg,
+        "HospitalsImg":Hosimg.url,
         "email":email,
         "password":password,
         "Specialty":specialty
@@ -66,43 +112,47 @@ export default function DocRegi() {
         console.log(err)
       })
      
-      }catch (error){
-      console.log(error)
-    }
+      const jsondata =  submit.json();
+      console.log(jsondata)
    
   };
 
   return (
-    <form  method='POST' onSubmit={handleSubmit}>
+    <div className="DocForm-div-1">
+      <h1>Doctor's Registration</h1>
+    <form className="form-1" method='POST' onSubmit={handleSubmit}>
       <label>
         Doctor's Name:
-        <input type="text" value={name} onChange={handleNameChange} />
+        <input type="text" required="required" value={name} onChange={handleNameChange} />
       </label>
       <label>
         Doctor's image:
-        <input  value={Img} onChange={handleImageChange}></input>
+        <input   type='file' required="required" accept="image/*" onChange={handleImageChange}></input>
+        {ImageUrl.map(imageSrc=><img width={100} height={100} src={imageSrc} alt=""/>)}
       </label>
       <label>
         Hospital Name:
-        <input type="text" value={HospitalName} onChange={handleHospitalNameChange} />
+        <input type="text" required="required" value={HospitalName} onChange={handleHospitalNameChange} />
       </label>
       <label>
         Hospital's image:
-        <input  value={HospitalImg} onChange={handleHospitalImgageChange}></input>
+        <input  type='file' required="required" accept="image/*"  onChange={handleHospitalImgageChange}></input>
+        {picurl.map(imageSrc=><img width={100} height={100} src={imageSrc} alt=""/>)}
       </label>
       <label>
         Email:
-        <input type="email" value={email} onChange={handleEmailChange} />
+        <input type="email" required="required" value={email} onChange={handleEmailChange} />
       </label>
       <label>
         Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
+        <input type="password" required="required" value={password} onChange={handlePasswordChange} />
       </label>
       <label>
         Specialty:
-        <input type="text" value={specialty} onChange={handleSpecialtyChange} />
+        <input type="text" required="required" value={specialty} onChange={handleSpecialtyChange} />
       </label>
       <button type="submit">Register</button>
     </form>
+    </div>
   );
 }

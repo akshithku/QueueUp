@@ -12,7 +12,6 @@ export default function Header() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   const [close,setclose]=useState(false);
 
-
   const openModel = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
@@ -75,7 +74,7 @@ export default function Header() {
             </button>
             {/* <Link to="/Forms"> */}
             <button onClick={() => loginWithRedirect()} className="btn-1">
-              Patient
+              User
             </button>
             {/* </Link> */}
             <Link to={"/DocForm"}>
