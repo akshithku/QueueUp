@@ -1,19 +1,39 @@
-.pay-div {
-    /* background-color: aqua; */
+body {
     background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
     background-repeat: no-repeat;
     background-size: 100%;
-    /* padding: 3vmin; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay-div {
+    background-color: #6f6c6c;
+    display: block;
+    /* padding: 1rem; */
+    max-width: 350px;
+    border-radius: 10rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    margin: auto;
+}
+
+.form1 {
+    max-width: 320px;
+    width: 100%;
+    background-color: #dde7e1;
+    padding: 20px;
+    box-shadow: 0px 0px 0px 4px rgba(52, 52, 53, 0.185);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* margin: 2vmin; */
+    border-radius: 10px;
 }
 
 .heading {
-    color: aliceblue;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    text-decoration: dotted 5px red;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #1a202c;
 }
 
 label {
@@ -21,6 +41,60 @@ label {
 }
 
 .input1 {
+    padding: 3px;
+    margin-bottom: 10px;
+    margin: auto;
+    width: 100%;
     font-size: 3vmin;
-    margin: 4vmin;
+    color: #4a5568;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
 }
+
+.input1:focus {
+    background-color: #fdf9f9;
+    box-shadow: 0 0 0 2px #123c69;
+}
+
+.input1:valid {
+    border: 1px solid green;
+}
+
+.input1:invalid {
+    border: 1px solid rgba(14, 14, 14, 0.205);
+}
+
+.pay-btn{
+    width: 9em;
+ height: 3em;
+ border-radius: 30em;
+ color: #1a202c;
+ font-size: 15px;
+ font-family: inherit;
+ border: none;
+ position: relative;
+ overflow: hidden;
+ z-index: 1;
+ background-color: #c5c5c5;
+ box-shadow: 6px 6px 12px #c5c5c5,
+             -6px -6px 12px #ffffff;
+}
+.pay-btn::before {
+    content: '';
+    width: 0;
+    height: 3em;
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+   }
+   
+   .pay-btn:hover::before {
+    width: 9em;
+   }

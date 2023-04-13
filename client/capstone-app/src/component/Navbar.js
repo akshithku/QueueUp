@@ -3,6 +3,9 @@ import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import logo from"../Assets/logo-2.png";
+
+
 export default function Header() {
   // const afterClick = () => {
   //   document.getElementById("nav-check").checked = false;
@@ -36,7 +39,9 @@ export default function Header() {
 
   return (
     <div className="nav">
-      <h1 style={{color:"white", marginLeft:"5vw",textShadow: ".5px .1px 0px white, 0px 5px 15px white"}} >QueueUp</h1>
+      <Link to='/'>
+      <img className="logo" src={logo} alt=""></img>
+      </Link>
       <div className="head">
         <Link to="/" className="home">Home
         </Link>

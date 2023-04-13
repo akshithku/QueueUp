@@ -107,22 +107,25 @@ const PaymentPage = () => {
           </Link>
         </div>
       ) :(
-      <form onSubmit={handleSubmit} >
+      <form className="form1" onSubmit={handleSubmit} >
         <label>
           Name:
           <input
           className="input1"
             type="text"
+            required="required"
             value={Name}
             onChange={handleNameChange}
           />
         </label>
+
         <br />
         <label>
           DoctorName:
           <input
           className="input1"
             type="text"
+            required="required"
             value={DoctorName}
             onChange={handleDoctorNameChange}
           />
@@ -130,17 +133,17 @@ const PaymentPage = () => {
           <br/>
         <label>
           Timings:
-          <input className="input1" type="timings" value={timing} onChange={handletimeChange}></input>
+          <input className="input1" type="timings"  required="required" value={timing} onChange={handletimeChange}></input>
         </label>
         <br />
         <label>
           Charges:
-          <input className="input1" type="number" placeholder="Amount" value={Amount} onChange={handleAmountChange}></input>
+          <input className="input1" type="number"  required="required" placeholder="Amount" value={Amount} onChange={handleAmountChange}></input>
         </label>
         <br/>
         <label>
-          Reference
-          <input className="input1"  type="file" accept="image/*" onChange={onImageChange}></input>
+          Reference:
+          <input className="input1"  type="file"  required="required" accept="image/*" onChange={onImageChange}></input>
           {ImageUrl.map(imageSrc=><img width={100} height={100} src={imageSrc} alt=""/>)}
         </label>
         <br/>
