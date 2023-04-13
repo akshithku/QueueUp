@@ -9,10 +9,11 @@ export default function Datas() {
  
 // const [Info,setInfo]=useState([])
 const [HospitalName,setHospitalName]=useState([])
-
-
 const {isAuthenticated,user} =useAuth0();
 console.log(user)
+const [isLoading, setIsLoading] = useState(true);
+const [searchQuery, setSearchQuery] = useState('');
+
 
 
 // const [GetData,setGetData]=useState([]);
@@ -28,15 +29,20 @@ console.log(user)
 //     console.log(" failed to fetch");
 //   })
 // },[])
+
+useEffect(() => {
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 5000);
+}, [])
+
 useEffect(()=>{
   console.log(HospitalName)
 },[HospitalName])
+
+
 useEffect(()=>{
   fetch(`${process.env.REACT_APP_URL}/HosList`)
-  
-
-  
-  
   .then((response) => response.json())
   .then((data) => {
     // console.log(data);
@@ -49,19 +55,37 @@ useEffect(()=>{
 },[]
 )
 
+
+
+
 const arrayUniqueHospitals = [...new Map(HospitalName.map(item =>
   [item['HospitalName'], item])).values()];
-// const unique = [...new Set(HospitalName.map(item => item.HospitalName))]; // [ 'A', 'B']
 console.log("unique:", arrayUniqueHospitals)
 function handlechange(e){
   setHospitalName(e);
 }
 
+const filteredHospitals = arrayUniqueHospitals.filter((hospital) =>
+  hospital.HospitalName.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
   return (
     <main className="fullContainer">
-
+{isLoading ? (
+  <div className="loading">
+    <div className="header">Loading</div>
+        <div class="loader">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    </div>
+      ) : (
+        <>
 <div class="wrap">
-<input type="text" name="text" class="input" placeholder="Type here..."></input>
+<input type="text" name="text" class="input" placeholder="Type here..." value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}></input>
 </div>
 
     {
@@ -72,16 +96,8 @@ function handlechange(e){
      </div>
      )
     }
-    {/* <div>
-    <button className="notifi-btn">
-    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M20 17h2v2H2v-2h2v-7a8 8 0 1 1 16 0v7zm-2 0v-7a6 6 0 1 0-12 0v7h12zm-9 4h6v2H9v-2z" fill="currentColor"></path>
-    </svg>
-</button>
-    </div> */}
       <div className="app">
-        {arrayUniqueHospitals.map((abd) => {
+        {filteredHospitals.map((abd) => {
           return (
             <div className="mainContainer">
               <img className="image" src={abd.HospitalsImg} alt="" />
@@ -97,6 +113,8 @@ function handlechange(e){
           );
         })}
       </div>
+      </>
+      )}
     </main>
   );
 }

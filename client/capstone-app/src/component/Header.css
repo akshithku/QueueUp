@@ -3,6 +3,7 @@
 }
 
 .nav{
+  /* position: fixed; */
   display: flex;
   justify-content: space-between;
   width: 100vw;
@@ -12,7 +13,14 @@
   border-bottom: solid white;
   border-radius: 5px;
   height: 12vh;
-  z-index: 0;
+  z-index: 5;
+  /* width: 100%; */
+}
+
+.logo{
+  height: 30vmin;
+  /* background-color: aliceblue; */
+  
 }
 
 .head{
@@ -27,7 +35,9 @@
 	border: 2px solid chartreuse;
   position:relative;
 	padding: 10px 25px;
-	border-radius: 30px;
+  height: 2vmin;
+  width: 9vmin;
+	border-radius: 50px;
 	background-color: chartreuse;
 	color: black;
   transition: .2s;
@@ -44,7 +54,9 @@
 	border: 2px solid #f9004d;
   position:relative;
 	padding: 10px 25px;
-	border-radius: 30px;
+  height: 3vmin;
+  width: 9vmin;
+	border-radius: 50px;
 	background-color: #f9004d;
 	color: black;
   transition: .2s;
