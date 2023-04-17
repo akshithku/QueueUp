@@ -9,12 +9,12 @@
     height: 8vmin;
   }
   
-  .main {
+  /* .main {
     height: 100vmin;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
   
   .main2 {
     height: auto;
@@ -71,10 +71,10 @@
     align-self: center;
   }
   
-  
+/*   
   @media screen and (max-width:600px) {
     .main{
       height: 150vmin;
     }
   }
-  
+   */

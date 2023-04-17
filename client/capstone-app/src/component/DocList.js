@@ -79,6 +79,7 @@ export default function Doclist() {
   // })
 
   return (
+    <div className="backgrounds">
     <main className="DocContainer">
       {data
         .filter((e) => e.HospitalName === forHos.HospitalName)
@@ -149,5 +150,6 @@ export default function Doclist() {
           );
         })}
     </main>
+    </div>
   );
 }

@@ -3,8 +3,8 @@ import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import logo from"../Assets/logo-2.png";
-
+import logo from "../Assets/logo-2.png";
+// import { motion } from "framer-motion";
 
 export default function Header() {
   // const afterClick = () => {
@@ -13,15 +13,15 @@ export default function Header() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
-  const [close,setclose]=useState(false);
+  const [close, setclose] = useState(false);
 
   const openModel = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
-  const handleClick=()=>{
- setclose(!close)
-  }
+  const handleClick = () => {
+    setclose(!close);
+  };
 
   // useEffect(() => {
   //   function handleClickOutside(event) {
@@ -39,15 +39,23 @@ export default function Header() {
 
   return (
     <div className="nav">
-      <Link to='/'>
-      <img className="logo" src={logo} alt=""></img>
+      <Link to="/">
+        <img className="logo" src={logo} alt=""></img>
       </Link>
       <div className="head">
-        <Link to="/" className="home">Home
+        <Link to="/" className="home">
+          Home
         </Link>
 
         {isAuthenticated ? (
-          <img className="user_img" onClick={()=>{setclose(true)}} src={user.picture} alt="" />
+          <img
+            className="user_img"
+            onClick={() => {
+              setclose(true);
+            }}
+            src={user.picture}
+            alt=""
+          />
         ) : (
           <div className="nav-title" id="nav-check">
             <Link className="regi" onClick={() => setModalIsOpen(true)}>
@@ -56,37 +64,46 @@ export default function Header() {
           </div>
         )}
 
-        {
-          close && (
-            <div className="log_div">
-              <h3>Do you want to loggout ?</h3>
-              <div className="log_btn">
-                <button className="log_btn1" onClick={openModel}>yes</button>
-                <button className="log_btn1" onClick={handleClick}>No</button>
-              </div>
+        {close && (
+           
+          <div className="log_div">
+            <h3>Do you want to loggout ?</h3>
+            <div className="log_btn">
+              <button className="log_btn1" onClick={openModel}>
+                yes
+              </button>
+              <button className="log_btn1" onClick={handleClick}>
+                No
+              </button>
             </div>
-          )
-        }
+          </div>
+
+        )}
+      
 
         <Modal
           className="popup"
           isOpen={modalIsOpen}
           // onRequestClose={() => setModalIsOpen(false)}
         >
-          <div className="btn-container">
-            <button className="close-btn" onClick={() => setModalIsOpen(false)}>
-              X
-            </button>
-            {/* <Link to="/Forms"> */}
-            <button onClick={() => loginWithRedirect()} className="btn-1">
-              User
-            </button>
-            {/* </Link> */}
-            <Link to={"/DocForm"}>
-              <button className="btn-2">Doctor</button>
-            </Link>
-          </div>
+            <div className="btn-container">
+              <button
+                className="close-btn"
+                onClick={() => setModalIsOpen(false)}
+              >
+                X
+              </button>
+              {/* <Link to="/Forms"> */}
+              <button onClick={() => loginWithRedirect()} className="btn-1">
+                User
+              </button>
+              {/* </Link> */}
+              <Link to={"/DocForm"}>
+                <button className="btn-2">Doctor</button>
+              </Link>
+            </div>
         </Modal>
+
       </div>
     </div>
   );

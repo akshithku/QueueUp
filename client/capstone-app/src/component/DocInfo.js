@@ -88,6 +88,7 @@ export default function DocInfo() {
   };
   // filter(e=>e.id===bookedSlots.id)
   return (
+    <div className="backgrounds">
     <main className="DocContainer">
       {data.map((abc, i) => {
         console.log(abc);
@@ -157,5 +158,6 @@ export default function DocInfo() {
         );
       })}
     </main>
+    </div>
   );
 }

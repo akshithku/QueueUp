@@ -2,6 +2,11 @@
   text-decoration: none;
 }
 
+/* body{
+  background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
 .nav{
   /* position: fixed; */
   display: flex;
@@ -18,13 +23,14 @@
 }
 
 .logo{
-  height: 30vmin;
+  height: 25vmin;
+  /* width: 10vmin; */
   /* background-color: aliceblue; */
   
 }
 
 .head{
-    width: 20rem;
+    width: 50vmin;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -32,16 +38,16 @@
 
 }
 .regi{
-	border: 2px solid chartreuse;
+  height: 10vmin;
+  width: 9vmin;
+	border: 1px solid chartreuse;
   position:relative;
 	padding: 10px 25px;
-  height: 2vmin;
-  width: 9vmin;
 	border-radius: 50px;
-	background-color: chartreuse;
+	background-color: rgb(124, 246, 2);
 	color: black;
   transition: .2s;
-  font-size: medium;
+  font-size: medium; 
 }
 .regi:hover{
 	background-color: black;
@@ -49,6 +55,7 @@
   color: white;
 	cursor: pointer;
 }
+
 
 .home{
 	border: 2px solid #f9004d;
@@ -121,11 +128,11 @@
   }
 
   .user_img{
-    height: 10vmin;
-    width: 10vmin;
+    height: 8vmin;
+    width: 8vmin;
     background-color: #bbb;
     border-radius: 50%;
-    margin-top: 3vmin;
+    /* margin-top: 3vmin; */
     margin-right: 1vmin;
     display: inline-block;
   }

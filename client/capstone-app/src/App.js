@@ -17,6 +17,7 @@ function App() {
     <div className="App">
       <Navbar/>
       <Routes>
+        
         <Route path='/' element={<Datas/>}></Route>
         <Route path='/Forms' element={<Forms/>}></Route>
         <Route path='/Doc/:id' element={<DocList/>}></Route>
