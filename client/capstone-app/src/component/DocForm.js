@@ -31,7 +31,7 @@ const DocForm = () => {
   // };
 
   return (
-    <div className="DocForm-div">
+    <div className="DocForm-div ">
         <h1>Doctor's Login</h1>
       {isAuthenticated ? (
         <div>

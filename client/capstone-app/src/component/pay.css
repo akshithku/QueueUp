@@ -1,19 +1,15 @@
-body {
+.background {
     background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;  
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .pay-div {
-    background-color: #6f6c6c;
-    display: block;
-    /* padding: 1rem; */
-    max-width: 350px;
-    border-radius: 10rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* background-color: #6f6c6c; */
+ 
     margin: auto;
 }
 
@@ -29,11 +25,12 @@ body {
 }
 
 .heading {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Courier New', Courier, monospace;
     text-align: center;
     font-size: 2rem;
-    margin-bottom: 10px;
-    color: #1a202c;
+    margin-bottom: 20px;
+    color: #4e0f0c;
+
 }
 
 label {
@@ -51,6 +48,7 @@ label {
     border: 1px solid transparent;
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .input1:focus {

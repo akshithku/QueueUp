@@ -97,6 +97,7 @@ const PaymentPage = () => {
 
 
   return (
+    <div className="background">
     <div className="pay-div">
       <h1 className="heading">Payment Page</h1>
       { isAuthenticated ? (
@@ -151,7 +152,7 @@ const PaymentPage = () => {
       </form>)
 }
     </div>
-    
+    </div>
   );
 };
 
