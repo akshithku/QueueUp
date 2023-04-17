@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../Assets/logo-2.png";
-// import { motion } from "framer-motion";
+// import { Motion, spring, presets } from "react-motion";
 
 export default function Header() {
   // const afterClick = () => {
@@ -80,6 +80,17 @@ export default function Header() {
 
         )}
       
+      {/* <Motion
+  defaultStyle={{
+    scale: 0,
+    translateX: -300
+  }}
+  style={{
+    scale: spring(1),
+    translateX: spring(0, presets.stiff)
+  }}
+>
+   */}
 
         <Modal
           className="popup"
@@ -103,6 +114,7 @@ export default function Header() {
               </Link>
             </div>
         </Modal>
+        {/* </Motion> */}
 
       </div>
     </div>

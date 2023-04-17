@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 // import { VscSearch } from "react-icons/vsc";
 // import Background from '../Assets/background.webp'
 import { motion } from "framer-motion";
+// import { Transition } from "react-transition-group";
 
 export default function Datas() {
   // const [Info,setInfo]=useState([])
@@ -52,7 +53,7 @@ export default function Datas() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 1000);
   }, []);
 
   const arrayUniqueHospitals = [
@@ -125,6 +126,7 @@ export default function Datas() {
               );
             })}
           </div>
+          
         </>
       )}
     </main>
