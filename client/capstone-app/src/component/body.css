@@ -3,11 +3,11 @@
 .fullContainer{
   background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
   background-repeat: no-repeat;
-  background-size: cover;
-  height: auto;
-  background-position: 0px 0px 10px;
-   padding: 3vmin;
-   
+  background-size: 100vw 100vh;
+  height: 90vh;
+  /* background-position: 0px 0px 10px; */
+   padding: 1vmin;
+   margin: auto;
 }
 
 
@@ -20,6 +20,7 @@
     align-items: center;
     margin-bottom: -3vmin;
     overflow-y: scroll;
+    height: 80vh;
 }
 .app::-webkit-scrollbar{
   display: none;
@@ -39,10 +40,9 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    box-shadow: 0px 0px 10px white, 0px 0px 35px black ;
+    box-shadow: 0px 0px 10px white, 0px 0px 25px black ;
     margin: 1.5em;
     border: solid black;
-    cursor: pointer;
 }
 
 .name{
@@ -81,6 +81,7 @@
     background: #e8e8e8;
     transition: 0.3s;
     margin: 0 auto;
+  
     /* margin-top: 12vh; */
    }
    
@@ -98,21 +99,22 @@
 
    .button {
     height: 1vmin;
-    /* width: 25vmin; */
+    width: 28vmin;
   padding: 2em 1em;
   border: none;
-  border-radius: 5px;
+  border-radius: 9px;
   font-weight: bold;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: #111212;
   transition: all 1000ms;
-  font-size: 2vmin;
+  font-size: 1.5vmin;
   position: relative;
   overflow: hidden;
   outline: 2px solid #2c9caf;
     text-align: center;
-  /* background-color: #ffffff; */
+    cursor: pointer;
+  background-color: #cbcbcb;
 }
 
 .button:hover {
@@ -165,14 +167,14 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  animation: spin988 2s linear infinite;
+  animation: spin988 3s linear infinite;
   margin: auto;
   margin-left: 3vmin;
 }
 
 .loader .circle {
-  width: 3vmin;
-  height: 3vmin;
+  width: 3.4vmin;
+  height: 3.4vmin;
   background-color: #333;
   border-radius: 50%;
   position: absolute; 
@@ -224,13 +226,20 @@
   display: flex;
   flex-direction: row;
   /* justify-content: space-evenly; */
-  margin: 0;
-  margin-top: 25vmin;
+  /* margin: 0; */
+  margin-top: 35vmin;
 }
 .header{
-  font-size:7vmin;
-  margin-top: 2vmin;
+  font-size:10vmin;
+  /* margin-top: 1vmin; */
   margin-left: auto;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: bold;
+}
+
+.header-2{
+  font-size: 6vmin;
+ padding: 5vmin;
+ margin-top: 10vmin;
+ color: #3f1602;
 }

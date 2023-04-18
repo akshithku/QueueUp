@@ -75,12 +75,12 @@
 
 #btn1{
     height: fit-content;
-    width: fit-content;
+    width: 30vmin;
     margin: auto;
-    padding: 1.3em 3em;
+    padding: 1em 2em;
     font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     font-weight: 500;
     color: #000;
     background-color: #fff;
@@ -153,8 +153,8 @@
     flex-direction: row;
     justify-content: center;
     text-align: center;
-    width: fit-content;
-    /* margin: 2vmin ; */
+    /* width: fit-content; */
+    margin: 1vmin ;
     /* width: 20vmin; */
     /* margin-left: 14vmin; */
 }

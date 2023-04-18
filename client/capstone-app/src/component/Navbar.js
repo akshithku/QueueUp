@@ -80,22 +80,12 @@ export default function Header() {
 
         )}
       
-      {/* <Motion
-  defaultStyle={{
-    scale: 0,
-    translateX: -300
-  }}
-  style={{
-    scale: spring(1),
-    translateX: spring(0, presets.stiff)
-  }}
->
-   */}
-
+    
         <Modal
+        // style={{translateX:"",opacity: style.opacity}}
           className="popup"
           isOpen={modalIsOpen}
-          // onRequestClose={() => setModalIsOpen(false)}
+          onRequestClose={() => setModalIsOpen(false)}
         >
             <div className="btn-container">
               <button
@@ -114,7 +104,7 @@ export default function Header() {
               </Link>
             </div>
         </Modal>
-        {/* </Motion> */}
+     
 
       </div>
     </div>
