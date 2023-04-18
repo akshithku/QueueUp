@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../Assets/logo-2.png";
-// import { motion } from "framer-motion";
+// import { Motion, spring, presets } from "react-motion";
 
 export default function Header() {
   // const afterClick = () => {
@@ -80,11 +80,12 @@ export default function Header() {
 
         )}
       
-
+    
         <Modal
+        // style={{translateX:"",opacity: style.opacity}}
           className="popup"
           isOpen={modalIsOpen}
-          // onRequestClose={() => setModalIsOpen(false)}
+          onRequestClose={() => setModalIsOpen(false)}
         >
             <div className="btn-container">
               <button
@@ -103,6 +104,7 @@ export default function Header() {
               </Link>
             </div>
         </Modal>
+     
 
       </div>
     </div>

@@ -12,12 +12,13 @@ import Slots from './component/Slots';
 
 import { Route,Routes
  } from 'react-router-dom';
+import Notfound from './component/Notfound';
 function App() {
   return (
     <div className="App">
       <Navbar/>
       <Routes>
-        
+        <Route path='*' element={<Notfound/>}></Route>
         <Route path='/' element={<Datas/>}></Route>
         <Route path='/Forms' element={<Forms/>}></Route>
         <Route path='/Doc/:id' element={<DocList/>}></Route>

@@ -19,7 +19,7 @@ const UserSchema = require("./UserSchema");
 
 console.log("mongobd : ",process.env.PORT)
 mongoose
-  .connect(`mongodb+srv://akshithkumarkarla:Kanni123@queueup.qaqkgtb.mongodb.net/?retryWrites=true&w=majority`, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4,
@@ -32,6 +32,7 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
 
 app.get("/User", async (err, data) => {
   try{
@@ -58,7 +59,11 @@ app.get("/DocList", async (req, res) => {
 app.get("/HosList", async (req, res) => {
   // const {data}=req.body;
   // const name=data.HospitalName;
-  const datas = await List.find().select("HospitalName HospitalsImg");
+  // const datas = await List.find().select("HospitalName HospitalsImg");
+  const datas = await List.aggregate([
+    { $project: { HospitalName: 1, HospitalsImg: 1 } } // Used Aggregation instead of find method
+  ]);
+  
   res.status(200).send(datas);
 });
 

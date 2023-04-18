@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 // import { VscSearch } from "react-icons/vsc";
 // import Background from '../Assets/background.webp'
 import { motion } from "framer-motion";
+// import { Transition } from "react-transition-group";
 
 export default function Datas() {
   // const [Info,setInfo]=useState([])
@@ -100,31 +101,36 @@ export default function Datas() {
               <h1 className="name_head">Hello {user?.name} !&#128591;</h1>
             </div>
           )}
-
-          <div className="app">
-            {filteredHospitals.map((abd) => {
-              return (
-                <motion.div whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}>
-                  <div className="mainContainer">
-                    <img className="image" src={abd.HospitalsImg} alt="" />
-                    <h1 className="name" key={abd.HospitalName}>
-                      {abd.HospitalName}
-                    </h1>
-                    <div className="Doc-link">
-                      <Link
-                        to={`/Doc/${abd._id}`}
-                        className="button"
-                        onChange={handlechange}
-                      >
-                        view Doctor's
-                      </Link>
+          {filteredHospitals.length === 0 ? (
+            <h1 className="header-2">Sorry!! No such Hospital</h1>
+          ) : (
+            <div className="app">
+              {filteredHospitals.map((abd) => {
+                return (
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <div className="mainContainer">
+                      <img className="image" src={abd.HospitalsImg} alt="" />
+                      <h1 className="name" key={abd.HospitalName}>
+                        {abd.HospitalName}
+                      </h1>
+                      <div className="Doc-link">
+                        <Link
+                          to={`/Doc/${abd._id}`}
+                          className="button"
+                          onChange={handlechange}
+                        >
+                          view Doctor's
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
         </>
       )}
     </main>

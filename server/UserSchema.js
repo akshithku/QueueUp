@@ -20,10 +20,12 @@ const UserSchema= mongoose.Schema({
     email:{
         type:String,
         // required:true
+        index: true
     },
     password:{
         type:String,
         // required:true
+        index: true
     },
     Specialty:{
         type:String,
