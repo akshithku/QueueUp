@@ -2,6 +2,7 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const fs= require("fs")
 
 require("dotenv").config();
 
@@ -206,6 +207,13 @@ app.post("/register", async (req, res) => {
   });
 });
 
+
+fs.writeFileSync("bio.txt","Created  Fs modules !")
+
+fs.appendFileSync("bio.txt"," Used successfully !!")
+
+const fsdata=fs.readFileSync("bio.txt","utf-8");
+console.log(fsdata)
 
 // app.post(`/login`, async (req, res) => {
 //   const { userId, password } = req.body
