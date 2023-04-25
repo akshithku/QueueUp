@@ -51,6 +51,7 @@ export default function DocInfo() {
   //     });
   // }, []);
 
+  
   const arrayUniqueDoctor = [...new Map(Docbooked.map(item =>
     [item['HospitalName'], item])).values()];
   // const unique = [...new Set(HospitalName.map(item => item.HospitalName))]; // [ 'A', 'B']

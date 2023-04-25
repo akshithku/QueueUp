@@ -33,6 +33,7 @@ const DocForm = () => {
   //   alert("Logged out!");
   // };
 
+  
   return (
     <div className="DocForm-div">
       <h1>Doctor's Login</h1>

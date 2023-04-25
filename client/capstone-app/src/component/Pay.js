@@ -94,7 +94,7 @@ const PaymentPage = () => {
     
   };
 
-
+  
   return (
     <div className="background">
     <div className="pay-div">

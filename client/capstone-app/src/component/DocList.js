@@ -72,9 +72,8 @@ export default function Doclist() {
         // console.log(data);
         setdata(data);
       })
-
       .catch((error) => {
-        console.log(" failed to fetch");
+        console.log(error," failed to fetch");
       });
   }, []);
 
@@ -159,7 +158,7 @@ export default function Doclist() {
                     </Link>
                   ) : (
                     <div >
-                      <button onClick={toggleModal} className="btn1">
+                      <button onClick={toggleModal} className="btns-1">
                         Book Now
                       </button>
                     <div className="modal-1">
