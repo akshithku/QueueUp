@@ -6,7 +6,7 @@
   background-size: 100vw 100vh;
   height: 100vh;
   /* background-position: 0px 0px 10px; */
-   padding: 1vmin;
+   /* padding: 1vmin; */
    margin: auto;
    overflow-y: hidden;
 }
@@ -69,6 +69,8 @@
 }
 
 
+
+
   .wrap{
     width: fit-content;
     margin: 0 auto;
@@ -82,8 +84,7 @@
     background: #e8e8e8;
     transition: 0.3s;
     margin: 0 auto;
-  
-    /* margin-top: 12vh; */
+    margin-top: 3vh;
    }
    
    .input:hover {

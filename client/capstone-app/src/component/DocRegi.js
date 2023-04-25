@@ -118,7 +118,7 @@ export default function DocRegi() {
   };
 
   return (
-    <div className="DocForm-div ">
+    <div className="DocForm-div-1">
       <h1>Doctor's Registration</h1>
       <div className="main-div">
       <form className="form-1" method="POST" onSubmit={handleSubmit}>

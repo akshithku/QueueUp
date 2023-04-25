@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const fs= require("fs")
+const jwt=require("jsonwebtoken")
 
 require("dotenv").config();
 
@@ -166,46 +167,117 @@ app.post("/register", async (req, res) => {
     modal.Specialty = Specialty,
     modal.Count = 0;
 
-//   if (!email || !password)
-//     return res.status(400).json({ msg: "Password and email are required" });
-//   if (password.length < 8) {
-//     return res
-//       .status(400)
-//       .json({ msg: "Password should be at least 8 characters long" });
-//   }
+  if (!email || !password)
+    return res.status(400).json({ msg: "Password and email are required" });
+  if (password.length < 8) {
+    return res
+      .status(400)
+      .json({ msg: "Password should be at least 8 characters long" });
+  }
 
-//   const user = await UserSchema.findOne({ email });
-//   if (user){ 
-//     console.log("user fund")
-//     return res.status(400).json({ msg: "User already exists" })
-// }
+  const user = await UserSchema.findOne({ email });
+  if (user){ 
+    console.log("user fund")
+    return res.status(400).json({ msg: "User already exists" })
+}
 
-//   const newUser = new UserSchema({ email, password });
-//   bcrypt.hash(password, 7, async (err, hash) => {
-//     if (err)
-//    {
-//     console.log('bcrypt')
-//       return res.status(400).json({ msg: "error while saving the password" });
-//    }
-//       newUser.password = hash;
-//     const savedUserRes = await modal.save();
-//     console.log(savedUserRes)
+  const newUser = new UserSchema({ email, password });
+  bcrypt.hash(password, 8, async (err, hash) => {
+    if (err)
+   {
+    console.log('bcrypt')
+      return res.status(400).json({ msg: "error while saving the password" });
+   }
+      newUser.password = hash;
+    // const savedUserRes = await modal.save();
+    // console.log(savedUserRes)
 
-//     if (savedUserRes)
+    // if (savedUserRes)
 
 
-//       return res.status(200).json({ msg: "user is successfully saved" });
-//   });
+    //   return res.status(200).json({ msg: "user is successfully saved" });
+
+   const token= jwt.sign(
+      {id:user._id,email},
+      'shhh',
+    )
+  });
 
   modal.save(async (err, data) => {
     if (err) {
       console.log(err);
+      
     } else {
-      res.status(200).send(data);
+      return res.status(200).send(data).json({ msg: "user is successfully saved" });
     }
 
   });
 });
+
+
+
+// app.post(`/login`, async (req, res) => {
+//   const { email, password } = req.body
+
+//   if (!email && !password) {
+//     res.status(400)
+//     .json({ msg: 'Something missing' })
+//   }
+
+//   const user = await UserSchema.findOne({email:email})
+//   if (!user) {
+//     return res.status(400)
+//     .json({ msg: 'User not found' })
+//   }
+
+//   const matchPassword = await bcrypt.compare(password, user.password)
+//   if (matchPassword) {
+//     const userSession = { email: user.email }
+//     req.session.user = userSession;
+
+//     return res
+//       .status(200)
+//       .json({ msg: 'You have logged in successfully', userSession })
+      
+//   } else {
+//     return res.status(400).json({ msg: 'Invalid credential' })
+//   }
+
+
+
+// })
+
+app.post(`/login`, async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ msg: 'Missing email or password' });
+  }
+
+  try {
+    const user = await UserSchema.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ msg: 'User not found' });
+    }
+
+    const matchPassword = await bcrypt.compare(password, user.password);
+
+    if (!matchPassword) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
+
+    const userSession = { email: user.email };
+    req.session.user = userSession;
+
+    return res.status(200).json({ msg: 'You have logged in successfully', userSession });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: 'Server error' });
+  }
+
+});
+
 
 
 fs.writeFileSync("bio.txt","Created  Fs modules !")
@@ -215,30 +287,8 @@ fs.appendFileSync("bio.txt"," Used successfully !!")
 const fsdata=fs.readFileSync("bio.txt","utf-8");
 console.log(fsdata)
 
-// app.post(`/login`, async (req, res) => {
-//   const { userId, password } = req.body
 
-//   if (!userId || !password) {
-//     res.status(400).json({ msg: 'Something missing' })
-//   }
 
-//   const user = await UserSchema.findOne({ userId: userId })
-//   if (!user) {
-//     return res.status(400).json({ msg: 'User not found' })
-//   }
-
-//   const matchPassword = await bcrypt.compare(password, user.password)
-//   if (matchPassword) {
-//     const userSession = { userId: user.userId }
-//     req.session.user = userSession
-
-//     return res
-//       .status(200)
-//       .json({ msg: 'You have logged in successfully', userSession })
-//   } else {
-//     return res.status(400).json({ msg: 'Invalid credential' })
-//   }
-// })
 
 // const getDocument = async()=>{
 //   try{const result = await appModal

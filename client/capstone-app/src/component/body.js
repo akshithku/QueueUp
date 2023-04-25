@@ -43,6 +43,7 @@ export default function Datas() {
       .then((data) => {
         // console.log(data);
         setHospitalName(data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(" failed to listout:", error);
@@ -50,11 +51,11 @@ export default function Datas() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 5000);
+  // }, []);
 
   const arrayUniqueHospitals = [
     ...new Map(
