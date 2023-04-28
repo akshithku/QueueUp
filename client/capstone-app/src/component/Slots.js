@@ -39,7 +39,6 @@ function Slots() {
     console.log("slots", bookedSlots);
   }, [bookedSlots]);
 
-
   useEffect(() => {
     const BookedSlots = async () => {
       const result = await axois.get(`${process.env.REACT_APP_URL}/bookedSlots/${id}`);

@@ -1,37 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./body.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import Modal from "react-modal";
 // import  Search  from "../Assets/search.png";
 // import { BsSearch } from 'react-icons/BsSearch';
 // import { VscSearch } from "react-icons/vsc";
 // import Background from '../Assets/background.webp'
 import { motion } from "framer-motion";
 // import { Transition } from "react-transition-group";
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 export default function Datas() {
   // const [Info,setInfo]=useState([])
+  const { id } = useParams();
   const [HospitalName, setHospitalName] = useState([]);
   const { isAuthenticated, user } = useAuth0();
   console.log(user);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [docBooked, setdocBooked] = useState([]);
+
 
   // const [isActive, setIsActive] = React.useState(false);
 
   // const [GetData,setGetData]=useState([]);
 
-  // useEffect(()=>{
-  //   fetch("http://localhost:2917/Userdata")
-  //   .then((response) => response.json())
-  //   .then((res) => {
-  //     // console.log(data);
-  //     // setInfo(res);
-  //   })
-  //   .catch((error) => {
-  //     console.log(" failed to fetch");
-  //   })
-  // },[])
+  useEffect(() => {
+    console.log(docBooked,"BookedSlots");
+  }, [docBooked]);
+
+  useEffect(()=>{
+    fetch(`${process.env.REACT_APP_URL}/docBookSlots`)
+    .then((response) => response.json())
+    .then((res) => {
+      console.log(id)
+      setdocBooked(res)
+    })
+    .catch((error) => {
+      console.log(error," failed to fetch");
+    })
+  },[id])
 
   useEffect(() => {
     console.log(HospitalName);
@@ -41,7 +52,7 @@ export default function Datas() {
     fetch(`${process.env.REACT_APP_URL}/HosList`)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data,"datas");
         setHospitalName(data);
         setIsLoading(false);
       })
@@ -56,6 +67,7 @@ export default function Datas() {
   //     setIsLoading(false);
   //   }, 5000);
   // }, []);
+
 
   const arrayUniqueHospitals = [
     ...new Map(
@@ -98,8 +110,48 @@ export default function Datas() {
           </div>
 
           {isAuthenticated && (
-            <div>
+            <div className="user-data">
               <h1 className="name_head">Hello {user?.name} !&#128591;</h1>
+              <div className="icon-div">
+              <NotificationsActiveIcon className="icon"  width='50' active={true} animate={true} onClick={() => setModalIsOpen(true)} />
+              </div>
+              <Modal
+              className="popup-1"
+              isOpen={modalIsOpen}
+              onRequestClose={() => setModalIsOpen(false)}
+              >
+                {
+                  <table>
+                  <thead>
+                    <tr>
+                <th>Name</th>
+                <br></br>
+                <th>DoctorName</th>
+                <br></br>
+                <th>Timings</th>
+                <br></br>
+                <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                  docBooked.filter((booking) => booking.UserEmail === user.email)
+                  .map((slot)=>(
+                    <tr>
+                      <td>{slot.Name}</td>
+                      <br></br>
+                      <td>{slot.DoctorName}</td>
+                      <br></br>
+                      <td>{slot.timings}</td>
+                      <br></br>
+                      <td>{slot.Amount}</td>
+                    </tr>
+                  ))
+                }
+                </tbody>
+                </table>
+                }
+              </Modal>
             </div>
           )}
           {filteredHospitals.length === 0 ? (

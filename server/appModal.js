@@ -26,8 +26,8 @@ const Shcema = mongoose.Schema
             type:String,
             // required:true,/
         },
-        mySlots:{
-            type:Boolean,
+        UserEmail:{
+            type:String,
             // required:true,
         }
 })
