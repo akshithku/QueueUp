@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 // import { json } from "react-router-dom";
 import "./pay.css";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const PaymentPage = () => {
   const [Name, setName] = useState("");
   const [DoctorName,setDoctorName]=useState(localStorage.getItem("name"));
@@ -11,9 +13,10 @@ const PaymentPage = () => {
   const [ImageUrl,setImageUrl]=useState([]);
   const DocId=  localStorage.getItem("doctorId")
   console.log(DocId)
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-
+  const [ISAuthenticated, setIsAuthenticated] = useState(false);
+  // const [UserEmail,setUserEmail]=useState([]);
+  const {  user } = useAuth0();
+// if (user) console.log(user)
   const handleNameChange = (event) => {
     setName(event.target.value);
   }
@@ -79,6 +82,7 @@ const PaymentPage = () => {
           Amount:Amount,
           image:json.url,
           Doc_id:DocId,
+          UserEmail:user.email,
         }),
        
       })
@@ -99,7 +103,7 @@ const PaymentPage = () => {
     <div className="background">
     <div className="pay-div">
       <h1 className="heading">Payment Page</h1>
-      { isAuthenticated ? (
+      { ISAuthenticated ? (
         <div>
           <h1>Thanks for Booking</h1>
           <Link to={'/'}>
@@ -108,6 +112,12 @@ const PaymentPage = () => {
         </div>
       ) :(
       <form className="form1" onSubmit={handleSubmit} >
+{/* 
+        {
+          isAuthenticated && (
+            <div></div>
+          )
+        } */}
         <label>
           Name:
           <input

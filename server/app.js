@@ -81,6 +81,12 @@ app.get("/DocSlot/:id", async(req,res)=>{
   res.status(200).json(list);
 })
 
+app.get("/docBookSlots", async(req,res)=>{
+  // const {id}=req.params;
+   const list = await appModal.find().select("Name DoctorName  timings Amount UserEmail");
+  res.status(200).json(list);
+})
+
 async function getBookedSlotsForDoctor(doc_id) {
   try {
     const bookedSlots = await appModal.find({ Doc_id: doc_id}); 
@@ -123,7 +129,7 @@ app.put("/update/:id", async (req, res) => {
 
 
 app.post('/Slot',(req,res)=>{
-  const {DoctorName,Name,timings,Amount,image,Doc_id } = req.body;
+  const {DoctorName,Name,timings,Amount,image,Doc_id,UserEmail } = req.body;
 
   const modal = new appModal()
 
@@ -133,6 +139,8 @@ app.post('/Slot',(req,res)=>{
   modal.Amount=Amount,
   modal.image=image,
   modal.Doc_id=Doc_id,
+  modal.UserEmail=UserEmail,
+        
 
   
   modal.save(async (err, data) => {
