@@ -126,6 +126,12 @@ app.put("/update/:id", async (req, res) => {
   res.status(200).json(data);
 });
 
+app.get("/Doc-login", async(req,res)=>{
+  // const {email,HospitalName,password} =req.params;
+  const datas = await List.find();
+  res.status(200).send(datas);
+})
+
 
 
 app.post('/Slot',(req,res)=>{

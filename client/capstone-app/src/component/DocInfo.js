@@ -2,12 +2,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import { json, useParams, useLocation } from "react-router-dom";
 // import { count } from "../../../../server/UserSchema";
 import "./Doc.css";
 import { Link } from "react-router-dom";
 
 export default function DocInfo() {
+
+  const state= useLocation();
+console.log(state)
+
+const Dataone=state.state.TheUser;
+console.log(Dataone)
   const { id } = useParams();
   // console.log(id)
   const [timing, setTiming] = useState("");
@@ -21,7 +27,7 @@ export default function DocInfo() {
 
 
   useEffect(()=>{
-    console.log('hospital', Docbooked);
+    // console.log('hospital', Docbooked);
   },[Docbooked])
 
   useEffect(() => {
@@ -55,7 +61,7 @@ export default function DocInfo() {
   const arrayUniqueDoctor = [...new Map(Docbooked.map(item =>
     [item['HospitalName'], item])).values()];
   // const unique = [...new Set(HospitalName.map(item => item.HospitalName))]; // [ 'A', 'B']
-  console.log("unique:", arrayUniqueDoctor)
+  // console.log("unique:", arrayUniqueDoctor)
   function handlechange(e){
     setDocbooked(e);
   }
@@ -87,21 +93,24 @@ export default function DocInfo() {
     // console.log(res)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
+  
   // filter(e=>e.id===bookedSlots.id)
   return (
     <div className="backgrounds">
     <main className="DocContainer">
-      {data.map((abc, i) => {
+      {console.log(Dataone)}
+      
+      {/* {Dataone.map((abc, i) => {
         console.log(abc);
-        return (
-          <div className="Docapp" key={abc._id}>
+        return ( */}
+          <div className="Docapp" key={Dataone._id}>
             <div method="PUT" className="Doc-token">
               <h6 className="token">#Current Num:</h6>
-              <p className="Token-Num">{abc.Count}</p>
+              <p className="Token-Num">{Dataone.Count}</p>
               <div className="doc-btns">
                 <button
                   className="doc-btn1"
-                  id={abc._id}
+                  id={Dataone._id}
                   onClick={(e) => {
                     setdata((prev) => {
                       let newData = [...prev];
@@ -115,7 +124,7 @@ export default function DocInfo() {
                   +
                 </button>
                 <button
-                  id={abc._id}
+                  id={Dataone._id}
                   onClick={(e) => {
                     setdata((prev) => {
                       let newData = [...prev];
@@ -133,7 +142,7 @@ export default function DocInfo() {
             </div>
             <div className="SubContainer">
               <div className="img-div">
-                <img className="Doc-img" src={abc.Docimg} alt="" />
+                <img className="Doc-img" src={Dataone.Docimg} alt="" />
               </div>
               <div className="div-list">
                 <h1
@@ -141,23 +150,23 @@ export default function DocInfo() {
                   value={name}
                   onChange={(abd) => setName(abd.target.value)}
                 >
-                  {abc.DoctorName}
+                  {Dataone.DoctorName}
                 </h1>
-                <h2 className="lit-1">{abc.Specialty}</h2>
-                <h3 className="lit-2">{abc.timings}</h3>
+                <h2 className="lit-1">{Dataone.Specialty}</h2>
+                <h3 className="lit-2">{Dataone.timings}</h3>
               </div>
             </div>
             <div className="SubContainer-1">
               <div className="slot-1">
-                <Link to={`/slots/${abc._id}`}>
+                <Link to={`/slots/${Dataone._id}`}>
                   <button id="btn1" onChange={handlechange}
                   >View Slots</button>
                 </Link>
               </div>
             </div>
           </div>
-        );
-      })}
+        {/* );
+      })} */}
     </main>
     </div>
   );

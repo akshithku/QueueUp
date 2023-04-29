@@ -1,32 +1,48 @@
 /* eslint-disable no-undef */
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./DocForm.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const DocForm = () => {
-  const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLogin = (event) => {
-    event.preventDefault();
+  const navigate=useNavigate()
+  // const [username, setUsername] = useState("");
+  const [UserEmail, setUserEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [data, setdata] = useState([]);
+ const [TheUser, setTheuser]=useState(null);
 
-    if (
-      username === "" &&
-      userId === "Akshith@gmail.com" &&
-      password === "1234567a"
-    ) {
-      setIsAuthenticated(false);
-      alert("Login successful!");
-    } else {
-      setIsAuthenticated(false);
-      alert("Invalid credentials!");
-    }
 
-    setUsername("");
-    setUserId("");
-    setPassword("");
+  const handleEmailChange = (event) => {
+    setUserEmail(event.target.value);
   };
+
+  useEffect(() => {
+    fetch(process.env.REACT_APP_URL+"/User")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data,"datas");
+        setdata(data);
+      })
+      .catch((error) => {
+        console.log(" failed to fetch"+ error);
+      });
+  }, []);
+
+  const handleLogin = () => {
+    // event.preventDefault();
+    setTheuser(data?.filter((event)=> event?.email === UserEmail)[0])
+    if(TheUser != null ){
+      navigate("/DocInfo",{state:{TheUser:TheUser}})
+    }
+    else{
+      setUserEmail("");
+    }
+    console.log(TheUser)
+  };
+
+  // console.log(handleLogin,"compared")
 
   // const handleLogout = () => {
   //   setIsAuthenticated(true);
@@ -37,21 +53,22 @@ const DocForm = () => {
   return (
     <div className="DocForm-div">
       <h1>Doctor's Login</h1>
-      {isAuthenticated ? (
-        <div>
+      {/* {isAuthenticated ? ( */}
+        {/* <div>
           <h1>Welcome,Doctor!</h1>
           <Link to={"/DocInfo"}>
             <button>Let's Go</button>
           </Link>
-        </div>
-      ) : (
-        <form className="form" onSubmit={handleLogin}>
+        </div> */}
+      {/* ) : ( */}
+        <div className="form" >
           <p className="form-title">Sign in to your account</p>
           <div className="input-container">
-            <input placeholder="Enter hospital Name" type="email" />
+            <input placeholder="Enter hospital Name"  />
           </div>
           <div className="input-container">
-            <input placeholder="Enter Email" type="email" />
+            <input placeholder="Enter Email" type="email" value={UserEmail}  onChange={handleEmailChange}></input>
+            {/* {console.log(TheUser)} */}
             <span>
               <svg
                 stroke="currentColor"
@@ -79,7 +96,7 @@ const DocForm = () => {
               ></svg>
             </span>
           </div>
-          <button className="submit" type="submit">
+          <button className="submit"  onClick={handleLogin}>
             Sign in
           </button>
 
@@ -87,8 +104,8 @@ const DocForm = () => {
             No account?
             <Link to={"/DocRegi"}>Register</Link>
           </p>
-        </form>
-      )}
+        </div>
+      {/* )} */}
     </div>
   );
 };

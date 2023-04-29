@@ -104,20 +104,15 @@ const PaymentPage = () => {
     <div className="pay-div">
       <h1 className="heading">Payment Page</h1>
       { ISAuthenticated ? (
-        <div>
-          <h1>Thanks for Booking</h1>
+        <div className="end-div">
+          <h1 className="heading-1">Thanks for Booking !! !&#128591;</h1>
           <Link to={'/'}>
-          <button >Let's Go</button>
+          <button className="pay-btn-1" >Home</button>
           </Link>
         </div>
-      ) :(
+       ) :(
       <form className="form1" onSubmit={handleSubmit} >
-{/* 
-        {
-          isAuthenticated && (
-            <div></div>
-          )
-        } */}
+
         <label>
           Name:
           <input
@@ -159,7 +154,7 @@ const PaymentPage = () => {
         <br/>
         <button className="pay-btn"  onSubmit={handleSubmit}>Make Payment</button>
       </form>)
-}
+} *
     </div>
     </div>
   );
