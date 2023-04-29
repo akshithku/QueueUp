@@ -133,7 +133,7 @@
 .Token-Num{
     color: rgb(17, 17, 18);
     margin-top: -5vmin;
-    /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
     font-family: Arial;
     /* background-color:#030321 ; */
@@ -143,6 +143,7 @@
     margin-top: 1vmin;
     margin-right: 23vmin;
     color: rgb(14, 15, 15);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .SubContainer-1{
@@ -175,28 +176,44 @@
 .doc-btns{
     display: flex;
     /* flex-direction: column; */
-    /* justify-content: space-around; */
+    justify-content: space-evenly;
     margin-top: -10vmin;
 }
 
 .doc-btn1{
-    width: 8vmin;
-    /* margin: 1vmin; */
+    width: 6vmin;
+    height: fit-content;
+    margin-right: -5vmin;
     background-color: rgb(113, 115, 117);
     color: black;
     font-size: 4vmin;
     font-weight: 900;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .doc-btn2{
-    width: 8vmin;
+    width: 6vmin;
+    height: fit-content;
     /* margin-top: -6vmin; */
-    margin-left: 20vmax;
+    margin-left: 30vmin;
     background-color: rgb(113, 115, 117);
     color: black;
     font-size: 5vmin;
     font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#btn1{
+    width: fit-content;
+    height: 6vmin;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #23c499;
+    color: #000;
+    font-size: 2.5vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     cursor: pointer;
 }
 
