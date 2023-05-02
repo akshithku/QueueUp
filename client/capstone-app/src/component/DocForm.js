@@ -37,7 +37,7 @@ const DocForm = () => {
       navigate("/DocInfo",{state:{TheUser:TheUser}})
     }
     else{
-      setUserEmail("");
+      // setUserEmail("");
     }
     console.log(TheUser)
   };

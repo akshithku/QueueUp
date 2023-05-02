@@ -38,9 +38,9 @@
 
 }
 .regi{
-  height: 9vmin;
-  width: 9vmin;
-	/* border: 1px solid chartreuse; */
+  /* height: 9vmin;
+  width: 9vmin; */
+	border: 1px solid chartreuse;
   position:relative;
 	padding: 10px 25px;
 	border-radius: 50px;
@@ -62,8 +62,8 @@
 	border: 2px solid #f9004d;
   position:relative;
 	padding: 10px 25px;
-  height: 4vmin;
-  width: 9vmin;
+  height: 3.5vmin;
+  width: 7vmin;
 	border-radius: 50px;
 	background-color: #f9004d;
 	color: black;
