@@ -12,8 +12,11 @@ export default function DocInfo() {
   const state= useLocation();
 console.log(state)
 
-const Dataone=state.state.TheUser;
-console.log(Dataone)
+const[Dataone,setDataone] =useState(state.state.TheUser)
+
+//  Dataone=state.state.TheUser;
+console.log(Dataone,"countdata")
+
   const { id } = useParams();
   // console.log(id)
   const [timing, setTiming] = useState("");
@@ -112,11 +115,11 @@ console.log(Dataone)
                   className="doc-btn1"
                   id={Dataone._id}
                   onClick={(e) => {
-                    setdata((prev) => {
-                      let newData = [...prev];
+                    setDataone((prev) => {
+                      let newData = {...prev};
                       console.log(newData);
-                      newData[i].Count++;
-                      UpdatCount(e, newData[i].Count);
+                      newData.Count++;
+                      UpdatCount(e, newData.Count);
                       return newData;
                     });
                   }}
@@ -126,10 +129,10 @@ console.log(Dataone)
                 <button
                   id={Dataone._id}
                   onClick={(e) => {
-                    setdata((prev) => {
-                      let newData = [...prev];
-                      newData[i].Count--;
-                      UpdatCount(e, newData[i].Count);
+                    setDataone((prev) => {
+                       let newData = {...prev};
+                      newData.Count--;
+                      UpdatCount(e, newData.Count);
                       return newData;
                     });
                   }}
