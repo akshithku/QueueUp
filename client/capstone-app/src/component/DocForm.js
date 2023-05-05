@@ -12,12 +12,15 @@ const DocForm = () => {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [data, setdata] = useState([]);
  const [TheUser, setTheuser]=useState(null);
+//  const [TheUserName, setTheuserName]=useState(null);
 
 
   const handleEmailChange = (event) => {
     setUserEmail(event.target.value);
   };
-
+  // const handleNameChange = (event) => {
+  //   setUsername(event.target.value);
+  // };
   useEffect(() => {
     fetch(process.env.REACT_APP_URL+"/User")
       .then((response) => response.json())
@@ -33,19 +36,22 @@ const DocForm = () => {
   const handleLogin = () => {
     // event.preventDefault();
     setTheuser(data?.filter((event)=> event?.email === UserEmail)[0])
+    // setTheuserName(data?.filter((event)=> event?.HospitalName === username)[0])
     if(TheUser != null ){
-      navigate("/DocInfo",{state:{TheUser:TheUser}})
+      navigate("/DocInfo",{state:{TheUser:TheUser}});
+      // setIsAuthenticated(true);
     }
     else{
       // setUserEmail("");
+      // setIsAuthenticated(false);
     }
-    console.log(TheUser)
+    // console.log(TheUser)
   };
 
   // console.log(handleLogin,"compared")
 
   // const handleLogout = () => {
-  //   setIsAuthenticated(true);
+  //   setIsAuthenticated(false);
   //   alert("Logged out!");
   // };
 
@@ -53,18 +59,19 @@ const DocForm = () => {
   return (
     <div className="DocForm-div">
       <h1>Doctor's Login</h1>
-      {/* {isAuthenticated ? ( */}
-        {/* <div>
+      {/* {isAuthenticated ? (
+        <div>
           <h1>Welcome,Doctor!</h1>
           <Link to={"/DocInfo"}>
             <button>Let's Go</button>
           </Link>
-        </div> */}
-      {/* ) : ( */}
+        </div> 
+       ) : (  */}
         <div className="form" >
           <p className="form-title">Sign in to your account</p>
           <div className="input-container">
-            <input placeholder="Enter hospital Name"  />
+            <input placeholder="Enter hospital Name" type="name" />
+            {/* {console.log(username)} */}
           </div>
           <div className="input-container">
             <input placeholder="Enter Email" type="email" value={UserEmail}  onChange={handleEmailChange}></input>
@@ -96,7 +103,7 @@ const DocForm = () => {
               ></svg>
             </span>
           </div>
-          <button className="submit"  onClick={handleLogin}>
+          <button className="submit"   onClick={handleLogin}>
             Sign in
           </button>
 
@@ -105,7 +112,7 @@ const DocForm = () => {
             <Link to={"/DocRegi"}>Register</Link>
           </p>
         </div>
-      {/* )} */}
+       {/* )} */}
     </div>
   );
 };

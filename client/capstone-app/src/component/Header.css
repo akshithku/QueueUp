@@ -14,7 +14,7 @@
   width: 100vw;
   align-items:  center;
   border: solid black; 
-  background-color: black;
+  background-color: rgb(33, 42, 62);
   border-bottom: solid white;
   border-radius: 5px;
   height: 12vh;
@@ -40,32 +40,33 @@
 .regi{
   /* height: 9vmin;
   width: 9vmin; */
-	border: 1px solid chartreuse;
+	/* border: 1px solid chartreuse; */
   position:relative;
 	padding: 10px 25px;
 	border-radius: 50px;
-	background-color: rgb(124, 246, 2);
-	color: black;
+	/* background-color: rgb(241, 246, 249); */
+  border: 2px solid #F1F6F9;
+	color:  #F1F6F9;
   transition: .2s;
   font-size: medium; 
   font-weight: bold;
 }
 .regi:hover{
 	background-color: black;
-	border: 2px solid chartreuse;
+	border: 2px solid rgb(248, 244, 244);
   color: white;
 	cursor: pointer;
 }
 
 
 .home{
-	border: 2px solid #f9004d;
+	/* border: 2px solid #f9004d; */
   position:relative;
 	padding: 10px 25px;
   height: 3.5vmin;
   width: 7vmin;
 	border-radius: 50px;
-	background-color: #f9004d;
+	background-color: rgb(241, 246, 249);
 	color: black;
   transition: .2s;
   font-size: medium;
@@ -75,12 +76,10 @@
 }
 .home:hover{
 	background-color: black;
-	border: 2px solid #f9004d;
+	border: 2px solid #f7f7f7;
   color: white;
 	cursor: pointer;
 }
-
-
 
 
 .popup {
@@ -92,7 +91,7 @@
     width: 35vmin;
     height: 28vmin;
     padding: 2vmin;
-    background-color: #9f9e9e;
+    background-color: rgb(57, 72, 103);
     box-shadow: 0 0 10px rgba(40, 20, 20, 0.3);
     border-radius: 30px;
   }
@@ -114,18 +113,21 @@
     border-radius: 50px;
   }
   .btn-1{
-    background-color: rgb(145, 235, 72);
+    background-color: rgb(241, 246, 249);
     height: 6vmin;
     width: 20vmin;
     font-size: 3vmin;
     margin: 2vmin;
     border-radius: 30px;
     cursor: pointer;
+    color: black;
   }
 
   .btn-2{
     height: 6vmin;
     width: 20vmin;
+    background-color: rgb(241, 246, 249);
+    color: black;
     font-size: 3vmin;
     margin: 3%;
     padding: 2%;
