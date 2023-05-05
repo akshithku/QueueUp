@@ -103,7 +103,7 @@ export default function Datas() {
               type="text"
               name="text"
               class="input"
-              placeholder="Type here..."
+              placeholder="Search here..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             ></input>
@@ -111,7 +111,7 @@ export default function Datas() {
 
           {isAuthenticated && (
             <div className="user-data">
-              <h1 className="name_head">Hello {user?.name} !&#128591;</h1>
+              <h1 className="name_head">Hello {user?.name} !</h1>
               <div className="icon-div">
               <NotificationsActiveIcon className="icon"  width='50' active={true} animate={true} onClick={() => setModalIsOpen(true)} />
               </div>
@@ -124,13 +124,13 @@ export default function Datas() {
                   <table>
                   <thead>
                     <tr>
-                <th>Name</th>
+                <th className="headers-1">Name</th>
                 <br></br>
-                <th>DoctorName</th>
+                <th className="headers-1">DoctorName</th>
                 <br></br>
-                <th>Timings</th>
+                <th className="headers-1">Timings</th>
                 <br></br>
-                <th>Amount</th>
+                <th className="headers-1" >Amount</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -138,13 +138,13 @@ export default function Datas() {
                   docBooked.filter((booking) => booking.UserEmail === user.email)
                   .map((slot)=>(
                     <tr>
-                      <td>{slot.Name}</td>
+                      <td className="comtent-1">{slot.Name}</td>
                       <br></br>
-                      <td>{slot.DoctorName}</td>
+                      <td className="comtent-1">{slot.DoctorName}</td>
                       <br></br>
-                      <td>{slot.timings}</td>
+                      <td className="comtent-1">{slot.timings}</td>
                       <br></br>
-                      <td>{slot.Amount}</td>
+                      <td className="comtent-1">{slot.Amount}</td>
                     </tr>
                   ))
                 }

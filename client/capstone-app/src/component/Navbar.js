@@ -59,7 +59,7 @@ export default function Header() {
         ) : (
           <div className="nav-title" id="nav-check">
             <Link className="regi" onClick={() => setModalIsOpen(true)}>
-              login
+              Login
             </Link>
           </div>
         )}
