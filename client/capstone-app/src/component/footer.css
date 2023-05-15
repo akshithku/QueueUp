@@ -1,0 +1,103 @@
+.footer {
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* width: 100vw; */
+    align-items: center;
+    border: solid black;
+    background-color: rgb(33, 42, 62);
+    border-bottom: solid white;
+    border-radius: 5px;
+    height: 14vh;
+    z-index: 5;
+    padding: 1vmin;
+    /* text-align: center; */
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 1vmin;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3vmin;
+    margin: 1vmin;
+}
+
+/* 
+.insta.icon {
+    fill: whitesmoke;
+}
+
+.facebook.icon {
+    width: 24px;
+  height: 24px;
+  fill: #ded5d5;
+  transition: fill 0.3s ease;
+
+}
+.facebook.icon:hover {
+    fill: #ff0000;
+  } */
+
+
+.logo-1 {
+    display: flex;
+    height: 15vmin;
+    width: 30vmin;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.ms-1 {
+    display: none;
+}
+
+.ms-2 {
+    color: aliceblue;
+    text-align: center;
+    font-size: 3vmin;
+    margin-top: 5.5vmin;
+}
+
+.icon-1{
+    margin-right: 1vmin;
+}
+
+@media screen and (max-width: 607px) {
+    .footer {
+        height: 25vmin;
+    }
+
+    .footer-logo {
+        flex-direction: column;
+        margin: 0%
+    }
+
+    .logo-1 {
+        height: 20vmin;
+        width: 30vmin;
+    }
+
+    .ms-2 {
+        display: none;
+    }
+
+    .ms-1 {
+        display: flex;
+        color: aliceblue;
+        font-size: 3.5vmin;
+        text-align: center;
+        margin-top: 19vmin;
+        margin-left: 20vmin;
+    }
+}
