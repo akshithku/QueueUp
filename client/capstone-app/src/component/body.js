@@ -59,7 +59,6 @@ export default function Datas() {
       .catch((error) => {
         console.log(" failed to listout:", error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // useEffect(() => {
@@ -121,7 +120,7 @@ export default function Datas() {
               onRequestClose={() => setModalIsOpen(false)}
               >
                 {
-                  <table>
+                  <table className="table">
                   <thead>
                     <tr>
                 <th className="headers-1">Name</th>

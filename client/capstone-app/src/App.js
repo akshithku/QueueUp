@@ -8,6 +8,8 @@ import DocForm from './component/DocForm';
 import DocInfo from "./component/DocInfo";
 import DocRegi from './component/DocRegi';
 import Slots from './component/Slots';
+import Footer from './component/Footer';
+
 
 
 import { Route,Routes
@@ -28,6 +30,7 @@ function App() {
         <Route path='/DocRegi' element={<DocRegi/>}></Route>
         <Route path='/slots/:id' element={<Slots/>}></Route>
       </Routes>
+      <Footer/>
     </div>
   );
 }

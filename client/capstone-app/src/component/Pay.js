@@ -8,7 +8,7 @@ const PaymentPage = () => {
   const [Name, setName] = useState("");
   const [DoctorName,setDoctorName]=useState(localStorage.getItem("name"));
   const [timing, setTiming] = useState("");
-  const [Amount, setAmount] = useState(0);
+  const [Amount, setAmount] = useState(500);
   const [Image,setImage]=useState("");
   const [ImageUrl,setImageUrl]=useState([]);
   const DocId=  localStorage.getItem("doctorId")

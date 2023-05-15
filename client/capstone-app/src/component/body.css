@@ -83,7 +83,7 @@
 }
 
 .input {
-  border: 1.5px solid gray;
+  border: 1.5px solid rgb(33, 42, 62);
   height: 3vmin;
   padding: 1rem;
   border-radius: 1rem;
@@ -262,7 +262,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 9999;
+  /* z-index: 9999; */
   max-width: fit-content;
   max-height: fit-content;
   padding: 4vmin;
@@ -271,10 +271,19 @@
   border-radius: 30px;
 }
 
+.table{
+  text-align: center;
+  padding: 3vmin;
+  max-width: fit-content;
+  
+  /* z-index: 9999; */
+}
+ 
 .headers-1{
   /* color: rgb(241, 246, 249); */
   color: rgb(155, 164, 181);
-  
+  margin: 10vmin;
+
 }
 .comtent-1{
   color: rgb(241, 246, 249);
