@@ -7,7 +7,7 @@ function Slots() {
   const { id } = useParams();
   const [data, setdata] = useState([]);
   const [bookedSlots, setBookedSlots] = useState([]);
-  const [photoVisibel, setpahotoVisible] = useState(false);
+  // const [photoVisibel, setpahotoVisible] = useState(false);
 
 
   useEffect(() => {
@@ -58,9 +58,10 @@ function Slots() {
   //     })
   // },[id])
 
-const handleClick=()=>{
-  setpahotoVisible(!photoVisibel)
-}
+  
+// const handleClick=()=>{
+//   setpahotoVisible(!photoVisibel)
+// }
 
 
   return (
@@ -98,11 +99,12 @@ const handleClick=()=>{
             <tr>
               <td>{slot.Name}</td>
               <td>{slot.timings}</td>
-              <td>
-                {/* <img className="img-2" onClick={handleClick} src={slot.image} alt=""/> */}
+              {/* <td>
+                <img className="img-2" onClick={handleClick} src={slot.image} alt=""/>
                 <button className="btn-3" onClick={handleClick}> VIEW </button>
                 {photoVisibel? <img className="img-2" src={slot.image} alt=""/>: ""}
-              </td>
+              </td> */}
+              <td>{slot.ReferenceCode}</td>
             </tr>
           ))
         }

@@ -89,6 +89,12 @@ app.get("/docBookSlots", async(req,res)=>{
   res.status(200).json(list);
 })
 
+app.get("/DocQr/:id",async(req,res)=>{
+  const {id}=req.params;
+   const list = await List.findById(id).select("email QRimg");
+  res.status(200).json(list);
+})
+
 async function getBookedSlotsForDoctor(doc_id) {
   try {
     const bookedSlots = await appModal.find({ Doc_id: doc_id}); 
@@ -135,9 +141,8 @@ app.get("/Doc-login", async(req,res)=>{
 })
 
 
-
 app.post('/Slot',(req,res)=>{
-  const {DoctorName,Name,timings,Amount,image,Doc_id,UserEmail } = req.body;
+  const {DoctorName,Name,timings,Amount,ReferenceCode,Doc_id,UserEmail } = req.body;
 
   const modal = new appModal()
 
@@ -145,7 +150,7 @@ app.post('/Slot',(req,res)=>{
   modal.Name = Name,
   modal.timings=timings,
   modal.Amount=Amount,
-  modal.image=image,
+  modal.ReferenceCode=ReferenceCode,
   modal.Doc_id=Doc_id,
   modal.UserEmail=UserEmail,
         
@@ -170,6 +175,7 @@ app.post("/register", async (req, res) => {
     email,
     password,
     Specialty,
+    QRimg,
   } = req.body;
   console.log(req.body);
 
@@ -181,6 +187,7 @@ app.post("/register", async (req, res) => {
     modal.email = email,
     modal.password = password,
     modal.Specialty = Specialty,
+    modal.QRimg=QRimg,
     modal.Count = 0;
 
   if (!email || !password)
@@ -213,10 +220,10 @@ app.post("/register", async (req, res) => {
 
     //   return res.status(200).json({ msg: "user is successfully saved" });
 
-   const token= jwt.sign(
-      {id:user._id,email},
-      'shhh',
-    )
+  //  const token= jwt.sign(
+  //     {id:user._id,email},
+  //     'shhh',
+  //   )
   });
 
   modal.save(async (err, data) => {

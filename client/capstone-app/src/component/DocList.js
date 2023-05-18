@@ -150,7 +150,7 @@ export default function Doclist() {
                   {/* {`/pay/${abc._id}`} */}
                   {user ? (
                     <Link
-                      to="/Pay"
+                      to={`/Pay/${abc._id}`}
                       className="btn1"
                       onClick={handleClick}
                       name={abc.DoctorName}

@@ -11,6 +11,8 @@ export default function DocRegi() {
   const [specialty, setSpecialty] = useState("");
   const [picurl, setpicUrl] = useState([]);
   const [ImageUrl, setImageUrl] = useState([]);
+  const [DocQr,setDocQr]=useState("");
+  const [QrDocImg,setQrDocImg]=useState([]);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -41,19 +43,32 @@ export default function DocRegi() {
     setSpecialty(event.target.value);
   };
 
+  const handleDoctorQrChange = (event) => {
+    setDocQr([...event.target.files]);
+    console.log(DocQr, "Doc Image");
+  };
+
+  useEffect(() => {
+    if (DocQr.length < 1) return;
+    const NewImageUrls = [];
+    Img.forEach((Img) => NewImageUrls.push(URL.createObjectURL(Img)));
+    setQrDocImg(NewImageUrls);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[DocQr]);
+
   useEffect(() => {
     if (Img.length < 1) return;
     const NewImageUrls = [];
     Img.forEach((Img) => NewImageUrls.push(URL.createObjectURL(Img)));
     setImageUrl(NewImageUrls);
-  }, [Img]);
+  },[Img]);
 
   useEffect(() => {
     if (HospitalImg.length < 1) return;
     const NewImageUrls = [];
     HospitalImg.forEach((Img) => NewImageUrls.push(URL.createObjectURL(Img)));
     setpicUrl(NewImageUrls);
-  }, [HospitalImg]);
+  },[HospitalImg]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,6 +102,18 @@ export default function DocRegi() {
     const Hosimg = await imagedata.json();
     console.log(Hosimg);
 
+    const QRdata=  new FormData();
+    QRdata.append("file",Image[0]);
+    QRdata.append("upload_preset", "QueueUp");
+    QRdata.append("cloud_name",'dr7cybxpq')
+  
+    const QRrespone= await fetch("https://api.cloudinary.com/v1_1/dr7cybxpq/image/upload",{
+     method:"POST",
+     body:data
+    })
+    const QRjson= await QRrespone.json()
+    console.log(json)
+
     const submit = await fetch(`${process.env.REACT_APP_URL}/register`, {
       method: "POST",
 
@@ -98,6 +125,7 @@ export default function DocRegi() {
         email: email,
         password: password,
         Specialty: specialty,
+        QRimg:QRjson.url,
       }),
 
       headers: {
@@ -190,6 +218,18 @@ export default function DocRegi() {
             value={specialty}
             onChange={handleSpecialtyChange}
           />
+        </label>
+        <label>
+          Doctor's QRcode:
+          <input
+            type="file"
+            required="required"
+            accept="image/*"
+            onChange={handleDoctorQrChange}
+          ></input>
+          {QrDocImg.map((imageSrc) => (
+            <img width={100} height={100} src={imageSrc} alt="" />
+          ))}
         </label>
         <button type="submit">Register</button>
       </form>

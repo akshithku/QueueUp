@@ -5,7 +5,7 @@ import FaceBook from "../Assets/facebook.icon.svg";
 import InstaIcon1 from "../Assets/insta.icon2.svg";
 import linkedinIcon from "../Assets/linkedin.icon.svg";
 import githubIcon from "../Assets/github.icon.svg";
-
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -14,7 +14,24 @@ function Footer() {
         <div className='footer-logo'>
           <img className='logo-1' src={logo} alt="log"/>
         </div>
-        <small className="ms-2">&copy; QueueUp, 2023. All rights reserved.</small>
+        {/* <small className="ms-2">&copy; QueueUp, 2023. All rights reserved.</small> */}
+        <div className='links'>
+          <div className='home-page'>
+          <Link to='/'>
+          Home
+          </Link>
+          </div>
+          <div className='terms'>
+          <Link to="/termspage">
+      <p>T&C</p>
+      </Link>
+      </div>
+        <div className='policy'>
+          <Link to="/policy">
+            <p>PrivacyPolicy</p>
+          </Link>
+        </div>
+        </div>
         <div className="social-icons">
         <div className='icon-1'>
         <a href="https://github.com/akshithku">
@@ -39,7 +56,9 @@ function Footer() {
       </div>
       
       </div>
+      <div className='MS'>
       <small className="ms-1">&copy; QueueUp, 2023. All rights reserved.</small>
+      </div>
       </footer>
   
     );

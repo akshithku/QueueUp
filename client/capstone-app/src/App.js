@@ -9,6 +9,8 @@ import DocInfo from "./component/DocInfo";
 import DocRegi from './component/DocRegi';
 import Slots from './component/Slots';
 import Footer from './component/Footer';
+import TermsPage from './component/TermsPage';
+import PrivacyPolicy from './component/PrivacyPolicy';
 
 
 
@@ -24,11 +26,13 @@ function App() {
         <Route path='/' element={<Datas/>}></Route>
         <Route path='/Forms' element={<Forms/>}></Route>
         <Route path='/Doc/:id' element={<DocList/>}></Route>
-        <Route path='/Pay' element={<PaymentPage/>}></Route>
+        <Route path='/Pay/:id' element={<PaymentPage/>}></Route>
         <Route path='/DocForm' element={<DocForm/>}></Route>
         <Route path='/DocInfo' element={<DocInfo/>}></Route>
         <Route path='/DocRegi' element={<DocRegi/>}></Route>
         <Route path='/slots/:id' element={<Slots/>}></Route>
+        <Route path='/termspage' element={<TermsPage/>}></Route>
+        <Route path='/policy'  element={<PrivacyPolicy/>}></Route>
       </Routes>
       <Footer/>
     </div>
