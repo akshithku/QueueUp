@@ -18,7 +18,7 @@ const Shcema = mongoose.Schema
             type:Number,
             // required:true
         },
-        image:{
+        ReferenceCode:{
             type:String,
             // required:true
         },

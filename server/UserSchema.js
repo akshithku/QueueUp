@@ -20,7 +20,7 @@ const UserSchema= mongoose.Schema({
     email:{
         type:String,
         // required:true
-        index: true
+        // index: true
     },
     password:{
         type:String,
@@ -28,6 +28,10 @@ const UserSchema= mongoose.Schema({
         index: true
     },
     Specialty:{
+        type:String,
+        // required:true
+    },
+    QRimg:{
         type:String,
         // required:true
     },
