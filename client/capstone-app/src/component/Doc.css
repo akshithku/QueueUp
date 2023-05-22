@@ -1,9 +1,10 @@
 .backgrounds{
-    background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
+    /* background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
     /* background-position: 0px 0px; */
     height: max-content;
+    background-color: rgb(241, 246, 249);
   }
 
 .DocContainer{

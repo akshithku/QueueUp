@@ -1,5 +1,5 @@
 .main_container {
-    background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
+    /* background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
     padding: 3vmin;
@@ -7,6 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     height: 100vh;
+    background-color: rgb(241, 246, 249);
     /* margin: 1vmin; */
 
 }

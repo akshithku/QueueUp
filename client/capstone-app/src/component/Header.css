@@ -1,15 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 *{
   text-decoration: none;
 }
 
-/* body{
-  background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
 .nav{
-  /* position: fixed; */
   display: flex;
+  /* flex-direction: column; */
   justify-content: space-between;
   width: 100vw;
   align-items:  center;
@@ -19,14 +16,13 @@
   border-radius: 5px;
   height: 12vh;
   z-index: 5;
-  /* width: 100%; */
+  align-items: center;
+   z-index: 5;
+
 }
 
 .logo{
   height: 25vmin;
-  /* width: 10vmin; */
-  /* background-color: aliceblue; */
-  
 }
 
 .head{
@@ -37,14 +33,58 @@
     align-items: center;
 
 }
+
+/* .Sub-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+  align-items: center;
+  margin-right:auto;
+    width: 35%;
+} */
+
+.menu-icon{
+  display: none;
+}
+
+.Sub-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly ;
+  font-size: 3vmin;
+  align-items: center;
+  /* padding: 10px; */
+  margin-right:auto;
+  width: 70%;
+}
+
+/* .Sub-btn > div {
+  margin-right: 20px;
+} */
+
+.Sub-btn a {
+  /* position: absolute; */
+  /* right: 0; */
+  text-decoration: none;
+  color: #efeeee;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+margin-left: auto;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+}
+
+.Sub-btn a:hover {
+  background-color: #ccc;
+  color: rgb(33, 42, 62);
+}
+
 .regi{
-  /* height: 9vmin;
-  width: 9vmin; */
-	/* border: 1px solid chartreuse; */
   position:relative;
 	padding: 10px 25px;
 	border-radius: 50px;
-	/* background-color: rgb(241, 246, 249); */
   border: 2px solid #F1F6F9;
 	color:  #F1F6F9;
   transition: .2s;
@@ -60,19 +100,18 @@
 
 
 .home{
-	border: 2px solid #111111;
+	/* border: 2px solid #111111; */
   position:relative;
 	padding: 10px 25px;
-  /* height: 3.5vmin;
-  width: 7vmin; */
 	border-radius: 50px;
-	background-color: rgb(241, 246, 249);
+	/* background-color: rgb(241, 246, 249); */
 	color: black;
   transition: .2s;
-  font-size: medium;
+  font-size: 3vmin;
   font-weight: bold;
   text-align: center;
   align-items: center;
+  margin: 3vmin;
 }
 .home:hover{
 	background-color: black;
@@ -80,6 +119,8 @@
   color: white;
 	cursor: pointer;
 }
+
+
 
 
 .popup {
@@ -140,12 +181,11 @@
     width: 8vmin;
     background-color: #bbb;
     border-radius: 50%;
-    /* margin-top: 3vmin; */
-    margin-right: 1vmin;
-    display: inline-block;
+    margin-left: 5vmin;
+    /* display: inline-block; */
   }
 
-  .log_div{
+  /* .log_div{
     position: absolute;
     background-color: rgb(221, 250, 215);
     height: 17vmin;
@@ -163,10 +203,69 @@
     color: black;
     font-weight: 600;
     border-radius: 30%;
-  }
+  } */
 
+  .log_div {
+    position: absolute;
+    height: 15vmin;
+    width: 25vmin;
+    top: 23vmin;
+    right: -5vmin;
+    transform: translate(-50%, -50%);
+    background-color: rgb(57, 72, 103);
+    padding: 3vmin;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    color: rgb(241, 246, 249);
+  }
+  
+  .log_div h3 {
+    font-size: 2.5vmin;
+  }
+  
+  .log_btn {
+    display: flex;
+    justify-content: center;
+    /* margin-top: 20px; */
+  }
+  
+  .log_btn1{
+    height: 4vmin;
+    width: 8vmin;
+    padding: 10px 10px;
+    margin: 0 5px;
+    background-color: rgb(241, 246, 249);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .log_btn button:hover {
+    background-color: rgb(33, 42, 62);
+    color: #f1f1f1;
+  }
+  
   .log_btn{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
   }
+
+  .logout-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #f1f1f1;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+  }
+
+
+ 

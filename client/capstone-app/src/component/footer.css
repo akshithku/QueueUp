@@ -7,7 +7,7 @@
     background-color: rgb(33, 42, 62);
     border-bottom: solid white;
     border-radius: 5px;
-    height: 14vh;
+    height: fit-content;
     z-index: 5;
     padding: 1vmin;
     /* text-align: center; */
@@ -17,88 +17,53 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 1vmin;
+    /* height: 1vmin; */
 }
-
-.social-icons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1vmin;
-    margin: 1vmin;
-}
-
-/* 
-.insta.icon {
-    fill: whitesmoke;
-}
-
-.facebook.icon {
-    width: 24px;
-  height: 24px;
-  fill: #ded5d5;
-  transition: fill 0.3s ease;
-
-}
-.facebook.icon:hover {
-    fill: #ff0000;
-  } */
 
 
 .logo-1 {
-    display: flex;
     height: 15vmin;
     width: 30vmin;
+    margin-left: 3vmin;
 }
 
 .footer-logo {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-
+    /* height: 30vmin; */
 }
+/* .footer-para{
+    height: 5vmin;
+    width: 50vmin;
+} */
+.footer-para p{
+    color: aliceblue;
+    /* height: 2vmin; */
+    width: 60vmin;
+    text-align: left;
+    margin-left: 8vmin;
+}
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* margin-left: 1vmin; */
+    /* padding: 1vmin;
+    margin: 1vmin; */
+}
+
 
 .links{
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
     align-items: center;
-    margin: 4vmin;
-    padding: 1vmin;
-    /* margin-right: 30vmin; */
-
 }
-.home-page{
-    /* background-color: aliceblue; */
-    /* margin: auto; */
-    padding: 2vmin;
-    /* margin-right:4vmin;  */
+.Main-page{
+    display: flex;
+    flex-direction: r;
 }
-.terms{
-    padding: 2vmin;
-    /* margin-right:1vmin;  */
-
-}
-
-.MS{
-    /* background-color: aliceblue; */
-    text-align: center;
-    padding: 2vmin;
-    margin-top: 8vmin;
-}
-
-.ms-1 {
-   color: aliceblue;
-   bottom: 10vmin;
-   text-align: center;
-}
-
-/* .ms-2 {
-    color: aliceblue;
-    text-align: center;
-    font-size: 3vmin;
-    margin-top: .5vmin;
-} */
 
 .icon-1{
     margin-right: 1vmin;
@@ -141,3 +106,13 @@
         margin-left: 20vmin;
     }
 }
+
+.main-footer {
+    color: white;
+    background-color: #dc3545;
+    padding-top: 3em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  

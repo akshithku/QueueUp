@@ -1,6 +1,6 @@
 
 .DocForm-div{
-  background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
+  /* background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
  display: flex;
@@ -8,7 +8,7 @@
  justify-content: center;
  align-items: center;
  height: 100vh;
- /* background-color: #e5e7eb; */
+  background-color: rgb(241, 246, 249);
 }
 
 .form {
@@ -33,7 +33,7 @@
 
 .form input{
   max-width: 50vmin;
-  font-size: 2vmin;
+  font-size: 3vmin;
   /* padding: 1rem; */
 }
 
@@ -103,46 +103,65 @@
   text-decoration: underline;
 }
 
-.DocForm-div-1{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
- }
+
 
  .DocForm-div-1{
-  background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg");
   background-repeat: no-repeat;
   background-size: cover;
  display: flex;
  flex-direction: column;
  justify-content: center;
  align-items: center;
- height: 128vh;
- /* background-color: #e5e7eb; */
+ height: fit-content;
+   background-color: rgb(241, 246, 249);
+ 
+}
+
+.main-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
 }
 
 .form-1 {
-  background-color: #686464;
-  display: block;
-  padding: 1rem;
+  background-color: rgb(57, 72, 103);
+  display: flex;
+  flex-direction: column;
+  padding: 2vmin;
   width: 56vmin;
   max-height: fit-content;
   border-radius: 0.5rem;
   align-items: center;
-  /* color: #ffffff; */
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20vmin;
+  margin-bottom: 2vmin;
 }
 
 .form-1 input{
   max-width: 45vmin;
   font-size: 2vmin;
-  /* padding: 1rem; */
 }
 
 .form-1 label{
-  padding: 1vmin;
   margin: 1vmin;
+  color: #F1F6F9;
+}
+
+.regi-btn{
+  width: 15vmin;
+  font-size: 2.5vmin;
+  text-align: center;
+  border-radius: 10vmin;  
+  position:relative;
+  background-color: rgb(33, 42, 62);
+  border: 2px solid #F1F6F9;
+	color:  #F1F6F9;
+  transition: .2s;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.regi-btn:hover{
+  background-color: rgb(44, 56, 79);
 }
