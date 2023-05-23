@@ -53,6 +53,7 @@ export default function Doclist() {
   useEffect(() => {
     console.log("hospital", forHos);
   }, [forHos]);
+  
   useEffect(() => {
     fetch(process.env.REACT_APP_URL + `/hospital/${id}`)
       .then((response) => response.json())
@@ -100,7 +101,7 @@ export default function Doclist() {
             return (
               <div className="Docapp">
                 <div className="Doc-token">
-                  <h6 className="token">#Current Num:</h6>
+                  <h6 className="token">#Token Num:</h6>
                   {/* <p className="Token-Num">{localStorage.getItem("Num")}</p> */}
                   <p  className="Token-Num">{abc.Count}</p>
                 </div>

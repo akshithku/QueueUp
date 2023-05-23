@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
 import "./DocForm.css";
 export default function DocRegi() {
   const [name, setName] = useState("");
@@ -13,6 +14,8 @@ export default function DocRegi() {
   const [ImageUrl, setImageUrl] = useState([]);
   const [DocQr,setDocQr]=useState("");
   const [QrDocImg,setQrDocImg]=useState([]);
+  const [location,setlocation]=useState("")
+
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -42,6 +45,10 @@ export default function DocRegi() {
   const handleSpecialtyChange = (event) => {
     setSpecialty(event.target.value);
   };
+  const handlelocationChange = (event) => {
+    setlocation(event.target.value);
+  };
+
 
   const handleDoctorQrChange = (event) => {
     setDocQr([...event.target.files]);
@@ -51,7 +58,7 @@ export default function DocRegi() {
   useEffect(() => {
     if (DocQr.length < 1) return;
     const NewImageUrls = [];
-    Img.forEach((Img) => NewImageUrls.push(URL.createObjectURL(Img)));
+    DocQr.forEach((Img) => NewImageUrls.push(URL.createObjectURL(Img)));
     setQrDocImg(NewImageUrls);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[DocQr]);
@@ -117,6 +124,10 @@ export default function DocRegi() {
     const submit = await fetch(`${process.env.REACT_APP_URL}/register`, {
       method: "POST",
 
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+
       body: JSON.stringify({
         DoctorName: name,
         Docimg: json.url,
@@ -125,12 +136,11 @@ export default function DocRegi() {
         email: email,
         password: password,
         Specialty: specialty,
+        City:location,
         QRimg:QRjson.url,
       }),
 
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
+   
     })
       .then((res) => res.json())
       .then((json) => {
@@ -141,14 +151,16 @@ export default function DocRegi() {
         console.log(err);
       });
 
+      console.log(submit)
+
     const jsondata = submit.json();
     console.log(jsondata);
   };
 
   return (
     <div className="DocForm-div-1">
-      <h1>Doctor's Registration</h1>
       <div className="main-div">
+      <h1>Doctor's Registration</h1>
       <form className="form-1" method="POST" onSubmit={handleSubmit}>
         <label>
           Doctor's Name:
@@ -168,7 +180,7 @@ export default function DocRegi() {
             onChange={handleImageChange}
           ></input>
           {ImageUrl.map((imageSrc) => (
-            <img width={100} height={100} src={imageSrc} alt="" />
+            <img width={80} height={80} src={imageSrc} alt="" />
           ))}
         </label>
         <label>
@@ -189,7 +201,7 @@ export default function DocRegi() {
             onChange={handleHospitalImgageChange}
           ></input>
           {picurl.map((imageSrc) => (
-            <img width={100} height={100} src={imageSrc} alt="" />
+            <img width={80} height={80} src={imageSrc} alt="" />
           ))}
         </label>
         <label>
@@ -220,6 +232,15 @@ export default function DocRegi() {
           />
         </label>
         <label>
+          City Name:
+          <input
+            type="text"
+            required="required"
+            value={location}
+            onChange={handlelocationChange}
+          />
+        </label>
+        <label>
           Doctor's QRcode:
           <input
             type="file"
@@ -228,10 +249,12 @@ export default function DocRegi() {
             onChange={handleDoctorQrChange}
           ></input>
           {QrDocImg.map((imageSrc) => (
-            <img width={100} height={100} src={imageSrc} alt="" />
+            <img width={80} height={80} src={imageSrc} alt="" />
           ))}
         </label>
-        <button type="submit">Register</button>
+        {/* <Link to='/'> */}
+        <button className="regi-btn" type="submit" >Register</button>
+        {/* </Link> */}
       </form>
       </div>
     </div>

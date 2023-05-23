@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 // import { Transition } from "react-transition-group";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
+
 export default function Datas() {
   // const [Info,setInfo]=useState([])
   const { id } = useParams();
@@ -22,6 +23,9 @@ export default function Datas() {
   const [searchQuery, setSearchQuery] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [docBooked, setdocBooked] = useState([]);
+  // const [selectedCity, setSelectedCity] = useState("");
+  // const [selectHospital, setSelectHospital] = useState([]);
+  
 
 
   // const [isActive, setIsActive] = React.useState(false);
@@ -67,6 +71,13 @@ export default function Datas() {
   //   }, 5000);
   // }, []);
 
+  // const handleFilter = () => {
+  //   const filtered =HospitalName.map((hospital) => hospital.City === selectedCity);
+  //   setSelectHospital(filtered);
+  // };
+
+  // console.log( "cities",handleFilter)
+  
 
   const arrayUniqueHospitals = [
     ...new Map(
@@ -77,11 +88,15 @@ export default function Datas() {
   function handlechange(e) {
     setHospitalName(e);
   }
+ 
+  
 
   const filteredHospitals = arrayUniqueHospitals.filter((hospital) =>
-    hospital.HospitalName.toLowerCase().includes(searchQuery.toLowerCase())
+    (hospital.HospitalName.toLowerCase().includes(searchQuery.toLowerCase())  && hospital.HospitalName.toLowerCase().startsWith(searchQuery.toLowerCase()) )
+    ||  (hospital.City.toLowerCase().includes(searchQuery.toLowerCase()) && hospital.City.toLowerCase().startsWith(searchQuery.toLowerCase()) )
   );
 
+   
   return (
     <main className="fullContainer">
       {/* <img src={Background} alt='#'className='background'/> */}
@@ -183,6 +198,8 @@ export default function Datas() {
               })}
             </div>
           )}
+
+         
         </>
       )}
     </main>

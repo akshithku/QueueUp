@@ -1,5 +1,6 @@
 .fullContainer {
   /* background-image: url("https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6364.jpg?size=626&ext=jpg"); */
+  background-color: rgb(241, 246, 249);
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
   height: 100vh;
@@ -106,33 +107,36 @@
 }
 
 .button {
-  height: 1vmin;
-  width: 28vmin;
-  padding: 2em 1em;
-  border: none;
-  border-radius: 9px;
-  font-weight: bold;
-  letter-spacing: 3px;
+  height: 3vmin;
+  width: 25vmin;
+  margin: auto;
+  padding: 1em 2em;
+  font-size: 2vmin;
   text-transform: uppercase;
-  color: #111212;
-  transition: all 1000ms;
-  font-size: 1.5vmin;
-  position: relative;
-  overflow: hidden;
-  outline: 1.5px solid #2c9caf;
-  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 750;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
   cursor: pointer;
-  background-color: rgb(241, 246, 249);
+  outline: none;
 }
 
 .button:hover {
-  color: #ffffff;
-  transform: scale(1.1);
-  outline: 2px solid #70bdca;
-  box-shadow: 4px 5px 17px -4px #012e35;
+  background-color: rgb(33, 42, 62);
+  /* box-shadow: 0px 15px 20px rgba(136, 139, 138, 0.4); */
+  color: #fff;
+  transform: translateY(-7px);
 }
 
-.button::before {
+.button:active {
+  transform: translateY(-1px);
+}
+
+/* .button::before {
   content: "";
   position: absolute;
   left: -50px;
@@ -147,7 +151,7 @@
 
 .button:hover::before {
   width: 250%;
-}
+} */
 
 
 

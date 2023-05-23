@@ -65,7 +65,7 @@ app.get("/HosList", async (req, res) => {
   // const name=data.HospitalName;
   // const datas = await List.find().select("HospitalName HospitalsImg");
   const datas = await List.aggregate([
-    { $project: { HospitalName: 1, HospitalsImg: 1 } } // Used Aggregation instead of find method
+    { $project: { HospitalName: 1, HospitalsImg: 1, City: 1 } } // Used Aggregation instead of find method
   ]);
   
   res.status(200).send(datas);
@@ -166,52 +166,62 @@ app.post('/Slot',(req,res)=>{
 
 })
 
-app.post("/register", async (req, res) => {
-  const {
-    DoctorName,
-    Docimg,
-    HospitalName,
-    HospitalsImg,
-    email,
-    password,
-    Specialty,
-    QRimg,
-  } = req.body;
-  console.log(req.body);
+// app.post("/register", async (req, res) => {
+//   const {
+//     DoctorName,
+//     Docimg,
+//     HospitalName,
+//     HospitalsImg,
+//     email,
+//     password,
+//     Specialty,
+//     QRimg,
+//   } = req.body;
+//   if (!email || !password)
+//     return res.status(400).json({ msg: "Password and email are required" });
+//   if (password.length < 8) {
+//     return res
+//       .status(400)
+//       .json({ msg: "Password should be at least 8 characters long" });
+//   }
+//   console.log(req.body);
 
-  const modal = new UserSchema();
-  modal.DoctorName = DoctorName,
-    modal.Docimg = Docimg,
-    modal.HospitalName = HospitalName,
-    modal.HospitalsImg = HospitalsImg,
-    modal.email = email,
-    modal.password = password,
-    modal.Specialty = Specialty,
-    modal.QRimg=QRimg,
-    modal.Count = 0;
+//   const model = new UserSchema({
+//  DoctorName,
+//  Docimg,
+//  HospitalName,
+//  HospitalsImg,
+//  email,
+//  password,
+// Specialty,
+// QRimg,
+// Count})
 
-  if (!email || !password)
-    return res.status(400).json({ msg: "Password and email are required" });
-  if (password.length < 8) {
-    return res
-      .status(400)
-      .json({ msg: "Password should be at least 8 characters long" });
-  }
+//   const duser = await model.save();
 
-  const user = await UserSchema.findOne({ email });
-  if (user){ 
-    console.log("user fund")
-    return res.status(400).json({ msg: "User already exists" })
-}
+//   if(duser){
+//     res.status(201).json({message: "sucess"})
+//   }
+//   else{
+//     res.status(501).json({message: "tryagain"})
+//   }
+  
 
-  const newUser = new UserSchema({ email, password });
-  bcrypt.hash(password, 8, async (err, hash) => {
-    if (err)
-   {
-    console.log('bcrypt')
-      return res.status(400).json({ msg: "error while saving the password" });
-   }
-      newUser.password = hash;
+//   const user = await UserSchema.findOne({ email });
+//   if (user){ 
+//     console.log("user fund")
+//     return res.status(400).json({ msg: "User already exists" })
+// }
+
+//   const newUser = new UserSchema({ email, password });
+   
+//   bcrypt.hash(password, 8, async (err, hash) => {
+//     if (err)
+//    {
+//     console.log('bcrypt')
+//       return res.status(400).json({ msg: "error while saving the password" });
+//    }
+//       newUser.password = hash;
     // const savedUserRes = await modal.save();
     // console.log(savedUserRes)
 
@@ -224,20 +234,76 @@ app.post("/register", async (req, res) => {
   //     {id:user._id,email},
   //     'shhh',
   //   )
-  });
+  // });
 
-  modal.save(async (err, data) => {
-    if (err) {
-      console.log(err);
+  // modal.save(async (err, data) => {
+  //   if (err) {
+  //     console.log(err);
       
-    } else {
-      return res.status(200).send(data).json({ msg: "user is successfully saved" });
-    }
+  //   } else {
+  //     return res.status(200).send(data).json({ msg: "user is successfully saved" });
+  //   }
 
-  });
-});
+  // });
+// });
+
+app.post('/register', async(req,res)=>{
+  const {
+    DoctorName,
+    Docimg,
+    HospitalName,
+    HospitalsImg,
+    email,
+    password,
+    Specialty,
+    City,
+    QRimg,
+  } = req.body;
+  if (!email || !password)
+    return res.status(400).json({ msg: "Password and email are required" });
+  if (password.length < 8) {
+    return res
+      .status(400)
+      .json({ msg: "Password should be at least 8 characters long" });
+  }
+  console.log(req.body);
+  try{
+    const user = await UserSchema.findOne({ email:email });
+  if (user){ 
+    console.log("user fund")
+    return res.status(400).json({ msg: "User already exists" })
+}
+     else{
+      const model = new UserSchema({
+        DoctorName,
+        Docimg,
+        HospitalName,
+        HospitalsImg,
+        email,
+        password,
+       Specialty,
+       QRimg,
+       City,
+       Count:0})
+       
+         const duser = await model.save();
+         if(duser){
+          res.status(201).json({message: "sucess"})
+        }
+        else{
+          res.status(501).json({message: "tryagain"})
+        }
+     }
+    
+
+  }
+  catch (err){
+console.log(err);
+  }
 
 
+
+})
 
 // app.post(`/login`, async (req, res) => {
 //   const { email, password } = req.body
@@ -265,6 +331,7 @@ app.post("/register", async (req, res) => {
 //   } else {
 //     return res.status(400).json({ msg: 'Invalid credential' })
 //   }
+
 
 
 
