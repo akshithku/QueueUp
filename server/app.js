@@ -65,7 +65,7 @@ app.get("/HosList", async (req, res) => {
   // const name=data.HospitalName;
   // const datas = await List.find().select("HospitalName HospitalsImg");
   const datas = await List.aggregate([
-    { $project: { HospitalName: 1, HospitalsImg: 1 } } // Used Aggregation instead of find method
+    { $project: { HospitalName: 1, HospitalsImg: 1, City: 1 } } // Used Aggregation instead of find method
   ]);
   
   res.status(200).send(datas);
@@ -256,6 +256,7 @@ app.post('/register', async(req,res)=>{
     email,
     password,
     Specialty,
+    City,
     QRimg,
   } = req.body;
   if (!email || !password)
@@ -282,6 +283,7 @@ app.post('/register', async(req,res)=>{
         password,
        Specialty,
        QRimg,
+       City,
        Count:0})
        
          const duser = await model.save();

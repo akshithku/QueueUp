@@ -14,6 +14,7 @@ export default function DocRegi() {
   const [ImageUrl, setImageUrl] = useState([]);
   const [DocQr,setDocQr]=useState("");
   const [QrDocImg,setQrDocImg]=useState([]);
+  const [location,setlocation]=useState("")
 
 
   const handleNameChange = (event) => {
@@ -44,6 +45,10 @@ export default function DocRegi() {
   const handleSpecialtyChange = (event) => {
     setSpecialty(event.target.value);
   };
+  const handlelocationChange = (event) => {
+    setlocation(event.target.value);
+  };
+
 
   const handleDoctorQrChange = (event) => {
     setDocQr([...event.target.files]);
@@ -131,6 +136,7 @@ export default function DocRegi() {
         email: email,
         password: password,
         Specialty: specialty,
+        City:location,
         QRimg:QRjson.url,
       }),
 
@@ -223,6 +229,15 @@ export default function DocRegi() {
             required="required"
             value={specialty}
             onChange={handleSpecialtyChange}
+          />
+        </label>
+        <label>
+          City Name:
+          <input
+            type="text"
+            required="required"
+            value={location}
+            onChange={handlelocationChange}
           />
         </label>
         <label>

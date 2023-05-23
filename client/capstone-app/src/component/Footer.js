@@ -73,7 +73,7 @@ function Footer() {
               </li>
             </ul>
           </div>
-          <div className="other-pages">
+          <div className="other-page">
             <ul>
               Other
             <li>
