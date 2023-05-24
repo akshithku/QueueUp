@@ -47,7 +47,7 @@ export default function Header() {
   return (
     <div className="nav">
       <Link to="/">
-        <img className="logo" src={logo} alt=""></img>
+        <img className="Logo" src={logo} alt=""></img>
       </Link>
 
       <div className="menu-icon" onClick={ toggleMenu}>
