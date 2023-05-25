@@ -12,6 +12,8 @@ After making a successful payment, patients are required to submit the transacti
 
 QueueUp aims to streamline the queue management and appointment booking process for both patients and doctors. By providing real-time updates on token numbers, a user-friendly appointment booking system, and a secure payment gateway, QueueUp simplifies the overall healthcare experience. It brings efficiency, convenience, and transparency to the process, enhancing patient satisfaction and optimizing the utilization of healthcare resources.
 
+![hi..](https://res.cloudinary.com/dr7cybxpq/image/upload/v1685015388/Screenshot_2023-05-25_171927_nmzsa9.png)
+
 # Project Url:
 
  👉[Frontend](https://queueup.netlify.app/)
