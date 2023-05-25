@@ -6,7 +6,7 @@ import { FaLinkedin, FaInstagram, FaTwitter, FaGithub } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className="footer" style={{borderTop:"5px solid black"}}>
+    <div className="footer" style={{borderTop:"2px solid black"}}>
     <footer style={{display:"flex", flexDirection:"column", marginTop:"", justifyContent:"center", alignItems:"center", backgroundColor:"#2d314b"}}>
       <div className="footer" style={{backgroundColor:"#2d314b",display:"flex",flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
       <div className="logo-footer" style={{width:"100%", backgroundColor:"#2d314b"}}>

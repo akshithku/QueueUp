@@ -332,9 +332,6 @@ console.log(err);
 //     return res.status(400).json({ msg: 'Invalid credential' })
 //   }
 
-
-
-
 // })
 
 app.post(`/login`, async (req, res) => {
