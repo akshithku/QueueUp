@@ -166,14 +166,13 @@ export default function Doclist() {
                     <div className="modal-1">
                       {modal && (
                         <div className="modal">
-                          <div onClick={toggleModal} className="overlay"></div>
-                          <div className="modal-content">
+                          <div onClick={toggleModal} className="overlay">
                             <h2 className="h2">Login is required</h2>
-                            <div className="clos-btn">
+                          
                             <button className="close-modal" onClick={toggleModal}>
                               CLOSE
                             </button>
-                            </div>
+      
                           </div>
                         </div>
                       )}

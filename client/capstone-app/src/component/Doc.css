@@ -232,7 +232,7 @@ body.active-modal {
 .modal, .overlay {
     width: 50vw;
     height: 50vh;
-    top: 0;
+    top: 50vh;
     left: 0;
     right: 0;
     bottom: 50vmin;
@@ -241,18 +241,27 @@ body.active-modal {
 }
 
 .overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
     background: rgb(57, 72, 103);
     /* background-color: #000; */
-    height: 24vmin;
+    height: 30%;
      width: 55vmin;
     border-radius: 40px;
     box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
 }
 .modal-content {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
     height: 10vmin;
-    top: 40%;
-    left: 50%;
+    /* top: 40%;
+    left: 50%; */
     transform: translate(-50%, -50%);
     line-height: 1.4;
     padding: 14px 28px;
@@ -292,7 +301,9 @@ body.active-modal {
     padding: 5px 7px;
     border-radius: 45px;
     cursor: pointer;
-    margin: auto;
+    margin-top: 3%;
+    height: 5%;
+    /* margin: auto; */
 }
 
 
@@ -300,5 +311,7 @@ body.active-modal {
     font-size: 3.5vmin;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(241, 246, 249);
+    height: 50%;
+    margin-bottom: 3vmin;
 }
 

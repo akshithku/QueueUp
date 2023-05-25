@@ -222,7 +222,7 @@ const gapi = await loadGapiInsideDOM();
   return (
     <div className="background">
     <div className="pay-div">
-      <h1 className="heading">Payment Page</h1>
+      <h1 className="heading-3">Payment Page</h1>
       { ISAuthenticated ? (
         <div className="end-div">
           <h1 className="heading-1">Thanks for Booking !! !&#128591;</h1>
@@ -266,10 +266,10 @@ const gapi = await loadGapiInsideDOM();
           <input className="input1" type="number"  required="required" placeholder="Amount" value={Amount} onChange={handleAmountChange}></input>
         </label>
         <br/>
-        <div>
+        <div className="QR-div" >
         <label>
           Scan QR:
-          <img src={Docqr.QRimg} alt="image"/>
+          <img className="Qr-img" src={Docqr.QRimg} alt="image"/>
         </label>
         </div>
         <br/>
