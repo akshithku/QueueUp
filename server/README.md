@@ -69,14 +69,18 @@ The QueueUp backend includes the following routes:
 
 Doctor Api's:
 -`POST/register`:Doctor's registration.
+
 -`POST/login`:Doctor's Login.
--`POST/slot`: User can book slots slots  
+
+-`POST/Slot`: User can book slots slots  
+
 -`PUT//update/:id`: Updating the count of token number of doctor.
--`GET/user`: Getting hospital's in home page.
--`GET/userdata`: Getting hospital's in doctor's page.
+-`GET/User`: Getting hospital's in home page.
+-`GET/Userdata`: Getting hospital's in doctor's page.
 -`GEt/bookedSlots/:doc_id`: compare the doctor's id and show them in slot's page from 
+
 -`GET/docBookSlots`- Showing the booked slots to the user.
--`GET/docSlot/:id`- showing doctor's detalies in the doctor's page
+-`GET/DocSlot/:id`- showing doctor's detalies in the doctor's page
 
 
 # Future Enhancements
