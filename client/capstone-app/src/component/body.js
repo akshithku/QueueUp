@@ -183,6 +183,7 @@ export default function Datas() {
                       <h1 className="name" key={abd.HospitalName}>
                         {abd.HospitalName}
                       </h1>
+                      {/* <h2 className="location">{abd.City}</h2> */}
                       <div className="Doc-link">
                         <Link
                           to={`/Doc/${abd._id}`}

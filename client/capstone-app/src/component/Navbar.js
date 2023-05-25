@@ -18,9 +18,12 @@ export default function Header() {
   const [close, setclose] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
+  
+  // const toggleMenu = () => {
+  //   setShowMenu(!showMenu);
+  // };
+console.log(setShowMenu)
+
 
   const openModel = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
@@ -50,9 +53,9 @@ export default function Header() {
         <img className="Logo" src={logo} alt=""></img>
       </Link>
 
-      <div className="menu-icon" onClick={ toggleMenu}>
+        {/* <div className="menu-icon" onClick={ toggleMenu}>
           <button>menu</button>
-        </div>
+        </div> */}
           {/* { */}
             {/* // showMenu && ( */}
               <div className={`Sub-btn ${showMenu && 'active'}`}>
