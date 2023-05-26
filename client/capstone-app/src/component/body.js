@@ -53,7 +53,7 @@ export default function Datas() {
   }, [HospitalName]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/HosList`)
+    fetch(`${process.env.REACT_APP_URL}/hosList`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data,"datas");

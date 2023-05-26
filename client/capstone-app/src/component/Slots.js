@@ -16,7 +16,7 @@ function Slots() {
 
   useEffect(() => {
     const datas = async () => {
-      const res = await axois.get(`${process.env.REACT_APP_URL}/DocSlot/${id}`);
+      const res = await axois.get(`${process.env.REACT_APP_URL}/docSlot/${id}`);
       // console.log("res", res.data);
       setdata(res.data);
     };

@@ -71,12 +71,12 @@ Open your web browser and go to http://localhost:3000 to view the app.
 
 # user Follow Demo
 
-![Hi...](https://res.cloudinary.com/dr7cybxpq/image/upload/v1685034690/ezgif.com-video-to-gif_hrglgr.gif)
+![Hi...](https://res.cloudinary.com/dr7cybxpq/image/upload/v1685072415/ezgif.com-video-to-gif_1_g3lwmm.gif)
 
 
 # Doctor's follow Demo
 
-![Hello...](https://res.cloudinary.com/dr7cybxpq/video/upload/v1685036746/ezgif.com-gif-maker_qvkxdw.mp4)
+![Hello...](https://res.cloudinary.com/dr7cybxpq/image/upload/v1685071972/ezgif.com-video-to-gif_-3_mjulgu.gif)
 
 # Progress Tracker
 ## 
