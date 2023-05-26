@@ -71,7 +71,7 @@ const calendarID = process.env.REACT_APP_CALENDAR_ID;
     console.log("DOC-QR", Docqr);
   }, [Docqr])
   useEffect(() => {
-    fetch(process.env.REACT_APP_URL + `/DocQr/${id}`)
+    fetch(process.env.REACT_APP_URL + `/docQr/${id}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -114,7 +114,7 @@ const calendarID = process.env.REACT_APP_CALENDAR_ID;
     // setLink(json.url)
     // console.log(link)
  
-     const submit= await fetch(`${process.env.REACT_APP_URL}/Slot`,{
+     const submit= await fetch(`${process.env.REACT_APP_URL}/slot`,{
         method:"POST",
         headers:{
           "Content-type":'application/json; charset=UTF-8'

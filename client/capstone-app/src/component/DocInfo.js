@@ -34,7 +34,7 @@ console.log(Dataone,"countdata")
   },[Docbooked])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_URL+"/User")
+    fetch(process.env.REACT_APP_URL+"/user")
       .then((response) => response.json())
       .then((data) => {
         // console.log(data);

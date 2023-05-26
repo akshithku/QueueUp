@@ -38,7 +38,7 @@ mongoose
   });
 
 
-app.get("/User", async (err, data) => {
+app.get("/user", async (err, data) => {
   try{
     const list = await List.find();
     data.status(200).send(list);
@@ -48,7 +48,7 @@ app.get("/User", async (err, data) => {
   
 });
 
-app.get("/Userdata", async (err, data) => {
+app.get("/userdata", async (err, data) => {
   const list = await List.find();
   data.status(200).send(list);
 });
@@ -60,7 +60,7 @@ app.get("/DocList", async (req, res) => {
   res.status(200).send(datas);
 });
 
-app.get("/HosList", async (req, res) => {
+app.get("/hosList", async (req, res) => {
   // const {data}=req.body;
   // const name=data.HospitalName;
   // const datas = await List.find().select("HospitalName HospitalsImg");
@@ -77,7 +77,7 @@ app.get("/hospital/:id", async (req, res) => {
   res.status(200).json(list);
 });
 
-app.get("/DocSlot/:id", async(req,res)=>{
+app.get("/docSlot/:id", async(req,res)=>{
   const {id}=req.params;
    const list = await List.findById(id).select("Docimg  DoctorName Specialty");
   res.status(200).json(list);
@@ -89,7 +89,7 @@ app.get("/docBookSlots", async(req,res)=>{
   res.status(200).json(list);
 })
 
-app.get("/DocQr/:id",async(req,res)=>{
+app.get("/docQr/:id",async(req,res)=>{
   const {id}=req.params;
    const list = await List.findById(id).select("email QRimg");
   res.status(200).json(list);
@@ -134,14 +134,14 @@ app.put("/update/:id", async (req, res) => {
   res.status(200).json(data);
 });
 
-app.get("/Doc-login", async(req,res)=>{
+app.get("/doc-login", async(req,res)=>{
   // const {email,HospitalName,password} =req.params;
   const datas = await List.find();
   res.status(200).send(datas);
 })
 
 
-app.post('/Slot',(req,res)=>{
+app.post('/slot',(req,res)=>{
   const {DoctorName,Name,timings,Amount,ReferenceCode,Doc_id,UserEmail } = req.body;
 
   const modal = new appModal()
