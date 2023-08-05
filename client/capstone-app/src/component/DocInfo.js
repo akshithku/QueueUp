@@ -63,7 +63,7 @@ console.log(Dataone,"countdata")
   
   const arrayUniqueDoctor = [...new Map(Docbooked.map(item =>
     [item['HospitalName'], item])).values()];
-  // const unique = [...new Set(HospitalName.map(item => item.HospitalName))]; // [ 'A', 'B']
+  // const unique = [...new Set(HospitalName.map(item => item.HospitalName))]; 
   // console.log("unique:", arrayUniqueDoctor)
   function handlechange(e){
     setDocbooked(e);

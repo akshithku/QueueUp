@@ -236,14 +236,14 @@ margin-left: auto;
   .log_btn1{
     height: 4vmin;
     width: 8vmin;
-    padding: 10px 10px;
+    padding: 5px 5px;
     margin: 0 5px;
     background-color: rgb(241, 246, 249);
     color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease;
   }
   
   .log_btn button:hover {

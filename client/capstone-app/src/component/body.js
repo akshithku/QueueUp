@@ -7,7 +7,6 @@ import Modal from "react-modal";
 // import  Search  from "../Assets/search.png";
 // import { BsSearch } from 'react-icons/BsSearch';
 // import { VscSearch } from "react-icons/vsc";
-// import Background from '../Assets/background.webp'
 import { motion } from "framer-motion";
 // import { Transition } from "react-transition-group";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
@@ -23,6 +22,8 @@ export default function Datas() {
   const [searchQuery, setSearchQuery] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [docBooked, setdocBooked] = useState([]);
+  // const [suggestions, setSuggestions] = useState([]);
+
   // const [selectedCity, setSelectedCity] = useState("");
   // const [selectHospital, setSelectHospital] = useState([]);
   
@@ -90,11 +91,19 @@ export default function Datas() {
   }
  
   
-
   const filteredHospitals = arrayUniqueHospitals.filter((hospital) =>
     (hospital.HospitalName.toLowerCase().includes(searchQuery.toLowerCase())  && hospital.HospitalName.toLowerCase().startsWith(searchQuery.toLowerCase()) )
     ||  (hospital.City.toLowerCase().includes(searchQuery.toLowerCase()) && hospital.City.toLowerCase().startsWith(searchQuery.toLowerCase()) )
   );
+
+  // const filteredHospitals = arrayUniqueHospitals.filter((hospital) => {
+  //   const searchLower = searchQuery.toLowerCase();
+  //   return (
+  //     (hospital.HospitalName && hospital.HospitalName.toUpperCase().includes(searchLower) && hospital.HospitalName.toUpperCase().startsWith(searchLower)) ||
+  //     (hospital.City && hospital.City.toUpperCase().includes(searchLower) && hospital.City.toUpperCase().startsWith(searchLower))
+  //   );
+  // });
+  
 
    
   return (
@@ -121,6 +130,13 @@ export default function Datas() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             ></input>
+            {/* {Array.isArray(suggestions) && suggestions.length > 0 && (
+        <ul>
+          {suggestions.map((suggestion) => (
+            <li key={suggestion}>{suggestion.City}</li>
+          ))}
+        </ul>
+      )} */}
           </div>
 
           {isAuthenticated && (
@@ -183,7 +199,6 @@ export default function Datas() {
                       <h1 className="name" key={abd.HospitalName}>
                         {abd.HospitalName}
                       </h1>
-                      {/* <h2 className="location">{abd.City}</h2> */}
                       <div className="Doc-link">
                         <Link
                           to={`/Doc/${abd._id}`}

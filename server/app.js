@@ -20,7 +20,6 @@ const appModal = require("./appModal");
 const UserSchema = require("./UserSchema");
 
 
-
 console.log("mongobd : ",process.env.PORT)
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -38,15 +37,27 @@ mongoose
   });
 
 
-app.get("/user", async (err, data) => {
-  try{
-    const list = await List.find();
-    data.status(200).send(list);
-  }catch(err){
-    console.log(err)
-  }
+// app.get("/user", async (err, data) => {
+//   try{
+//     const list = await List.find();
+//     data.status(200).send(list);
+//   }catch(err){
+//     console.log(err)
+//   }
   
+// });
+
+app.get("/user", async (req, res) => {
+  try {
+    const list = await List.find().select("-password"); 
+    // console.log(list.map(({ password, ...rest }) => rest)); 
+    res.status(200).send(list);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
+
 
 app.get("/userdata", async (err, data) => {
   const list = await List.find();
@@ -73,7 +84,7 @@ app.get("/hosList", async (req, res) => {
 
 app.get("/hospital/:id", async (req, res) => {
   const { id } = req.params;
-  const list = await List.findById(id).select("HospitalName");
+  const list = await List.findById(id).select("HospitalName City");
   res.status(200).json(list);
 });
 
@@ -258,6 +269,8 @@ app.post('/register', async(req,res)=>{
     Specialty,
     City,
     QRimg,
+    Gender,
+    Awards,
   } = req.body;
   if (!email || !password)
     return res.status(400).json({ msg: "Password and email are required" });
@@ -284,6 +297,8 @@ app.post('/register', async(req,res)=>{
        Specialty,
        QRimg,
        City,
+       Gender,
+       Awards,
        Count:0})
        
          const duser = await model.save();

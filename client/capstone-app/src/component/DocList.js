@@ -140,11 +140,11 @@ export default function Doclist() {
                         onChange={(Event) => setTiming(Event.target.value)}
                       >
                         <option value="Afternoon">Afternoon</option>
-                        <option>1| 1.30Pm to 2.00Pm </option>
-                        <option>2| 2.00Pm to 2.30Pm </option>
-                        <option>3| 2.30Pm to 3.00Pm </option>
-                        <option>4| 3.00Pm to 3.30Pm </option>
-                        <option>5| 3.30Pm to 4.00Pm </option>
+                        <option>6| 1.30Pm to 2.00Pm </option>
+                        <option>7| 2.00Pm to 2.30Pm </option>
+                        <option>8| 2.30Pm to 3.00Pm </option>
+                        <option>9| 3.00Pm to 3.30Pm </option>
+                        <option>10| 3.30Pm to 4.00Pm </option>
                       </select>
                     </div>
                   </div>
@@ -187,3 +187,5 @@ export default function Doclist() {
     </div>
   );
 }
+
+
