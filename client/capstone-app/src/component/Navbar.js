@@ -5,7 +5,6 @@ import "./Header.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../Assets/logo-3.png";
 // import Hamburger from "../Assets/menu.png";
-
 // import { Motion, spring, presets } from "react-motion";
 
 export default function Header() {
@@ -16,13 +15,13 @@ export default function Header() {
 
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   const [close, setclose] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
 
   
   // const toggleMenu = () => {
   //   setShowMenu(!showMenu);
   // };
-console.log(setShowMenu)
+// console.log(setShowMenu)
 
 
   const openModel = () => {
@@ -58,7 +57,7 @@ console.log(setShowMenu)
         </div> */}
           {/* { */}
             {/* // showMenu && ( */}
-              <div className={`Sub-btn ${showMenu && 'active'}`}>
+              <div className={`Sub-btn `}>
               <div>
               <Link to="/" className="home">
                 Home
@@ -71,7 +70,7 @@ console.log(setShowMenu)
               </div>
               <div>
               <Link to="/" className="About-btn">
-                About US
+                About 
               </Link>
               </div>
               </div>

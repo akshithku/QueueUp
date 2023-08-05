@@ -42,9 +42,15 @@ const UserSchema= mongoose.Schema({
     Count:{
         type:Number, 
         // required:true
+    },
+    Gender:{
+        type:String,
+    },
+    Awards:{
+        type:String,
     }
 });
 
 const User=mongoose.model("User",UserSchema);
-
+ 
 module.exports=User;

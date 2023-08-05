@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import "./DocForm.css";
+// import { events } from "../../../../server/UserSchema";
 export default function DocRegi() {
   const [name, setName] = useState("");
   const [Img, setImg] = useState("");
@@ -15,6 +16,8 @@ export default function DocRegi() {
   const [DocQr,setDocQr]=useState("");
   const [QrDocImg,setQrDocImg]=useState([]);
   const [location,setlocation]=useState("")
+  const [Gender,setGender]=useState("");
+  const [awards,setAwards]=useState("")
 
 
   const handleNameChange = (event) => {
@@ -54,6 +57,13 @@ export default function DocRegi() {
     setDocQr([...event.target.files]);
     console.log(DocQr, "Doc Image");
   };
+
+  const handleGenderside=(event)=>{
+    setGender(event.target.value)
+  }
+  const handleAwardschange=(events)=>{
+    setAwards(events.target.value)
+  }
 
   useEffect(() => {
     if (DocQr.length < 1) return;
@@ -240,6 +250,22 @@ export default function DocRegi() {
             onChange={handlelocationChange}
           />
         </label>
+            <label>
+              Gender:
+            <select value={Gender} onChange={handleGenderside}>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            </label>
+            <label>
+              Awards:
+              <input
+              type="text"
+              required="required"
+              value={awards}
+              onChange={handleAwardschange}
+              />
+            </label>
         <label>
           Doctor's QRcode:
           <input
