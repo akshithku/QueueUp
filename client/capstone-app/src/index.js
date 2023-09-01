@@ -5,8 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom"
 import { Auth0Provider } from "@auth0/auth0-react";
+// import Modal from "react-modal";
+
 // import { ChakraProvider } from '@chakra-ui/react';
 
+
+// Modal.setAppElement("#root");
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,7 +26,8 @@ root.render(
   >
     <App />
   </Auth0Provider>
-    </BrowserRouter>
+    </BrowserRouter>,
+    //  document.getElementById("root")
       // </ChakraProvider>
     
   // </React.StrictMode>

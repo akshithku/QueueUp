@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import "./body.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import Modal from "react-modal";
@@ -11,17 +11,21 @@ import { motion } from "framer-motion";
 // import { Transition } from "react-transition-group";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
-
 export default function Datas() {
   // const [Info,setInfo]=useState([])
-  const { id } = useParams();
+  let user1
+  const { user,isAuthenticated } =  useAuth0();
+  // const { id } = useParams();
   const [HospitalName, setHospitalName] = useState([]);
-  const { isAuthenticated, user } = useAuth0();
-  console.log(user);
+  if(user){
+user1=user
+  }
+  console.log("user",user1);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [docBooked, setdocBooked] = useState([]);
+  
   // const [suggestions, setSuggestions] = useState([]);
 
   // const [selectedCity, setSelectedCity] = useState("");
@@ -33,21 +37,59 @@ export default function Datas() {
 
   // const [GetData,setGetData]=useState([]);
 
-  useEffect(() => {
-    console.log(docBooked,"BookedSlots");
-  }, [docBooked]);
+  // useEffect(() => {
+  //   console.log(docBooked,"BookedSlots");
+  // }, [docBooked]);
 
-  useEffect(()=>{
-    fetch(`${process.env.REACT_APP_URL}/docBookSlots`)
-    .then((response) => response.json())
-    .then((res) => {
-      console.log(id)
-      setdocBooked(res)
-    })
-    .catch((error) => {
-      console.log(error," failed to fetch");
-    })
-  },[id])
+  // useEffect(()=>{
+  //   fetch(`${process.env.REACT_APP_URL}/docBookSlots`)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     const userBookedSlots = data.filter((slot) => slot.UserEmail === user.email);
+  //     userBookedSlots.sort((a, b) => {
+  //       const doctorNameComparison = a.DoctorName.localeCompare(b.DoctorName);
+  //       if (doctorNameComparison !== 0) {
+  //         return doctorNameComparison;
+  //       }
+  //       const timingsComparison = a.timings.localeCompare(b.timings);
+  //       if (timingsComparison !== 0) {
+  //         return timingsComparison;
+  //       }
+  //       return a.Name.localeCompare(b.Name);
+  //     });
+  //     setdocBooked(userBookedSlots);
+  //     console.log("kjhgf ",userBookedSlots)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error," failed to fetch");
+  //   })
+  
+  // },[id])
+    // ... (other code)
+
+    const handleClickNotify = () => {
+      fetch(`${process.env.REACT_APP_URL}/docBookSlots`)
+        .then((response) => response.json())
+        .then((data) => {
+          const userBookedSlots = data.filter((slot) => slot.UserEmail === user.email);
+          userBookedSlots.sort((a, b) => {
+            const doctorNameComparison = a.DoctorName.localeCompare(b.DoctorName);
+            if (doctorNameComparison !== 0) {
+              return doctorNameComparison;
+            }
+            const timingsComparison = a.timings.localeCompare(b.timings);
+            if (timingsComparison !== 0) {
+              return timingsComparison;
+            }
+            return a.Name.localeCompare(b.Name);
+          });
+          setdocBooked(userBookedSlots);
+          console.log("Updated docBooked:", userBookedSlots);
+        })
+        .catch((error) => {
+          console.log(error, " failed to fetch");
+        });
+    };
 
   useEffect(() => {
     console.log(HospitalName);
@@ -78,6 +120,11 @@ export default function Datas() {
   // };
 
   // console.log( "cities",handleFilter)
+
+  const handleNotificationsClick = () => {
+    setModalIsOpen(true);
+    handleClickNotify();
+  };
   
 
   const arrayUniqueHospitals = [
@@ -138,19 +185,20 @@ export default function Datas() {
         </ul>
       )} */}
           </div>
-
           {isAuthenticated && (
             <div className="user-data">
               <h1 className="name_head">Hello {user?.name} !</h1>
               <div className="icon-div">
-              <NotificationsActiveIcon className="icon"  width='50' active={true} animate={true} onClick={() => setModalIsOpen(true)} />
+              <NotificationsActiveIcon className="icon"  width='50' active={true} animate={true} onClick={()=>handleNotificationsClick()} />
               </div>
               <Modal
               className="popup-1"
               isOpen={modalIsOpen}
               onRequestClose={() => setModalIsOpen(false)}
               >
-                {
+                {docBooked.length === 0 ? (
+  <h1 className="header-2">No booked slots found</h1>
+) : (
                   <table className="table">
                   <thead>
                     <tr>
@@ -165,7 +213,8 @@ export default function Datas() {
                 </thead>
                 <tbody>
                 {
-                  docBooked.filter((booking) => booking.UserEmail === user.email)
+                  docBooked
+                  .filter((booking) => booking.UserEmail === user.email)
                   .map((slot)=>(
                     <tr>
                       <td className="comtent-1">{slot.Name}</td>
@@ -180,7 +229,7 @@ export default function Datas() {
                 }
                 </tbody>
                 </table>
-                }
+                )}
               </Modal>
             </div>
           )}
