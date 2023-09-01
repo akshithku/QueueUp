@@ -138,7 +138,7 @@ console.log(Dataone,"countdata")
                   }}
                   className="doc-btn2"
                 >
-                  -
+                   -
                 </button>
               </div>
               {console.log(counts)}

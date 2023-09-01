@@ -163,14 +163,14 @@ app.post('/slot',(req,res)=>{
   modal.Amount=Amount,
   modal.ReferenceCode=ReferenceCode,
   modal.Doc_id=Doc_id,
-  modal.UserEmail=UserEmail,
-        
+  modal.UserEmail=UserEmail
 
-  
+
   modal.save(async (err, data) => {
     if (err) {
       console.log(err);
     } else {
+      
       res.status(200).send(data);
     }
   });
@@ -279,6 +279,7 @@ app.post('/register', async(req,res)=>{
       .status(400)
       .json({ msg: "Password should be at least 8 characters long" });
   }
+  const newpassword= await bcrypt.hash(password,10);
   console.log(req.body);
   try{
     const user = await UserSchema.findOne({ email:email });
@@ -293,7 +294,7 @@ app.post('/register', async(req,res)=>{
         HospitalName,
         HospitalsImg,
         email,
-        password,
+        password:newpassword,
        Specialty,
        QRimg,
        City,
@@ -315,8 +316,6 @@ app.post('/register', async(req,res)=>{
   catch (err){
 console.log(err);
   }
-
-
 
 })
 
