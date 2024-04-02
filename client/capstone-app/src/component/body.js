@@ -121,9 +121,9 @@ user1=user
 
   // console.log( "cities",handleFilter)
 
-  const handleNotificationsClick = () => {
+  const handleNotificationsClick = async() => {
+    await handleClickNotify();
     setModalIsOpen(true);
-    handleClickNotify();
   };
   
 

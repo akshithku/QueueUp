@@ -96,17 +96,20 @@ export default function Doclist() {
         {data
           .filter((e) => e.HospitalName === forHos.HospitalName)
           .map((abc) => {
+            const isSlotBooked = abc.isBooked;
             console.log(abc);
 
             return (
-              <div className="Docapp">
+              <div 
+              className={`Docapp ${isSlotBooked ? "booked" : ""}`}
+              key={abc._id}>
                 <div className="Doc-token">
                   <h6 className="token">#Token Num:</h6>
                   {/* <p className="Token-Num">{localStorage.getItem("Num")}</p> */}
                   <p  className="Token-Num">{abc.Count}</p>
                 </div>
                 <div className="SubContainer">
-                  <div className="img-div">
+                  <div className="img-div">p
                     <img className="Doc-img" src={abc.Docimg} alt="" />
                   </div>
                   <div className="div-list">
