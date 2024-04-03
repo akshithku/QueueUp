@@ -19,6 +19,7 @@ const List = require("../server/UserSchema");
 const appModal = require("./appModal");
 const UserSchema = require("./UserSchema");
 
+const Timeslot = require('./timeslot'); 
 
 console.log("mongobd : ",process.env.PORT)
 mongoose
@@ -381,12 +382,30 @@ app.post(`/login`, async (req, res) => {
 
 
 
-fs.writeFileSync("bio.txt","Created  Fs modules !")
+app.post('/book-slot/:doctorId', async (req, res) => {
+  const { doctorId } = req.params;
+  const { TimeValue, userId } = req.body;
 
-fs.appendFileSync("bio.txt"," Used successfully !!")
+  try {
+    let doctorBooking = await Timeslot.findOne({ doctorId });
+    if (!doctorBooking) {
+      doctorBooking = new Timeslot({ doctorId, bookedSlots: [] });
+    }
+    doctorBooking.bookedSlots.push({ TimeValue, userId });
+    await doctorBooking.save();
+    res.json({ message: 'Slot booked successfully' });
+  } catch (error) {
+    console.error('Error booking slot: ', error);
+    res.status(500).json({ error: 'Failed to book slot' });
+  }
+});
 
-const fsdata=fs.readFileSync("bio.txt","utf-8");
-console.log(fsdata)
+// fs.writeFileSync("bio.txt","Created  Fs modules !")
+
+// fs.appendFileSync("bio.txt"," Used successfully !!")
+
+// const fsdata=fs.readFileSync("bio.txt","utf-8");
+// console.log(fsdata)
 
 
 
