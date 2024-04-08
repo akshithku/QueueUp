@@ -17,23 +17,10 @@ function Slots() {
   useEffect(() => {
     const datas = async () => {
       const res = await axois.get(`${process.env.REACT_APP_URL}/docSlot/${id}`);
-      // console.log("res", res.data);
       setdata(res.data);
     };
     datas();
   }, [id]);
-
-  // useEffect(()=>{
-  //       fetch(`http://localhost:2917/DocSlot/${id}`)
-  //       .then((response) => response.json())
-  //       .then(res => {
-  //         console.log('res',res)
-  //         setdata(res.data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error," failed to fetch");
-  //       })
-  //   },[id])
 
   useEffect(() => {
     console.log("slots", bookedSlots);
@@ -47,40 +34,33 @@ function Slots() {
     BookedSlots();
   }, [id]);
 
-  //   useEffect(()=>{
-  //     fetch(`http://localhost:2917/bookedSlots/${id}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setBookedSlots(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error," failed to fetch");
-  //     })
-  // },[id])
-
-  
-// const handleClick=()=>{
-//   setpahotoVisible(!photoVisibel)
-// }
 
 
   return (
     <div className="main_container">
       <div className="sub_container">
+        <div className="slot-sub1">
         <img className="img_1" src={data.Docimg} alt="" />
         <div className="Doc_name">
           <div className="Doc_1">
-            <label>
+            <label className="Slot-label">
               DoctorName:
               <h2 className="Doc_name1">{data.DoctorName}</h2>
             </label>
           </div>
           <div className="Doc_2">
-            <label>
+            <label className="Slot-label">
               Specialty:
               <h3>{data.Specialty}</h3>
             </label>
           </div>
+        </div>
+        </div>
+        <div>
+          <label className="Slot-label">
+            Timings
+            <input placeholder="Timings"/>
+          </label>
         </div>
       </div>
       <div>
@@ -99,11 +79,6 @@ function Slots() {
             <tr>
               <td>{slot.Name}</td>
               <td>{slot.timings}</td>
-              {/* <td>
-                <img className="img-2" onClick={handleClick} src={slot.image} alt=""/>
-                <button className="btn-3" onClick={handleClick}> VIEW </button>
-                {photoVisibel? <img className="img-2" src={slot.image} alt=""/>: ""}
-              </td> */}
               <td>{slot.ReferenceCode}</td>
             </tr>
           ))

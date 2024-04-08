@@ -383,15 +383,13 @@ app.post(`/login`, async (req, res) => {
 
 
 app.post('/book-slot/:doctorId', async (req, res) => {
-  const { doctorId } = req.params;
-  const { TimeValue, userId } = req.body;
-
+  const {TimeValue,doctorId} = req.body;
   try {
     let doctorBooking = await Timeslot.findOne({ doctorId });
     if (!doctorBooking) {
       doctorBooking = new Timeslot({ doctorId, bookedSlots: [] });
     }
-    doctorBooking.bookedSlots.push({ TimeValue, userId });
+    doctorBooking.bookedSlots.push({ TimeValue});
     await doctorBooking.save();
     res.json({ message: 'Slot booked successfully' });
   } catch (error) {
