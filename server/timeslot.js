@@ -9,12 +9,19 @@ const doctorBookingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: Doc_Schema,
   },
-  TimeValue: {
-    timing: String,
+  slots: [{
+    TimeValue: {
+      type: String,
+    },
+  }],
+  booked: {
+    type: Boolean,
+    default: false, 
   },
-  userId: {
+  bookedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User_schema,
+    default: null, 
   },
 });
 

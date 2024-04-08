@@ -381,22 +381,47 @@ app.post(`/login`, async (req, res) => {
 });
 
 
-
-app.post('/book-slot/:doctorId', async (req, res) => {
-  const {TimeValue,doctorId} = req.body;
+app.post('/create-slot', async (req, res) => {
   try {
+    const { doctorId, slots } = req.body;
+
     let doctorBooking = await Timeslot.findOne({ doctorId });
     if (!doctorBooking) {
-      doctorBooking = new Timeslot({ doctorId, bookedSlots: [] });
+      doctorBooking = new Timeslot({
+        doctorId: doctorId,
+        slots: slots
+      });
+    } else {
+      doctorBooking.slots = doctorBooking.slots.concat(slots);
     }
-    doctorBooking.bookedSlots.push({ TimeValue});
     await doctorBooking.save();
-    res.json({ message: 'Slot booked successfully' });
+    res.status(201).json({ message: 'Slots created successfully', slots: doctorBooking.slots });
   } catch (error) {
-    console.error('Error booking slot: ', error);
-    res.status(500).json({ error: 'Failed to book slot' });
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // fs.writeFileSync("bio.txt","Created  Fs modules !")
 

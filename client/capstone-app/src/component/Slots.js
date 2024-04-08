@@ -8,6 +8,7 @@ function Slots() {
   const [data, setdata] = useState([]);
   const [bookedSlots, setBookedSlots] = useState([]);
   // const [photoVisibel, setpahotoVisible] = useState(false);
+  const [timing, setTiming] = useState('');
 
 
   useEffect(() => {
@@ -34,7 +35,35 @@ function Slots() {
     BookedSlots();
   }, [id]);
 
-
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${process.env.REACT_APP_URL}/create-slot`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          doctorId: id,
+          slots: [{
+            TimeValue: timing
+          }]
+        })
+      });
+  
+      if (response.ok) {
+        const newSlot = { TimeValue: timing };
+        setdata([...data, newSlot]);
+        setTiming('');
+      } else {
+        console.error('Failed to create slot');
+      }
+    } catch (error) {
+      console.error('Error creating slot:', error);
+    }
+  };
+  
 
   return (
     <div className="main_container">
@@ -57,10 +86,13 @@ function Slots() {
         </div>
         </div>
         <div>
-          <label className="Slot-label">
-            Timings
-            <input placeholder="Timings"/>
-          </label>
+        <form onSubmit={handleSubmit}>
+            <label>
+              Timing:
+              <input type="text" value={timing} onChange={(e) => setTiming(e.target.value)} />
+            </label>
+            <button type="submit">Create Slot</button>
+          </form>
         </div>
       </div>
       <div>
