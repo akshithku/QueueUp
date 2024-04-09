@@ -7,13 +7,11 @@ function Slots() {
   const { id } = useParams();
   const [data, setdata] = useState([]);
   const [bookedSlots, setBookedSlots] = useState([]);
-  // const [photoVisibel, setpahotoVisible] = useState(false);
   const [timing, setTiming] = useState('');
+  const [docSlots, setDocSlots] = useState([]);
 
 
-  useEffect(() => {
-    console.log("dataaa", data);
-  }, [data]);
+
 
   useEffect(() => {
     const datas = async () => {
@@ -23,9 +21,8 @@ function Slots() {
     datas();
   }, [id]);
 
-  useEffect(() => {
-    console.log("slots", bookedSlots);
-  }, [bookedSlots]);
+  console.log("DocData: ", data);
+
 
   useEffect(() => {
     const BookedSlots = async () => {
@@ -35,6 +32,7 @@ function Slots() {
     BookedSlots();
   }, [id]);
 
+  console.log("Bookedslots: ", bookedSlots);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +61,17 @@ function Slots() {
       console.error('Error creating slot:', error);
     }
   };
-  
+
+
+  useEffect(() => {
+    const DocSlots = async () => {
+      const result = await axois.get(`${process.env.REACT_APP_URL}/doccreatedSlots/${id}`);
+      setDocSlots(result.data);
+    };
+    DocSlots();
+  }, [id]);
+
+  console.log("DoccreatedSlots: ", docSlots);
 
   return (
     <div className="main_container">
@@ -93,6 +101,10 @@ function Slots() {
             </label>
             <button type="submit">Create Slot</button>
           </form>
+          <div>
+            <h1>Booked Slots: </h1>
+            
+          </div>
         </div>
       </div>
       <div>
