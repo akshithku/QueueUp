@@ -13,11 +13,11 @@ const doctorBookingSchema = new mongoose.Schema({
     TimeValue: {
       type: String,
     },
+    booked: {
+      type: Boolean,
+      default: false, 
+    },
   }],
-  booked: {
-    type: Boolean,
-    default: false, 
-  },
   bookedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User_schema,

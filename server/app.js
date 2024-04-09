@@ -402,7 +402,15 @@ app.post('/create-slot', async (req, res) => {
   }
 });
 
-
+app.get("/doccreatedSlots/:doctorId", async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const doctorBookings = await Timeslot.find({ doctorId }).select("slots booked");
+    res.status(200).json(doctorBookings);
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred", error });
+  }
+});
 
 
 
