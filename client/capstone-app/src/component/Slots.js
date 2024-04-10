@@ -103,7 +103,18 @@ function Slots() {
           </form>
           <div>
             <h1>Booked Slots: </h1>
-            
+            <ul>
+              {docSlots.map((slot) => (
+                <div>
+                  {slot.slots.map((s) => (
+                    <div>
+                      <p>Time: {s.TimeValue}</p>
+                      {/* <p>Booked: {s.booked ? 'Yes' : 'No'}</p> */}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
