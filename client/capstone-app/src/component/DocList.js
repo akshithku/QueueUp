@@ -109,7 +109,7 @@ export default function Doclist() {
                   <p  className="Token-Num">{abc.Count}</p>
                 </div>
                 <div className="SubContainer">
-                  <div className="img-div">p
+                  <div className="img-div">
                     <img className="Doc-img" src={abc.Docimg} alt="" />
                   </div>
                   <div className="div-list">
