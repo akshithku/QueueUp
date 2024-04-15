@@ -119,7 +119,7 @@ export default function Doclist() {
                   </div>
                 </div>
                 <div className="SubContainer-1">
-                  <div className="doc-lit">
+                  {/* <div className="doc-lit">
                     <div className="slot-1">
                       <select
                         className="select-1"
@@ -150,7 +150,7 @@ export default function Doclist() {
                         <option>10| 3.30Pm to 4.00Pm </option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                   {/* {`/pay/${abc._id}`} */}
                   {user ? (
                     <Link
