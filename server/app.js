@@ -413,6 +413,27 @@ app.get("/doccreatedSlots/:doctorId", async (req, res) => {
 });
 
 
+app.put("/book-slot/:slotId", async (req, res) => {
+  try {
+    const { slotId } = req.params;
+    const { booked } = req.body;
+    const slot = await Timeslot.findOneAndUpdate(
+      { "slots._id": slotId },
+      { $set: { "slots.$.booked": booked } },
+      { new: true }
+    );
+    if (!slot) {
+      return res.status(404).json({ message: "Slot not found" });
+    }
+
+    res.status(200).json({ message: "Slot booking status updated successfully" });
+  } catch (error) {
+    console.error("Error updating slot booking status:", error);
+    res.status(500).json({ message: "An error occurred while updating slot booking status" });
+  }
+});
+
+
 
 
 

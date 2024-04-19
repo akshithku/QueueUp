@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
@@ -7,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { loadGapiInsideDOM } from "gapi-script";
-import axois from "axios";
+import axios from "axios";
 
 const PaymentPage = () => {
   const { id } = useParams();
@@ -20,11 +21,12 @@ const PaymentPage = () => {
   const [ReferenceCode, setReferenceCode] = useState();
   const [Docqr, setDocqr] = useState("");
   const [docSlots, setDocSlots] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState("");
 
   // const [isModalOpen, setModalOpen] = useState(false);
 
   const DocId = localStorage.getItem("doctorId");
-  console.log(DocId);
+  // console.log(DocId);
   const [ISAuthenticated, setIsAuthenticated] = useState(false);
   // const [UserEmail,setUserEmail]=useState([]);
   const { user, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
@@ -35,7 +37,7 @@ const PaymentPage = () => {
   const calendarID = process.env.REACT_APP_CALENDAR_ID;
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  console.log({ apiKey, calendarID });
+  // console.log({ apiKey, calendarID });
   const DISCOVERY_DOC =
     "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
   const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
@@ -57,13 +59,13 @@ const PaymentPage = () => {
   };
 
   useEffect(() => {
-    console.log("DOC-QR", Docqr);
+    // console.log("DOC-QR", Docqr);
   }, [Docqr]);
   useEffect(() => {
     fetch(process.env.REACT_APP_URL + `/docQr/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setDocqr(data);
         // setDoccount(data.Count)
       })
@@ -75,7 +77,7 @@ const PaymentPage = () => {
 
   useEffect(() => {
     const DocSlots = async () => {
-      const result = await axois.get(
+      const result = await axios.get(
         `${process.env.REACT_APP_URL}/doccreatedSlots/${id}`
       );
       setDocSlots(result.data);
@@ -85,13 +87,9 @@ const PaymentPage = () => {
 
   console.log("DoccreatedSlots: ", docSlots);
 
-  const handletimeChange = (event) => {
-    setDocSlots(event.target.value);
-  };
-
-  // useEffect(() => {
-  //   setTiming(localStorage.getItem("time"));
-  // }, []);
+  // const handletimeChange = (event) => {
+  //   setDocSlots(event.target.value);
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -103,7 +101,7 @@ const PaymentPage = () => {
       body: JSON.stringify({
         Name: Name,
         DoctorName: DoctorName,
-        timings: docSlots,
+        timings: selectedSlot,
         Amount: Amount,
         ReferenceCode: ReferenceCode,
         Doc_id: DocId,
@@ -114,17 +112,37 @@ const PaymentPage = () => {
     if (jsondata) {
       setIsAuthenticated(true);
       alert("Payment Done");
+       // Find the slot ID corresponding to the selected time value
+       const selectedSlotId = docSlots.reduce((foundId, slotGroup) => {
+        const slot = slotGroup.slots.find((slot) => slot.TimeValue === selectedSlot);
+        return slot ? slot._id : foundId;
+      }, null);
+
+      // Make PUT request to update the slot status
+      if (selectedSlotId) {
+        const updateResponse = await axios.put(`${process.env.REACT_APP_URL}/book-slot/${selectedSlotId}`, {
+          booked: true,
+        });
+        console.log(updateResponse.data.message);
+      }
+
+      // Update the docSlots state to remove the booked slot
+      const updatedSlots = docSlots.map((slotGroup) => ({
+        ...slotGroup,
+        slots: slotGroup.slots.filter((slot) => slot.TimeValue !== selectedSlot),
+      }));
+      setDocSlots(updatedSlots);
     } else {
       setIsAuthenticated(false);
       alert("Payment pending");
     }
 
     const accessToken = await getAccessTokenSilently();
-    console.log("Access Token:", accessToken);
+    // console.log("Access Token:", accessToken);
 
     const idTokenClaims = await getIdTokenClaims();
     const refreshToken = idTokenClaims.__raw;
-    console.log("Refresh Token:", refreshToken);
+    // console.log("Refresh Token:", refreshToken);
 
     const gapi = await loadGapiInsideDOM();
 
@@ -228,35 +246,28 @@ const PaymentPage = () => {
               />
             </label>
             <br />
-            {/* <label>
-              Timings:
-              <select>
-                {docSlots.map((slot) => (
-                      <option>Slots</option>
-                    {slot.slots.map((s) => (
-                      <option  value={docSlots} onChange={handletimeChange}  >
-                        Time: {s.TimeValue}{" "}
-                      </option>
-                    ))}
-                ))}
-              </select>
-            </label> */}
             <label>
               Timings:
               <select
-                value={timing}
-                onChange={(e) => setTiming(e.target.value)}
+                value={selectedSlot}
+                onChange={(e) => setSelectedSlot(e.target.value)}
               >
-                <option>Select a slot</option>
-                {docSlots.map((slotGroup, index) => (
-                  <optgroup label={`Slot Group ${index + 1}`} key={index}>
-                    {slotGroup.slots.map((slot, slotIndex) => (
-                      <option value={slot.TimeValue} key={slotIndex}>
-                        {slot.TimeValue}
-                      </option>
+                {docSlots.length === 0 ? (
+                  <option>No slots available</option>
+                ) : (
+                  <>
+                    <option>Select a slot</option>
+                    {docSlots.map((slotGroup) => (
+                      <optgroup key={slotGroup._id}>
+                        {slotGroup.slots.map((slot) => (
+                          <option value={slot.TimeValue}>
+                            {slot.TimeValue}
+                          </option>
+                        ))}
+                      </optgroup>
                     ))}
-                  </optgroup>
-                ))}
+                  </>
+                )}
               </select>
             </label>
 
