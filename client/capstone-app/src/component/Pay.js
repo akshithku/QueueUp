@@ -2,45 +2,30 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
-// import { json } from "react-router-dom";
 import "./pay.css";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { loadGapiInsideDOM } from "gapi-script";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const PaymentPage = () => {
   const { id } = useParams();
   const [Name, setName] = useState("");
   const [DoctorName, setDoctorName] = useState(localStorage.getItem("name"));
-  // const [timing, setTiming] = useState("");
   const [Amount, setAmount] = useState(500);
-  // const [Image,setImage]=useState("");
-  // const [ImageUrl,setImageUrl]=useState([]);
   const [ReferenceCode, setReferenceCode] = useState();
   const [Docqr, setDocqr] = useState("");
   const [docSlots, setDocSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState("");
 
-  // const [isModalOpen, setModalOpen] = useState(false);
-
   const DocId = localStorage.getItem("doctorId");
   // console.log(DocId);
   const [ISAuthenticated, setIsAuthenticated] = useState(false);
-  // const [UserEmail,setUserEmail]=useState([]);
   const { user, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
+  const navigate = useNavigate();
 
-  // if (user) console.log(user)
-
-  // const gapi=window.gapi;
-  const calendarID = process.env.REACT_APP_CALENDAR_ID;
-  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
-
-  // console.log({ apiKey, calendarID });
-  const DISCOVERY_DOC =
-    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
-  const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+ 
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -58,22 +43,19 @@ const PaymentPage = () => {
     setReferenceCode(event.target.value);
   };
 
-  useEffect(() => {
-    // console.log("DOC-QR", Docqr);
-  }, [Docqr]);
-  useEffect(() => {
-    fetch(process.env.REACT_APP_URL + `/docQr/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        setDocqr(data);
-        // setDoccount(data.Count)
-      })
-      .catch((error) => {
-        console.log(error, " failed to fetch");
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   fetch(process.env.REACT_APP_URL + `/docQr/${id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // console.log(data);
+  //       setDocqr(data);
+  //       // setDoccount(data.Count)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error, " failed to fetch");
+  //     });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [Docqr]);
 
   useEffect(() => {
     const DocSlots = async () => {
@@ -85,130 +67,176 @@ const PaymentPage = () => {
     DocSlots();
   }, [id]);
 
-  console.log("DoccreatedSlots: ", docSlots);
+  // console.log("DoccreatedSlots: ", docSlots);
 
-  // const handletimeChange = (event) => {
-  //   setDocSlots(event.target.value);
+  
+//First Code:
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const submit = await fetch(`${process.env.REACT_APP_URL}/slot`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json; charset=UTF-8",
+  //     },
+  //     body: JSON.stringify({
+  //       Name: Name,
+  //       DoctorName: DoctorName,
+  //       timings: selectedSlot,
+  //       Amount: Amount,
+  //       ReferenceCode: ReferenceCode,
+  //       Doc_id: DocId,
+  //       UserEmail: user.email,
+  //     }),
+  //   });
+  //   const jsondata = await submit.json();
+  //   if (jsondata) {
+  //     setIsAuthenticated(true);
+  //     alert("Payment Done");
+  //      // Find the slot ID corresponding to the selected time value
+  //      const selectedSlotId = docSlots.reduce((foundId, slotGroup) => {
+  //       const slot = slotGroup.slots.find((slot) => slot.TimeValue === selectedSlot);
+  //       return slot ? slot._id : foundId;
+  //     }, null);
+
+  //     // Make PUT request to update the slot status
+  //     if (selectedSlotId) {
+  //       const updateResponse = await axios.put(`${process.env.REACT_APP_URL}/book-slot/${selectedSlotId}`, {
+  //         booked: true,
+  //       });
+  //       console.log(updateResponse.data.message);
+  //     }
+
+  //     // Update the docSlots state to remove the booked slot
+  //     const updatedSlots = docSlots.map((slotGroup) => ({
+  //       ...slotGroup,
+  //       slots: slotGroup.slots.filter((slot) => slot.TimeValue !== selectedSlot),
+  //     }));
+  //     setDocSlots(updatedSlots);
+  //   } else {
+  //     setIsAuthenticated(false);
+  //     alert("Payment pending");
+  //   }
+
+  //   const accessToken = await getAccessTokenSilently();
+  //   // console.log("Access Token:", accessToken);
+
+  //   const idTokenClaims = await getIdTokenClaims();
+  //   const refreshToken = idTokenClaims.__raw;
+  //   // console.log("Refresh Token:", refreshToken);
+    
   // };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const submit = await fetch(`${process.env.REACT_APP_URL}/slot`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-      body: JSON.stringify({
-        Name: Name,
-        DoctorName: DoctorName,
+
+//Second Code:
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  
+  //   try {
+  //     // Step 1: Request order ID from the backend
+  //     const response = await axios.post(`${process.env.REACT_APP_URL}/slot`, {
+  //       DoctorName,
+  //       Name,
+  //       timings: selectedSlot,
+  //       Doc_id: DocId,
+  //       UserEmail: user.email,
+  //     });
+  
+  //     const { orderId, key } = response.data;
+  
+  //     // Step 2: Open Razorpay Checkout
+  //     const options = {
+  //       key,
+  //       amount: 500 * 100, // Amount in paisa
+  //       currency: "INR",
+  //       name: "QueueUp",
+  //       description: "Doctor Appointment Payment",
+  //       order_id: orderId,
+  //       handler: async function (paymentResponse) {
+  //         // Step 3: Send payment confirmation to backend
+  //         await axios.post(`${process.env.REACT_APP_URL}/verify-payment`, {
+  //           orderId: paymentResponse.razorpay_order_id,
+  //           paymentId: paymentResponse.razorpay_payment_id,
+  //         });
+  
+  //         alert("Payment Successful & Slot Confirmed!");
+  //       },
+  //       prefill: {
+  //         name: Name,
+  //         email: user.email,
+  //       },
+  //       theme: {
+  //         color: "#3399cc",
+  //       },
+  //     };
+  
+  //     const razorpay = new window.Razorpay(options);
+  //     razorpay.open();
+  //   } catch (error) {
+  //     console.error("Error processing payment:", error);
+  //     alert("Payment failed, please try again.");
+  //   }
+  // };
+
+//Third Code:
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try { 
+    // ✅ Step 1: Load Razorpay script dynamically
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = async () => {
+      // ✅ Step 2: Request order ID from the backend
+      const response = await axios.post(`${process.env.REACT_APP_URL}/slot`, {
+        DoctorName,
+        Name,
         timings: selectedSlot,
-        Amount: Amount,
-        ReferenceCode: ReferenceCode,
         Doc_id: DocId,
         UserEmail: user.email,
-      }),
-    });
-    const jsondata = await submit.json();
-    if (jsondata) {
-      setIsAuthenticated(true);
-      alert("Payment Done");
-       // Find the slot ID corresponding to the selected time value
-       const selectedSlotId = docSlots.reduce((foundId, slotGroup) => {
-        const slot = slotGroup.slots.find((slot) => slot.TimeValue === selectedSlot);
-        return slot ? slot._id : foundId;
-      }, null);
+      });
 
-      // Make PUT request to update the slot status
-      if (selectedSlotId) {
-        const updateResponse = await axios.put(`${process.env.REACT_APP_URL}/book-slot/${selectedSlotId}`, {
-          booked: true,
-        });
-        console.log(updateResponse.data.message);
-      }
+      const { orderId, key } = response.data;
 
-      // Update the docSlots state to remove the booked slot
-      const updatedSlots = docSlots.map((slotGroup) => ({
-        ...slotGroup,
-        slots: slotGroup.slots.filter((slot) => slot.TimeValue !== selectedSlot),
-      }));
-      setDocSlots(updatedSlots);
-    } else {
-      setIsAuthenticated(false);
-      alert("Payment pending");
-    }
-
-    const accessToken = await getAccessTokenSilently();
-    // console.log("Access Token:", accessToken);
-
-    const idTokenClaims = await getIdTokenClaims();
-    const refreshToken = idTokenClaims.__raw;
-    // console.log("Refresh Token:", refreshToken);
-
-    const gapi = await loadGapiInsideDOM();
-
-    gapi.Load("client:auth2", () => {
-      console.log("loaded Client");
-
-      gapi.client
-        .init({
-          apiKey: apiKey,
-          clientId: calendarID,
-          discoveryDocs: [DISCOVERY_DOC],
-          scope: SCOPES,
-        })
-        .then(() => {
-          console.log("Client initialized");
-          return gapi.client.load("calendar", "v3");
-        })
-        .then(() => {
-          console.log("Calendar API loaded");
-          return gapi.auth2.getAuthInstance().signIn();
-        })
-        .then(() => {
-          console.log("User signed in");
-
-          var event = {
-            summary: "Appointment booked",
-            location: "New Location",
-            description:
-              "A chance to hear more about Google's developer products.",
-            start: {
-              // 'dateTime': '2015-05-28T09:00:00-07:00',
-              timeZone: timing,
-            },
-            end: {
-              // 'dateTime': '2015-05-28T17:00:00-07:00',
-              timeZone: timing,
-            },
-            recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
-            attendees: [
-              { email: "website@example.com" },
-              { email: "doctor@example.com" },
-              { email: user.email },
-            ],
-            reminders: {
-              useDefault: false,
-              overrides: [
-                { method: "email", minutes: 24 * 60 },
-                { method: "popup", minutes: 10 },
-              ],
-            },
-          };
-
-          return gapi.client.calendar.events.insert({
-            calendarId: "primary",
-            resource: event,
+      // ✅ Step 3: Open Razorpay Checkout
+      const options = {
+        key,
+        amount: 500 * 100, // Amount in paisa
+        currency: "INR",
+        name: "QueueUp",
+        description: "Doctor Appointment Payment",
+        order_id: orderId,
+        handler: async function (paymentResponse) {
+          // ✅ Step 4: Verify payment after success
+          await axios.post(`${process.env.REACT_APP_URL}/verify-payment`, {
+            orderId: paymentResponse.razorpay_order_id,
+            paymentId: paymentResponse.razorpay_payment_id,
           });
-        })
-        .then((response) => {
-          console.log("Event created successfully");
-          window.open(response.result.htmlLink);
-        })
-        .catch((error) => {
-          console.error("Error occurred:", error);
-        });
-    });
-  };
+
+          alert("Payment Successful & Slot Confirmed!");
+          navigate("/");
+        },
+        prefill: {
+          name: Name,
+          email: user.email,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      // ✅ Step 5: Initialize Razorpay properly
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    };
+  } catch (error) {
+    console.error("Error processing payment:", error);
+    alert("Payment failed, please try again.");
+  }
+};
+
+  
 
   return (
     <div className="background">
@@ -271,7 +299,7 @@ const PaymentPage = () => {
               </select>
             </label>
 
-            <br />
+            {/* <br />
             <label>
               Charges:
               <input
@@ -283,15 +311,16 @@ const PaymentPage = () => {
                 onChange={handleAmountChange}
               ></input>
             </label>
-            <br />
-            <div className="QR-div">
+            <br /> */}
+
+            {/* <div className="QR-div">
               <label>
                 Scan QR:
                 <img className="Qr-img" src={Docqr.QRimg} alt="image" />
               </label>
-            </div>
+            </div> */}
             <br />
-            <label>
+            {/* <label>
               Reference Code:
               <input
                 className="input1"
@@ -300,7 +329,7 @@ const PaymentPage = () => {
                 value={ReferenceCode}
                 onChange={handleReferenceCodeChange}
               ></input>
-            </label>
+            </label> */}
             <br />
             <button className="pay-btn" onSubmit={handleSubmit}>
               Make Payment

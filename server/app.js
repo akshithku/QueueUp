@@ -2,6 +2,8 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
 const fs= require("fs")
 const jwt=require("jsonwebtoken")
 
@@ -11,6 +13,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 
 mongoose.set("strictQuery", false);
@@ -37,16 +41,7 @@ mongoose
     console.log(err);
   });
 
-
-// app.get("/user", async (err, data) => {
-//   try{
-//     const list = await List.find();
-//     data.status(200).send(list);
-//   }catch(err){
-//     console.log(err)
-//   }
   
-// });
 
 app.get("/user", async (req, res) => {
   try {
@@ -153,111 +148,147 @@ app.get("/doc-login", async(req,res)=>{
 })
 
 
-app.post('/slot',(req,res)=>{
-  const {DoctorName,Name,timings,Amount,ReferenceCode,Doc_id,UserEmail } = req.body;
+// app.post('/slot',(req,res)=>{
+//   const {DoctorName,Name,timings,Amount,ReferenceCode,Doc_id,UserEmail } = req.body;
 
-  const modal = new appModal()
+//   const modal = new appModal()
 
-  modal.DoctorName=DoctorName,
-  modal.Name = Name,
-  modal.timings=timings,
-  modal.Amount=Amount,
-  modal.ReferenceCode=ReferenceCode,
-  modal.Doc_id=Doc_id,
-  modal.UserEmail=UserEmail
+//   modal.DoctorName=DoctorName,
+//   modal.Name = Name,
+//   modal.timings=timings,
+//   modal.Amount=Amount,
+//   modal.ReferenceCode=ReferenceCode,
+//   modal.Doc_id=Doc_id,
+//   modal.UserEmail=UserEmail
 
 
-  modal.save(async (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
+//   modal.save(async (err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
       
-      res.status(200).send(data);
-    }
-  });
+//       res.status(200).send(data);
+//     }
+//   });
 
-})
+// })
 
-// app.post("/register", async (req, res) => {
-//   const {
-//     DoctorName,
-//     Docimg,
-//     HospitalName,
-//     HospitalsImg,
-//     email,
-//     password,
-//     Specialty,
-//     QRimg,
-//   } = req.body;
-//   if (!email || !password)
-//     return res.status(400).json({ msg: "Password and email are required" });
-//   if (password.length < 8) {
-//     return res
-//       .status(400)
-//       .json({ msg: "Password should be at least 8 characters long" });
+const razorpay = new Razorpay({
+  key_id: process.env.Razorpay_Key_ID,
+  key_secret: process.env.Razorpay_Key_Secret,
+});
+
+// console.log("razorpay",razorpay);
+
+// First code:
+// app.post("/slot", async (req, res) => {
+//   try {
+//     const { DoctorName, Name, timings, Doc_id, UserEmail } = req.body;
+
+//     // Step 1: Create Razorpay Order
+//     const options = {
+//       amount: 500 * 100, // Convert amount to paise
+//       currency: "INR",
+//       receipt: `order_${Date.now()}`,
+//     };
+
+//     const order = await razorpay.orders.create(options);
+
+//     // Step 2: Save slot booking with orderId
+//     const newSlot = new appModal({
+//       DoctorName,
+//       Name,
+//       timings,
+//       Doc_id,
+//       UserEmail,
+//       orderId: order.id, // Store Razorpay order ID
+//       paymentStatus: "Pending",
+//     });
+
+//     await newSlot.save();
+
+//     // Step 3: Send response with order details for Razorpay checkout
+//     res.status(200).json({
+//       message: "Slot booked, complete payment to confirm.",
+//       orderId: order.id,
+//       key: process.env.Razorpay_Key_ID, 
+//     });
+//   } catch (error) {
+//     console.error("Error booking slot:", error);
+//     res.status(500).json({ error: "Failed to book slot" });
 //   }
-//   console.log(req.body);
-
-//   const model = new UserSchema({
-//  DoctorName,
-//  Docimg,
-//  HospitalName,
-//  HospitalsImg,
-//  email,
-//  password,
-// Specialty,
-// QRimg,
-// Count})
-
-//   const duser = await model.save();
-
-//   if(duser){
-//     res.status(201).json({message: "sucess"})
-//   }
-//   else{
-//     res.status(501).json({message: "tryagain"})
-//   }
-  
-
-//   const user = await UserSchema.findOne({ email });
-//   if (user){ 
-//     console.log("user fund")
-//     return res.status(400).json({ msg: "User already exists" })
-// }
-
-//   const newUser = new UserSchema({ email, password });
-   
-//   bcrypt.hash(password, 8, async (err, hash) => {
-//     if (err)
-//    {
-//     console.log('bcrypt')
-//       return res.status(400).json({ msg: "error while saving the password" });
-//    }
-//       newUser.password = hash;
-    // const savedUserRes = await modal.save();
-    // console.log(savedUserRes)
-
-    // if (savedUserRes)
-
-
-    //   return res.status(200).json({ msg: "user is successfully saved" });
-
-  //  const token= jwt.sign(
-  //     {id:user._id,email},
-  //     'shhh',
-  //   )
-  // });
-
-  // modal.save(async (err, data) => {
-  //   if (err) {
-  //     console.log(err);
-      
-  //   } else {
-  //     return res.status(200).send(data).json({ msg: "user is successfully saved" });
-  //   }
-
-  // });
 // });
+
+// Updated code:
+app.post("/slot", async (req, res) => {
+  try {
+    console.log("Received request body:", req.body);
+
+    const { DoctorName, Name, timings, Doc_id, UserEmail } = req.body;
+
+    if (!DoctorName || !Name || !timings || !Doc_id || !UserEmail) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Step 1: Create Razorpay Order
+    const options = {
+      amount: 500 * 100, 
+      currency: "INR",
+      receipt: `order_${Date.now()}`,
+    };
+
+    const order = await razorpay.orders.create(options);
+
+    // Step 2: Save slot booking with orderId
+    const newSlot = new appModal({ // ✅ Ensure you're using the correct model name
+      DoctorName,
+      Name,
+      timings,
+      Doc_id,
+      UserEmail,
+      orderId: order.id,
+      paymentStatus: "Pending",
+    });
+
+    await newSlot.save()
+      .then(() => console.log("Data saved successfully!")) // ✅ Log success
+      .catch((err) => console.error("Error saving to DB:", err)); // ✅ Log errors
+
+    res.status(200).json({
+      message: "Slot booked, complete payment to confirm.",
+      orderId: order.id,
+      key: process.env.Razorpay_Key_ID,
+    });
+
+  } catch (error) {
+    console.error("Error booking slot:", error);
+    res.status(500).json({ error: "Failed to book slot" });
+  }
+});
+
+
+app.post("/verify-payment", async (req, res) => {
+  try {
+    const { orderId, paymentId } = req.body;
+
+    // Verify Razorpay payment
+    const payment = await razorpay.payments.fetch(paymentId);
+    if (!payment || payment.status !== "captured") {
+      return res.status(400).json({ error: "Payment verification failed" });
+    }
+
+    // Update slot booking with successful payment
+    await appModal.findOneAndUpdate(
+      { orderId },
+      { paymentStatus: "Success", paymentId }
+    );
+
+    res.status(200).json({ message: "Payment verified and slot confirmed" });
+  } catch (error) {
+    console.error("Payment verification failed:", error);
+    res.status(500).json({ error: "Failed to verify payment" });
+  }
+});
 
 app.post('/register', async(req,res)=>{
   const {
@@ -320,34 +351,6 @@ console.log(err);
 
 })
 
-// app.post(`/login`, async (req, res) => {
-//   const { email, password } = req.body
-
-//   if (!email && !password) {
-//     res.status(400)
-//     .json({ msg: 'Something missing' })
-//   }
-
-//   const user = await UserSchema.findOne({email:email})
-//   if (!user) {
-//     return res.status(400)
-//     .json({ msg: 'User not found' })
-//   }
-
-//   const matchPassword = await bcrypt.compare(password, user.password)
-//   if (matchPassword) {
-//     const userSession = { email: user.email }
-//     req.session.user = userSession;
-
-//     return res
-//       .status(200)
-//       .json({ msg: 'You have logged in successfully', userSession })
-      
-//   } else {
-//     return res.status(400).json({ msg: 'Invalid credential' })
-//   }
-
-// })
 
 app.post(`/login`, async (req, res) => {
   const { email, password } = req.body;
