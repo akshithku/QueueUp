@@ -27,11 +27,7 @@ const Timeslot = require('./timeslot');
 
 console.log("mongobd : ",process.env.PORT)
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    family: 4,
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(PORT,"0.0.0.0", () => {
       console.log(`Server is running on port ${PORT}`);
