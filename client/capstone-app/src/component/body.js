@@ -26,46 +26,7 @@ user1=user
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [docBooked, setdocBooked] = useState([]);
   
-  // const [suggestions, setSuggestions] = useState([]);
 
-  // const [selectedCity, setSelectedCity] = useState("");
-  // const [selectHospital, setSelectHospital] = useState([]);
-  
-
-
-  // const [isActive, setIsActive] = React.useState(false);
-
-  // const [GetData,setGetData]=useState([]);
-
-  // useEffect(() => {
-  //   console.log(docBooked,"BookedSlots");
-  // }, [docBooked]);
-
-  // useEffect(()=>{
-  //   fetch(`${process.env.REACT_APP_URL}/docBookSlots`)
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     const userBookedSlots = data.filter((slot) => slot.UserEmail === user.email);
-  //     userBookedSlots.sort((a, b) => {
-  //       const doctorNameComparison = a.DoctorName.localeCompare(b.DoctorName);
-  //       if (doctorNameComparison !== 0) {
-  //         return doctorNameComparison;
-  //       }
-  //       const timingsComparison = a.timings.localeCompare(b.timings);
-  //       if (timingsComparison !== 0) {
-  //         return timingsComparison;
-  //       }
-  //       return a.Name.localeCompare(b.Name);
-  //     });
-  //     setdocBooked(userBookedSlots);
-  //     console.log("kjhgf ",userBookedSlots)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error," failed to fetch");
-  //   })
-  
-  // },[id])
-    // ... (other code)
 
     const handleClickNotify = () => {
       fetch(`${process.env.REACT_APP_URL}/docBookSlots`)
@@ -108,18 +69,6 @@ user1=user
       });
   }, []);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 5000);
-  // }, []);
-
-  // const handleFilter = () => {
-  //   const filtered =HospitalName.map((hospital) => hospital.City === selectedCity);
-  //   setSelectHospital(filtered);
-  // };
-
-  // console.log( "cities",handleFilter)
 
   const handleNotificationsClick = async() => {
     await handleClickNotify();
@@ -207,8 +156,8 @@ user1=user
                 <th className="headers-1">DoctorName</th>
                 <br></br>
                 <th className="headers-1">Timings</th>
-                <br></br>
-                <th className="headers-1" >Amount</th>
+                {/* <br></br>
+                <th className="headers-1" >Amount</th> */}
                 </tr>
                 </thead>
                 <tbody>

@@ -124,7 +124,7 @@ function Slots() {
             <tr>
         <th>Name</th>
         <th>Timings</th>
-        <th>Reference</th>
+        <th>Transaction_ID</th>
         </tr>
         </thead>
         <tbody>
@@ -134,7 +134,8 @@ function Slots() {
             <tr>
               <td>{slot.Name}</td>
               <td>{slot.timings}</td>
-              <td>{slot.ReferenceCode}</td>
+              {/* <td>{slot.ReferenceCode}</td> */}
+              <td>{slot.paymentId}</td>
             </tr>
           ))
         }
